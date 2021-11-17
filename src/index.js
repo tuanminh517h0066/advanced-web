@@ -3,7 +3,10 @@ const express       = require('express');
 const handlebars    = require('express-handlebars');
 
 const route = require('./routes');
+const indexRouter = require('./routes/users');
 const db    = require('./config/db');
+const passport = require('passport');
+const flash = require('connect-flash');
 
 //connect DB
 db.connect();
@@ -22,6 +25,13 @@ app.use(require("express-session")({key:'sessionId'}))
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+require('./config/passport/passport');
+
+app.use(flash());
+app.use(passport.initialize())
+app.use(passport.session());
+
+
 //Template engine
 app.engine('handlebars', handlebars({
     defaultLayout: 'main',
@@ -35,8 +45,8 @@ app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'resources/views'));
 
 //Route
-route(app);
-
+// route(app, passport);
+app.use('/', indexRouter);
 
 
 
