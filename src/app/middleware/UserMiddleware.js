@@ -3,9 +3,13 @@
 class UserMiddleware {
     checkAuthenticated (req, res, next) {
         
-        if (req.isAuthenticated())
+        if (req.isAuthenticated()) {
+   
             return next();
-        res.redirect('/login');
+        }
+            
+        
+        res.redirect('/admin/login');
     }
 
     checkNotAuthenticated (req, res, next) {

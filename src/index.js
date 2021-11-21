@@ -3,7 +3,7 @@ const express       = require('express');
 const handlebars    = require('express-handlebars');
 
 const route = require('./routes');
-const indexRouter = require('./routes/users');
+// const indexRouter = require('./routes/index');
 const db    = require('./config/db');
 const passport = require('passport');
 const flash = require('connect-flash');
@@ -28,16 +28,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 require('./config/passport/passport');
 
 app.use(flash());
+//passport
+
 app.use(passport.initialize())
 app.use(passport.session());
 
 
 //Template engine
 app.engine('handlebars', handlebars({
+    // layoutsDir: __dirname + '/views/layouts',
     defaultLayout: 'main',
+    
 
     helpers: {
         sum: (a, b) => a+b,
+        check_role: (role) => {
+            let role_name = 'Student';
+            if(role == 1) {
+                role_name = 'Teacher';
+                // console.log('yes');
+            }
+            return role_name
+        }
     }
 }));
 
@@ -45,8 +57,9 @@ app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'resources/views'));
 
 //Route
-// route(app, passport);
-app.use('/', indexRouter);
+route(app);
+// app.use('/', indexRouter);
+// app.use('/', )
 
 
 
