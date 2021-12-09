@@ -595,6 +595,7 @@
 										<div class="user-post">
 											
 											<div class="friend-info" style=" display: inline-block;">
+												{{#if_eq ../member._id this.user._id }}
 												<div class="edit-menu dropleft">
 													<button type="button" id="btn-edit-menu" class="btn btn-light dropdown-toggle-" data-toggle="dropdown" aria-expanded="false">
 														<i class="fas fa-ellipsis-h"></i>
@@ -602,12 +603,13 @@
 
 													{{!-- edit dropdown --}}
 													<div class="dropdown-menu" aria-labelledby="btn-edit-menu" >
-														{{#if_eq ../member._id this.user._id }}
-														<a class="dropdown-item" href="javascript:void(0);" class="edit_post" data-id="{{ ../this._id }}">Edit</a>
-														<a class="dropdown-item" href="javascript:void(0);" class="delete_post" data-id="{{ ../this._id }}">Delete</a>
-														{{/if_eq}}
+														
+														<a class="dropdown-item edit_post" href="javascript:void(0);" data-id="{{ ../this._id }}">Edit</a>
+														<a class="dropdown-item delete_post" href="javascript:void(0);" data-id="{{ ../this._id }}">Delete</a>
+														
 													</div>
 												</div>
+												{{/if_eq}}
 												
 												<figure><img src="/frontend1/images/resources/friend-avatar10.jpg" alt=""></figure>
 												<div class="friend-name">
@@ -1359,7 +1361,21 @@
             function postForm(data, status_edit_del) {
 				
 				var post = '<div class="user-post">'
-				post += '<div class="friend-info">'
+				post += '<div class="friend-info" style=" display: inline-block;">'
+					
+				if(status_edit_del == 1) {
+				post += '<div class="edit-menu dropleft">'
+				post += '<button type="button" id="btn-edit-menu" class="btn btn-light dropdown-toggle-" data-toggle="dropdown" aria-expanded="false">'									
+				post += '<i class="fas fa-ellipsis-h"></i>'									
+				post += '</button>'									
+				post += '<div class="dropdown-menu" aria-labelledby="btn-edit-menu" >'
+				post += '<a class="dropdown-item edit_post" href="javascript:void(0);" data-id="' + data._id + '">Edit</a>'								
+				post += '<a class="dropdown-item delete_post" href="javascript:void(0);" data-id="' + data._id + '">Delete</a>'
+				post += '</div>'			
+				post += '</div>'	
+				}					
+
+
 				post += '<figure><img src="/frontend1/images/resources/friend-avatar10.jpg" alt=""></figure>'
 				post += '<div class="friend-name">'
 				post += '<ins><a href="time-line.html" title="">' + data.user.username + '</a></ins>'
