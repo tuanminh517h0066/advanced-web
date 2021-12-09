@@ -1313,6 +1313,23 @@ header.sticky {
   top: 12px;
   right: 2%;
 }
+.edit-menu {
+  position: absolute;
+  top: -5px;
+  right: 0%;
+}
+.dropdown-toggle::after {
+  display: none;
+}
+
+.edit-menu #btn-edit-menu:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.edit-menu #btn-edit-menu {
+  background-color: #fff;
+  border-radius: 50%;
+  border: none;
+}
 .btn-close #close {
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.05);
@@ -1337,6 +1354,7 @@ header.sticky {
   padding: 20px 12px;
   background-color: #fff;
   border-radius: 10px;
+  margin-top: 10px;
   border: 1px solid rgba(0, 0, 0, 0.15);
 }
 #lable-add {
@@ -1444,9 +1462,18 @@ form button {
 }
 
 .friend-info {
-  display: inline-block;
   position: relative;
   width: 100%;
+}
+#icon-liked {
+  color: rgb(45, 32, 224);
+}
+.post-upload img {
+  border-radius: 10px;
+}
+.post-upload input {
+  width: 100%;
+  border: none;
 }
 
 .friend-info > figure {
@@ -1483,6 +1510,7 @@ form button {
   float: left;
   margin-top: 15px;
   width: 100%;
+  border-bottom: 1px solid #ccc;
 }
 
 .post-meta > img {
@@ -1578,7 +1606,7 @@ form button {
 }
 
 .we-video-info > ul li span.like {
-  color: green;
+  /* color: green; */
   cursor: pointer;
   transition: all 0.2s linear 0s;
 }

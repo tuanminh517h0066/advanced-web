@@ -17,12 +17,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
 
-
+	
 	<link rel="stylesheet" href="/frontend/css/main.min.css">
     <link rel="stylesheet" href="/frontend/css/style.css">
     <link rel="stylesheet" href="/frontend/css/color.css">
     <link rel="stylesheet" href="/frontend/css/responsive.css">
-
+	<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
 </head>
 <body>
 <!--<div class="se-pre-con"></div>-->
@@ -479,13 +479,13 @@
 												</div>
 												<div class="row mt-2"id="row-status" >
 													<div class="col-lg-4 mx-0 px-0">
-														<button type="button" class="btn btn-light create_post" id="icon-block"><i class="fa fa-video-camera"></i> Video</button>
+														<button type="button" class="btn btn-light create_post" id="icon-block"><i class="fab fa-youtube"></i> Video</button>
 													</div>
 													<div class="col-lg-4 mx-0 px-0">
-														<button type="button" class="btn btn-light create_post" id="icon-block"><i class="fa fa-image"></i> Image</button>
+														<button type="button" class="btn btn-light create_post" id="icon-block"><i class="fas fa-image"></i> Image</button>
 													</div>
 													<div class="col-lg-4 mx-0 px-0">
-														<button type="button" class="btn btn-light create_post" id="icon-block"><i class="fa fa-smile-o"></i> Status</button>
+														<button type="button" class="btn btn-light create_post" id="icon-block"><i class="far fa-smile"></i> Status</button>
 													</div>
 												</div>
 											</div>
@@ -524,8 +524,8 @@
                                                             <span>Public</span>
                                                         </div>
                                                         <textarea id="post_content" name="content" rows="3" placeholder="Buddy, What the hell are you thinking today?"></textarea>
-                                                        <div class="post-meta" id="option">
-                                                            	
+                                                        <div class="post-upload" id="option">
+														
                                                         </div>
                                                     </div>
 
@@ -537,14 +537,14 @@
                                                         {{!-- <input type="text" id="upload-video" style="display:none"> --}}
                                                         <div> 
                                                             <label for="upload-image" id="icon-label">
-                                                                <i class="fa fa-image m-2"></i>
+                                                                <i class="fas fa-image m-2"></i>
                                                             </label>	
                                                             
                                                             <label class="video-btn" id="icon-label">
-                                                                <i class="fa fa-video-camera m-2"></i>
+                                                                <i class="fab fa-youtube m-2"></i>
                                                             </label>
                                                             <label for="upload" id="icon-label" >
-                                                            <i class="fa fa-smile-o m-2"></i>
+                                                            <i class="far fa-smile m-2"></i>
                                                             </label>
                                                         </div> 
                                                     </div>
@@ -591,8 +591,24 @@
 									{{#each posts}}
 									
 									<div class="central-meta item" id="post-item{{ this._id }}">
+										
 										<div class="user-post">
-											<div class="friend-info">
+											
+											<div class="friend-info" style=" display: inline-block;">
+												<div class="edit-menu dropleft">
+													<button type="button" id="btn-edit-menu" class="btn btn-light dropdown-toggle-" data-toggle="dropdown" aria-expanded="false">
+														<i class="fas fa-ellipsis-h"></i>
+													</button>
+
+													{{!-- edit dropdown --}}
+													<div class="dropdown-menu" aria-labelledby="btn-edit-menu" >
+														{{#if_eq ../member._id this.user._id }}
+														<a class="dropdown-item" href="javascript:void(0);" class="edit_post" data-id="{{ ../this._id }}">Edit</a>
+														<a class="dropdown-item" href="javascript:void(0);" class="delete_post" data-id="{{ ../this._id }}">Delete</a>
+														{{/if_eq}}
+													</div>
+												</div>
+												
 												<figure><img src="/frontend1/images/resources/friend-avatar10.jpg" alt=""></figure>
 												<div class="friend-name">
 													<ins><a href="time-line.html" title="">{{ this.user.username }}</a></ins>
@@ -610,17 +626,20 @@
 													{{/if}}
 													<div class="we-video-info">
 														<ul>
+
 															<li>
-																<span class="comment" data-toggle="tooltip" title="Comments">
-																	<i class="fa fa-comments-o"></i>
-																	<ins>52</ins>
+																<span class="like" data-toggle="tooltip" title="like">
+																	<a href="javascript:void(0)" class="total_like bt-like like-post{{ this._id }} {{liked this.likes ../member._id}}" data-post-id="{{ this._id }}" data-like-id="{{data_like this.likes ../member._id}}"><i class="far fa-thumbs-up"  style="display: none;" ></i> <i class="fas fa-thumbs-up" id="icon-liked" ></i></a>
+																	<ins class="count-like{{ this._id }}" >{{ this.likes.length }}</ins>
 																</span>
 															</li>
 															<li>
-																<ins class="count-like{{ this._id }}" >{{ this.likes.length }}</ins>
-																
-																<a href="javascript:void(0)" class="total_like bt-like like-post{{ this._id }} {{liked this.likes ../member._id}}" data-post-id="{{ this._id }}" data-like-id="{{data_like this.likes ../member._id}}"><span>Like</span></a>
+																<span class="comment" data-toggle="tooltip" title="Comments">
+																	<i class="far fa-comment"></i>
+																	<ins>52</ins>
+																</span>
 															</li>
+															
 															
 															{{#if_eq ../member._id this.user._id }}
 															<li>
@@ -1161,7 +1180,7 @@
             });
 
             $(document).on('click', '.video-btn', function() {
-                $('#option').html('<input type="text" id="upload-video" name="video" placeholder="please input link of youtube video" >');
+                $('#option').html('<input type="text" id="upload-video" name="video" placeholder=" please input link of youtube video" >');
                 $('#upload-image').val('');
                 var content = $('#post_content').val();
 
