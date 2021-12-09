@@ -36,7 +36,7 @@
 		</form>
 	</div>
 	<div class="form-container sign-in-container">
-		<form action="/login" method="post">
+		<form action="/member/login" method="post">
 			{{#if hasErrors  }}
 			{{#each messages}}
 				<div>{{this}}</div>
@@ -60,7 +60,7 @@
 			<span class="Or">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;  or &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span>
 			<div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="/auth/google" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="/member/auth/google" class="social"><i class="fab fa-google-plus-g"></i></a>
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 		</form>

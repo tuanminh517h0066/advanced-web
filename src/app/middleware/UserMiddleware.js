@@ -12,10 +12,46 @@ class UserMiddleware {
         res.redirect('/admin/login');
     }
 
+
+    isAdmin (req, res,next) {
+        if(req.isAuthenticated()) {
+            if( req.user.role === '2') {
+                    return next();
+            } 
+            // else {
+            //     console.log(2);
+            //     // return next();
+            // }
+        }
+
+        res.redirect('/admin/login');
+    }
+
+    isMember (req, res, next) {
+        if(req.isAuthenticated()) {
+            if( req.user.role !== '2') {
+                return next();
+            } 
+            // else {
+            //     console.log(3);
+            //     // return next();
+            // }
+        }
+        res.redirect('/admin/login');
+    }
+
     checkNotAuthenticated (req, res, next) {
         if (req.isAuthenticated())
-            // console.log(1);
-            res.redirect('/admin/index');
+           
+            if( req.user.role === '2') {
+                
+                res.redirect('/admin/index');
+            } else {
+                // console.log(2);
+                res.redirect('/member/home');
+                
+            }
+            // res.redirect('/admin/index');
         return next();
     }
 }

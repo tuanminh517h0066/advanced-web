@@ -38,7 +38,7 @@ app.use(passport.session());
 app.engine('handlebars', handlebars({
     // layoutsDir: __dirname + '/views/layouts',
     defaultLayout: 'main',
-    
+    partialsDir : 'partials/check',
 
     helpers: {
         sum: (a, b) => a+b,
@@ -49,6 +49,64 @@ app.engine('handlebars', handlebars({
                 // console.log('yes');
             }
             return role_name
+        },
+        getYoutubeId: (youtube) => {
+            var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+            return (youtube.match(p)) ? RegExp.$1 : false;
+        },
+        formatDate: (dates) => {
+            var date = new Date(dates);
+            var dateStr =
+              ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
+              ("00" + date.getDate()).slice(-2) + "/" +
+              date.getFullYear() + " " +
+              ("00" + date.getHours()).slice(-2) + ":" +
+              ("00" + date.getMinutes()).slice(-2) + ":" +
+              ("00" + date.getSeconds()).slice(-2);
+            
+            return dateStr
+        },
+        if_eq: (a, b, opts) => {
+            if (String(a) === String(b)) {
+                return opts.fn(this);
+            } else {
+                return opts.inverse(this);
+            }
+        },
+        liked: (a,b) => {
+
+            // return user_id;
+            var like_arr = a;
+            var user_id = b;
+            var liked = '';
+            
+            like_arr.forEach(function (element){
+                
+                if (String(element.user._id) === String(user_id)) {
+                    
+                    liked = 'liked';
+                    
+                }
+            })
+            
+            return liked;
+        },
+        data_like: (a, b) => {
+
+            var like_arr = a;
+            var user_id = b;
+            var data_like = '';
+            like_arr.forEach(function (element){
+                
+                if (String(element.user._id) === String(user_id)) {
+                    
+
+                    data_like = element._id;
+                    
+                }
+            })
+            
+            return data_like;
         }
     }
 }));
