@@ -1465,7 +1465,7 @@ form button {
   position: relative;
   width: 100%;
 }
-#icon-liked {
+.liked {
   color: rgb(45, 32, 224);
 }
 .post-upload img {

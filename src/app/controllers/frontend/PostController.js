@@ -6,7 +6,7 @@ class PostController {
     async post(req, res, next) {
 
        
-       
+        var current_account = req.user._id
         var id = 0
         if(req.body.post_id) {
             id = req.body.post_id
@@ -42,7 +42,7 @@ class PostController {
                         Post.populate(post, {path:"department user"}, function(err, post) { 
                             // console.log(post);
                             // res.json({success: true, type: 'new', post});
-                            res.json({success: true, type: 'update', post});
+                            res.json({success: true, type: 'update',current_account: current_account, post});
                         });
                         
                     }
@@ -73,7 +73,7 @@ class PostController {
                     }
                     else{
                         Post.populate(post, {path:"department user"}, function(err, post) { 
-                            res.json({success: true, type: 'new', post});
+                            res.json({success: true, type: 'new',current_account: current_account, post});
                         });
                         
                     }
@@ -120,6 +120,7 @@ class PostController {
 
          var memberId = req.user._id;
          var postId = req.body.post_id;
+        
 
          const postLike = new Like();
          postLike.user  = memberId;
@@ -143,7 +144,7 @@ class PostController {
     async ajaxRemoveLike(req, res, next) {
 
         var like_id = req.body.id;
-        console.log(like_id);
+        
         Like.findOneAndDelete({_id: like_id }, async function (err, like) {
             if (err){
                 console.log(err)

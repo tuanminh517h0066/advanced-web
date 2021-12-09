@@ -631,7 +631,7 @@
 
 															<li>
 																<span class="like" data-toggle="tooltip" title="like">
-																	<a href="javascript:void(0)" class="total_like bt-like like-post{{ this._id }} {{liked this.likes ../member._id}}" data-post-id="{{ this._id }}" data-like-id="{{data_like this.likes ../member._id}}"><i class="far fa-thumbs-up"  style="display: none;" ></i> <i class="fas fa-thumbs-up" id="icon-liked" ></i></a>
+																	<a href="javascript:void(0)" class="total_like bt-like like-post{{ this._id }}" data-post-id="{{ this._id }}" data-like-id="{{data_like this.likes ../member._id}}"><i class="far fa-thumbs-up like-post-icon{{ this._id }} {{liked this.likes ../member._id}}"></i></a>
 																	<ins class="count-like{{ this._id }}" >{{ this.likes.length }}</ins>
 																</span>
 															</li>
@@ -1347,7 +1347,7 @@
 								}
 
 								post += '<div class="central-meta item" id="post-item' + element._id + '">'
-								post += postForm(element, status_edit_del);
+								post += postForm(element, status_edit_del, data.current_account);
 								post += '</div>'
 								
 							}); 
@@ -1358,7 +1358,7 @@
 				}
 			});
 
-            function postForm(data, status_edit_del) {
+            function postForm(data, status_edit_del, current_account) {
 				
 				var post = '<div class="user-post">'
 				post += '<div class="friend-info" style=" display: inline-block;">'
@@ -1395,16 +1395,33 @@
 
 				post += '<div class="we-video-info">'
 				post += '<ul>'
+
+				var liked = '';
+				var data_like = '';
+				
+				data.likes.forEach(function (element){
+					
+					if (String(element.user._id) === String(current_account)) {
+						
+						liked = 'liked';
+						data_like = element._id;
+						
+					}
+				})	
+
+				post +=	'<li>'
+				post += '<span class="like" data-toggle="tooltip" title="like">'												
+				post += '<a href="javascript:void(0)" class="total_like bt-like like-post' + data._id + '" data-post-id="' + data._id + '" data-like-id="'+ data_like +'"><i class="far fa-thumbs-up like-post-icon' + data._id + ' '+ liked +'"></i></a>'													
+				post += '<ins class="count-like' + data._id + '" >'+ data.likes.length +'</ins>'													
+				post += '</span>'												
+				post += '</li>'		
+
+
+
 				post += '<li>'
 				post += '<span class="comment" data-toggle="tooltip" title="Comments">'
-				post += '<i class="fa fa-comments-o"></i>'
+				post += '<i class="far fa-comment"></i>'
 				post += '<ins>52</ins>'
-				post += '</span>'
-				post += '</li>'
-				post += '<li>'
-				post += '<span class="like" data-toggle="tooltip" title="like">'
-				post += '<i class="ti-heart"></i>'
-				post += '<ins>2.2k</ins>'
 				post += '</span>'
 				post += '</li>'
 				
@@ -1522,7 +1539,7 @@
 
 								$('.count-like' + post_id).text(count_like);
 								$('.like-post' + post_id).attr('data-like-id', '');
-								$('.like-post' + post_id).removeClass('liked');
+								$('.like-post-icon' + post_id).removeClass('liked');
 							}
 						}
 					});
@@ -1538,7 +1555,7 @@
 
 							$('.count-like' + post_id).text(count_like);
 							$('.like-post' + post_id).attr('data-like-id', data.id);
-							$('.like-post' + post_id).addClass('liked');
+							$('.like-post-icon' + post_id).addClass('liked');
 						}
 					}); 
 				}
