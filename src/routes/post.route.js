@@ -30,5 +30,9 @@ router.post('/ajaxRemoveLike',userMiddleware.isMember, PostController.ajaxRemove
 
 router.post('/ajaxLike',userMiddleware.isMember, PostController.ajaxLike);
 
+router.post('/ajaxAddComment',userMiddleware.isMember,PostController.ajaxAddComment);
+
+router.post('/ajaxDeleteComment',userMiddleware.isMember,PostController.ajaxRemoveComment)
+
 
 module.exports = router;

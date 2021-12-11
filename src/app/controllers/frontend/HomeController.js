@@ -13,6 +13,11 @@ class HomeController {
             path: 'likes',
             populate: {path: "user"}
         })
+        .populate({
+            path: 'comments',
+            populate: {path: "user"},
+            options: { sort: { createdAt: -1 } },
+        })
         .sort('-updatedAt').limit(5);
         const member = req.user;
         

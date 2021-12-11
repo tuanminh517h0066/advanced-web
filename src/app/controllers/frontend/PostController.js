@@ -1,5 +1,6 @@
 const Post = require('../../models/Post');
 const Like = require('../../models/Like');
+const Comment = require('../../models/Comment');
 
 class PostController {
     
@@ -160,6 +161,61 @@ class PostController {
         });
 
     }
+
+    async ajaxAddComment(req, res, next) {
+        var user_id = req.user._id;
+        var post_id = req.body.post_id;
+        var comment = req.body.comment; 
+        
+        const newComment   = new Comment();
+        newComment.user = user_id;
+        newComment.post = post_id;
+        newComment.comment = comment;
+
+        newComment.save( async function(err,comment){
+            if (err){
+                console.log(err);
+            }
+            else{
+
+                const post = await Post.findById(post_id);
+                post.comments.push(comment._id);
+                await post.save();
+                
+                Comment.populate(comment, {path:"user"}, function(err, comment) { 
+                    // res.json({success: true, type: 'new',current_account: current_account, post});
+                    // console.log('2');
+                    console.log(comment);
+                    res.json({current_account: user_id, comment});
+                });
+                
+                // console.log('1')
+                
+            }
+        })
+
+    }
+
+    async ajaxRemoveComment(req, res, next) {
+        var comment_id = req.body.comment_id;
+       
+
+
+        Comment.findOneAndDelete({_id: comment_id }, async function (err, comment) {
+            if (err){
+                console.log(err)
+            }
+            else{
+                const post = await Post.findById(comment.post);
+                post.comments.pull(comment_id)
+                await post.save();
+            }
+
+            res.json({success: true})
+
+        });
+    }
+
 }
 
 module.exports = new PostController;

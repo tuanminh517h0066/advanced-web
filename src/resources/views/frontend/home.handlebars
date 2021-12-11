@@ -638,19 +638,9 @@
 															<li>
 																<span class="comment" data-toggle="tooltip" title="Comments">
 																	<i class="far fa-comment"></i>
-																	<ins>52</ins>
+																	<ins class="count-comment{{ this._id }}">{{ this.comments.length }}</ins>
 																</span>
 															</li>
-															
-															
-															{{#if_eq ../member._id this.user._id }}
-															<li>
-																	<a href="javascript:void(0);" title="" class="edit_post" data-id="{{ ../this._id }}">edit</a>
-															</li>
-															<li>
-																	<a href="javascript:void(0);" title="" class="delete_post" data-id="{{ ../this._id }}">delete</a>
-															</li>
-															{{/if_eq}}
 														</ul>
 													</div>
 													
@@ -658,28 +648,43 @@
 											</div>
 											<div class="coment-area">
 												<ul class="we-comet">
-													<li>
+													
+													{{#each this.comments}}
+													<li id="comment{{ this._id }}">
 														<div class="comet-avatar">
-															<img src="/frontend1/images/resources/comet-1.jpg" alt="">
+															<img src="/frontend/images/resources/comet-1.jpg" alt="">
 														</div>
 														<div class="we-comment">
 															<div class="coment-head">
-																<h5><a href="time-line.html" title="">Jason borne</a></h5>
-																<span>1 year ago</span>
-																<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+																<h5><a href="time-line.html" title="">{{ this.user.username }}</a></h5>
+																<span>{{ formatDate this.updatedAt }}</span>
+																{{#if_eq ../../member._id this.user._id }}
+																<div class="edit-menu dropleft">
+																	<button type="button" id="btn-edit-menu" class="btn btn-light dropdown-toggle-" data-toggle="dropdown" aria-expanded="false">
+																		<i class="fas fa-ellipsis-h"></i>
+																	</button>
+
+																	{{!-- edit dropdown --}}
+																	<div class="dropdown-menu" aria-labelledby="btn-edit-menu" >
+																		<a class="dropdown-item delete_comment" href="javascript:void(0);" data-id="{{ ../this._id }}">Delete</a>
+																		
+																	</div>
+																</div>
+																{{/if_eq}}
 															</div>
-															<p>we are working for the dance and sing songs. this car is very awesome for the youngster. please vote this car and like our post</p>
+															<p>{{ this.comment }}</p>
 														</div>
 													</li>
+													{{/each }}
+													
 													<li class="post-comment">
 														<div class="comet-avatar">
-															<img src="/frontend1/images/resources/comet-1.jpg" alt="">
+															<img src="/frontend/images/resources/comet-1.jpg" alt="">
 														</div>
 														<div class="post-comt-box">
-															<form method="post">
-																<textarea placeholder="Post your comment"></textarea>
-																
-																<button type="submit" class="btn btn-primary">Add Comment</button>
+															<form name="frm-comment" action="" method="post" class="frm-post-comment" id="frm-post{{ this._id }}">
+																<textarea placeholder="Post your comment" class="inputComment" name="comment"></textarea>
+																<input type="hidden" name="post_id" value="{{ this._id }}" />
 															</form>	
 														</div>
 													</li>
@@ -1400,6 +1405,8 @@
 				var data_like = '';
 				
 				data.likes.forEach(function (element){
+					console.log('member_like'+element.user._id);
+					
 					
 					if (String(element.user._id) === String(current_account)) {
 						
@@ -1422,15 +1429,6 @@
 				post += '<ins>52</ins>'
 				post += '</span>'
 				post += '</li>'
-				
-				if(status_edit_del == 1) {
-				post += '<li>'
-				post += '<a href="javascript:void(0);" title="" class="edit_post" data-id="' + data._id + '">edit</a>'
-				post += '</li>'
-				post += '<li>'
-				post += '<a href="javascript:void(0);" title="" class="delete_post" data-id="' + data._id + '">delete</a>'
-				post += '</li>'
-				}
 				
 				post += '</ul>'
 				post += '</div>'
@@ -1558,6 +1556,130 @@
 					}); 
 				}
 			});
+
+			//------------------JS for Comment area ------------------------------
+
+			$(document).on('keypress', '.frm-post-comment', function(e) {
+				if(e.shiftKey) return;
+
+				var _this = $(this);
+				var keyCode = e.keyCode || e.which;
+
+				if (keyCode === 13) { 
+					
+					var comment = _this.find('textarea[name=comment]').val() || '';
+					var post_id = _this.find('input[name=post_id]').val();
+					
+
+					
+					// var id      = _this.find('input[name=comment_id]').val();
+					var count_comment = parseInt($('.count-comment' + post_id).text());
+					
+					if(comment.trim() == '') {
+						e.preventDefault();          
+						return false;
+					}
+
+					$.ajax({
+					url:'/post/ajaxAddComment',
+					type:'POST',
+					data:{
+						comment:comment, 
+						post_id:post_id,
+					},
+					success:function(data) {
+						console.log('check exist')
+						console.log(data.comment);
+						count_comment = count_comment + 1;
+						
+						var status_edit_del = 1;
+
+						$('.count-comment' + post_id).text(count_comment);
+						_this.find('textarea[name=comment]').val('');
+
+						var comment = '';
+						comment += '<li id="comment'+ data.comment._id +'">'
+						comment += 	showComment(data, status_edit_del);			
+						comment += '</li>'		
+
+						$( ".we-comet" ).prepend( comment );	
+
+									
+						
+					}
+					});
+
+					e.preventDefault();
+					return false;
+				}
+			});
+
+			function showComment(data, status_edit_del) {
+				var comment = '<div class="comet-avatar">'								
+					comment += '<img src="/frontend/images/resources/comet-1.jpg" alt="">'									
+					comment += '</div>'								
+					comment += '<div class="we-comment">'								
+					comment += '<div class="coment-head">'									
+					comment += '<h5><a href="time-line.html" title="">'+ data.comment.user.username +'</a></h5>'										
+					comment += '<span>'+ formatDate(data.comment.user.createdAt) +'</span>'
+						if(status_edit_del == 1) {	
+
+						comment += '<div class="edit-menu dropleft">'
+																	
+							comment += '<button type="button" id="btn-edit-menu" class="btn btn-light dropdown-toggle-" data-toggle="dropdown" aria-expanded="false">'											
+							comment += '<i class="fas fa-ellipsis-h"></i>'													
+							comment += '</button>'												
+
+							comment += '<div class="dropdown-menu" aria-labelledby="btn-edit-menu" >'
+							comment += '<a class="dropdown-item delete_comment" href="javascript:void(0);" data-id="'+ data.comment._id +'">Delete</a>'												
+							comment += '</div>'											
+						comment += '</div>'
+						}										
+					comment += '</div>'					
+
+					comment += '<p>'+ data.comment.comment +'</p>'									
+					comment += '</div>'
+				
+				return comment;
+			}
+
+
+			$(document).on('click','.delete_comment', function(){
+				var id = $(this).attr('data-id');
+				
+
+				var post_id = $('.frm-post-comment').find('input[name=post_id]').val();
+				var count_comment = parseInt($('.count-comment' + post_id).text());
+				
+				
+				$.ajax({
+					url: '/post/ajaxDeleteComment',
+					data: {
+						comment_id: id,
+					},
+					type: 'post',
+					success: function(data) {
+						
+						if(data.success == true){
+							count_comment = count_comment - 1;
+
+							$('.count-comment' + post_id).text(count_comment);
+							
+							$('#comment' + id).remove();
+						}
+						
+					}
+				});
+			})
+
+
+
+
+
+
+
+
+
 
         })
     
