@@ -133,7 +133,7 @@ $(document).ready(function() {
                     var status_edit_del = 1;
                     if(data.type == 'update') {
                         console.log(data.post);
-                        var post = postForm(data.post,status_edit_del);
+                        var post = postForm(data.post,status_edit_del, data.current_account);
 
                         $('#postModal').modal('hide');
 
@@ -279,6 +279,8 @@ $(document).ready(function() {
             }
         })	
 
+        console.log(data.comments.length);
+
         post +=	'<li>'
         post += '<span class="like" data-toggle="tooltip" title="like">'												
         post += '<a href="javascript:void(0)" class="total_like bt-like like-post' + data._id + '" data-post-id="' + data._id + '" data-like-id="'+ data_like +'"><i class="far fa-thumbs-up like-post-icon' + data._id + ' '+ liked +'"></i></a>'													
@@ -289,7 +291,7 @@ $(document).ready(function() {
         post += '<li>'
         post += '<span class="comment" data-toggle="tooltip" title="Comments">'
         post += '<i class="far fa-comment"></i>'
-        post += '<ins>52</ins>'
+        post += '<ins>'+ data.comments.length +'</ins>'
         post += '</span>'
         post += '</li>'
         
@@ -301,52 +303,41 @@ $(document).ready(function() {
         post += '<div class="coment-area">'
         post +=	'<ul class="we-comet">'
             
-        post +=	'<li>'
-        post += '<div class="comet-avatar">'				
-        post += '<img src="/frontend1/images/resources/comet-1.jpg" alt="">'					
-        post += '</div>'				
-        post += '<div class="we-comment">'				
-        post += '<div class="coment-head">'					
-        post += '<h5><a href="time-line.html" title="">Jason borne</a></h5>'						
-        post += '<span>1 year ago</span>'						
-        post += '<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>'						
-        post += '</div>'					
-        post += '<p>we are working for the dance and sing songs. this car is very awesome for the youngster. please vote this car and like our post</p>'				
-        post += '</div>'					
-        post += '</li>'			
+        // console.log(data.comments);
+        data.comments.forEach(function (element){
+
+            var status_edit_del = 0;
+            console.log(element.user._id);
+            console.log(current_account);
+
+            if (String(element.user._id) === String(current_account)) {
+                
+                var status_edit_del = 1;
+                console.log(status_edit_del);
+                
+            }
+
+            post +=	'<li id="comment'+ element._id +'">'
+            post +=  showComment(element, status_edit_del);					
+            post += '</li>'			
+        })
         
-        post += '<li>'			
-        post += '<a href="#" title="" class="showmore underline">more comments</a>'				
-        post += '</li>'			
-        //
-        post += '<li class="post-comment">'			
-        post += '<div class="comet-avatar">'				
-        post += '<img src="/frontend1/images/resources/comet-1.jpg" alt="">'					
-        post += '</div>'				
-        post += '<div class="post-comt-box">'				
-        post += '<form method="post">'					
-        post += '<textarea placeholder="Post your comment"></textarea>'						
-        post += '<div class="add-smiles">'						
-        post += '<span class="em em-expressionless" title="add icon"></span>'							
-        post += '</div>'						
-        post += '<div class="smiles-bunch">'						
-        post += '<i class="em em---1"></i>'							
-        post += '<i class="em em-smiley"></i>'							
-        post += '<i class="em em-anguished"></i>'							
-        post += '<i class="em em-laughing"></i>'							
-        post += '<i class="em em-angry"></i>'							
-        post += '<i class="em em-astonished"></i>'							
-        post += '<i class="em em-blush"></i>'							
-        post += '<i class="em em-disappointed"></i>'							
-        post += '<i class="em em-worried"></i>'							
-        post += '<i class="em em-kissing_heart"></i>'							
-        post += '<i class="em em-rage"></i>'							
-        post += '<i class="em em-stuck_out_tongue"></i>'							
-        post += '</div>'						
-        post += '<button type="submit"></button>'						
-        post += '</form>'					
-        post += '</div>'				
-        post += '</li>'			
+        //post += '<li>'			
+        //post += '<a href="#" title="" class="showmore underline">more comments</a>'				
+        //post += '</li>'
+
+        //post comment
+        post += '<li class="post-comment">'
+		post += '<div class="comet-avatar">'												
+		post += '<img src="/frontend/images/resources/comet-1.jpg" alt="">'													
+		post += '</div>'												
+		post += '<div class="post-comt-box">'												
+		post += '<form name="frm-comment" action="" method="post" class="frm-post-comment" id="frm-post{{ this._id }}">'													
+		post += '<textarea placeholder="Post your comment" class="inputComment" name="comment"></textarea>'														
+		post += '<input type="hidden" name="post_id" value="{{ this._id }}" />'													
+		post += '</form>'														
+		post += '</div>'											
+		post += '</li>'														
         post += '</ul>'		
         post +=	'</div>'
         post += '</div>'
@@ -462,7 +453,7 @@ $(document).ready(function() {
 
                 var comment = '';
                 comment += '<li id="comment'+ data.comment._id +'">'
-                comment += 	showComment(data, status_edit_del);			
+                comment += 	showComment(data.comment, status_edit_del);			
                 comment += '</li>'		
 
                 $( ".we-comet" ).prepend( comment );	
@@ -483,8 +474,8 @@ $(document).ready(function() {
             comment += '</div>'								
             comment += '<div class="we-comment">'								
             comment += '<div class="coment-head">'									
-            comment += '<h5><a href="time-line.html" title="">'+ data.comment.user.username +'</a></h5>'										
-            comment += '<span>'+ formatDate(data.comment.user.createdAt) +'</span>'
+            comment += '<h5><a href="time-line.html" title="">'+ data.user.username +'</a></h5>'										
+            comment += '<span>'+ formatDate(data.user.createdAt) +'</span>'
                 if(status_edit_del == 1) {	
 
                 comment += '<div class="edit-menu dropleft">'
@@ -494,13 +485,13 @@ $(document).ready(function() {
                     comment += '</button>'												
 
                     comment += '<div class="dropdown-menu" aria-labelledby="btn-edit-menu" >'
-                    comment += '<a class="dropdown-item delete_comment" href="javascript:void(0);" data-id="'+ data.comment._id +'">Delete</a>'												
+                    comment += '<a class="dropdown-item delete_comment" href="javascript:void(0);" data-id="'+ data._id +'">Delete</a>'												
                     comment += '</div>'											
                 comment += '</div>'
                 }										
             comment += '</div>'					
 
-            comment += '<p>'+ data.comment.comment +'</p>'									
+            comment += '<p>'+ data.comment +'</p>'									
             comment += '</div>'
         
         return comment;

@@ -40,8 +40,20 @@ class PostController {
                         console.log(err);
                     }
                     else{
-                        Post.populate(post, {path:"department user"}, function(err, post) { 
-                            // console.log(post);
+                        Post.populate(post, 
+                            [{
+                                path:"user"
+                            },{
+                                path:"likes",
+                                populate:{ path: "user"}
+                            },
+                            ,{
+                                path:"comments",
+                                populate:{ path: "user"},
+                                options: { sort: { createdAt: -1 } },
+                            }]
+                            , function(err, post) { 
+                                console.log(post);
                             // res.json({success: true, type: 'new', post});
                             res.json({success: true, type: 'update',current_account: current_account, post});
                         });
@@ -73,7 +85,9 @@ class PostController {
                         console.log(err);
                     }
                     else{
-                        Post.populate(post, {path:"department user"}, function(err, post) { 
+                        Post.populate(post
+                        ,{path:"department user"},
+                         function(err, post) { 
                             res.json({success: true, type: 'new',current_account: current_account, post});
                         });
                         
