@@ -124,7 +124,20 @@ class PostController {
         var current_account = req.user._id
         // console.log(current_account);
         
-        const posts = await Post.find({}).populate('department user').skip(startForm).sort('-updatedAt').limit(2).exec();
+        const posts = await Post.find({})
+        .populate('department user')
+        .populate({
+            path: 'likes',
+            populate: {path: "user"}
+        })
+        .populate({
+            path: 'comments',
+            populate: {path: "user"},
+            options: { sort: { createdAt: -1 } },
+        })
+        .skip(startForm).sort('-updatedAt')
+        .limit(2)
+        .exec();
         
         // console.log(posts);
 
