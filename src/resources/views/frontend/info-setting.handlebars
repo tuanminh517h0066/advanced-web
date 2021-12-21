@@ -1,5 +1,4 @@
 
-
 <!--<div class="se-pre-con"></div>-->
 <div class="theme-layout">
 	
@@ -398,24 +397,20 @@
 										<div class="widget"></div>
 										{{!-- <h4 class="widget-title">Shortcuts</h4> --}}
 										<ul class="naves">
+											
 											<li>
-												<i class="ti-clipboard"></i>
-												<a href="#" title="">News feed</a>
+												<i class="ti-mouse-alt"></i>
+												<a href="edit-work-eductation.html" title="">New feed</a>
 											</li>
 
 											<li>
-												<i class="ti-clipboard"></i>
-												<a href="/member/departments/list" >Departments</a>
+												<i class="ti-info-alt"></i>
+												<a href="edit-account-setting.html" title="">Info setting</a>
 											</li>
 											
 											<li>
-												<i class="ti-files"></i>
-												<a href="#" title="">My pages</a>
-											</li>
-											
-											<li>
-												<i class="ti-bell"></i>
-												<a href="#" title="">Notifications</a>
+												<i class="ti-lock"></i>
+												<a href="edit-password.html" title="">change password</a>
 											</li>
 											
 											<li>
@@ -425,413 +420,388 @@
 										</ul>
 									</div>
 									<!-- Shortcuts -->
-									<div class="widget">
-										<h4 class="widget-title">Department</h4>
-										<ul class="list-group">
-											{{#each departments}}
-											<li class="list-group-item d-flex justify-content-between align-items-center">
-												<a href="#">
-												{{ this.name }}
-												</a>
-												<span class="badge badge-primary badge-pill">14</span>
-											</li>
-											{{/each  }}
-										</ul>
-									</div><!-- friends list sidebar -->
 									
 									
 								</aside>
 							</div><!-- sidebar -->
-							<div class="col-lg-6">
-								<div class="central-meta" id ="new-post-block" >
-									
-									<div class="new-postbox">
-										<div class="row">
-											<div class="col-lg-2 mx-0">
-												<figure>
-													<img src="/frontend/images/resources/admin2.jpg" alt="" class="rounded-circle pt-2">
-												</figure>
+							<div class="col-lg-9">
+
+								<div class="central-meta">
+									<div class="editing-info">
+										<h5 class="f-title"><i class="ti-info-alt"></i> Edit Basic Information</h5>
+
+										<form method="post">
+											<div class="form-group half">	
+											  <input type="text" id="input" required="required"/>
+											  <label class="control-label" for="input">First Name</label><i class="mtrl-select"></i>
 											</div>
-											<div class="col-lg-10 mx-0">
-												<div class="row mt-2" id="row-status">
-													<button type="button" class="btn btn-secondary btn-lg btn-block create_post" id="status-block">Buddy, What the hell are you thinking today?</button>
+											<div class="form-group half">	
+											  <input type="text" required="required"/>
+											  <label class="control-label" for="input">Last Name</label><i class="mtrl-select"></i>
+											</div>
+											<div class="form-group">	
+											  <input type="text" required="required"/>
+											  <label class="control-label" for="input"><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b0e262a22270b">[email&#160;protected]</a></label><i class="mtrl-select"></i>
+											</div>
+											<div class="form-group">	
+											  <input type="text" required="required"/>
+											  <label class="control-label" for="input">Phone No.</label><i class="mtrl-select"></i>
+											</div>
+											<div class="dob">
+												<div class="form-group">
+													<select>
+														<option value="Day">Day</option>
+														  <option>1</option>
+														  <option>2</option>
+														  <option>3</option>
+														  <option>4</option>
+														  <option>5</option>
+														  <option>6</option>
+														  <option>7</option>
+														  <option>8</option>
+														  <option>9</option>
+														  <option>10</option>
+														  <option>11</option>
+														  <option>12</option>
+														  <option>13</option>
+														  <option>14</option>
+														  <option>15</option>
+														  <option>16</option>
+														  <option>17</option>
+														  <option>18</option>
+														  <option>19</option>
+														  <option>20</option>
+														  <option>21</option>
+														  <option>22</option>
+														  <option>23</option>
+														  <option>24</option>
+														  <option>25</option>
+														  <option>26</option>
+														  <option>27</option>
+														  <option>28</option>
+														  <option>29</option>
+														  <option>30</option>
+														  <option>31</option>
+													</select>
 												</div>
-												<div class="row mt-2"id="row-status" >
-													<div class="col-lg-4 mx-0 px-0">
-														<button type="button" class="btn btn-light create_post" id="icon-block"><i class="fab fa-youtube"></i> Video</button>
-													</div>
-													<div class="col-lg-4 mx-0 px-0">
-														<button type="button" class="btn btn-light create_post" id="icon-block"><i class="fas fa-image"></i> Image</button>
-													</div>
-													<div class="col-lg-4 mx-0 px-0">
-														<button type="button" class="btn btn-light create_post" id="icon-block"><i class="far fa-smile"></i> Status</button>
-													</div>
+												<div class="form-group">
+													<select>
+														<option value="month">Month</option>
+														  <option>Jan</option>
+														  <option>Feb</option>
+														  <option>Mar</option>
+														  <option>Apr</option>
+														  <option>May</option>
+														  <option>Jun</option>
+														  <option>Jul</option>
+														  <option>Aug</option>
+														  <option>Sep</option>
+														  <option>Oct</option>
+														  <option>Nov</option>
+														  <option>Dec</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<select>
+													  <option value="year">Year</option>
+													  <option>2000</option>
+													  <option>2001</option>
+													  <option>2002</option>
+													  <option>2004</option>
+													  <option>2005</option>
+													  <option>2006</option>
+													  <option>2007</option>
+													  <option>2008</option>
+													  <option>2009</option>
+													  <option>2010</option>
+													  <option>2011</option>
+													  <option>2012</option>
+													</select>
 												</div>
 											</div>
-										</div>
-										
+											<div class="form-radio">
+											  <div class="radio">
+												<label>
+												  <input type="radio" checked="checked" name="radio"><i class="check-box"></i>Male
+												</label>
+											  </div>
+											  <div class="radio">
+												<label>
+												  <input type="radio" name="radio"><i class="check-box"></i>Female
+												</label>
+											  </div>
+											</div>
+											<div class="form-group">	
+											  <input type="text" required="required"/>
+											  <label class="control-label" for="input">City</label><i class="mtrl-select"></i>
+											</div>
+											<div class="form-group">	
+											  <select>
+												<option value="country">Country</option>
+												  <option value="AFG">Afghanistan</option>
+												  <option value="ALA">Ƭand Islands</option>
+												  <option value="ALB">Albania</option>
+												  <option value="DZA">Algeria</option>
+												  <option value="ASM">American Samoa</option>
+												  <option value="AND">Andorra</option>
+												  <option value="AGO">Angola</option>
+												  <option value="AIA">Anguilla</option>
+												  <option value="ATA">Antarctica</option>
+												  <option value="ATG">Antigua and Barbuda</option>
+												  <option value="ARG">Argentina</option>
+												  <option value="ARM">Armenia</option>
+												  <option value="ABW">Aruba</option>
+												  <option value="AUS">Australia</option>
+												  <option value="AUT">Austria</option>
+												  <option value="AZE">Azerbaijan</option>
+												  <option value="BHS">Bahamas</option>
+												  <option value="BHR">Bahrain</option>
+												  <option value="BGD">Bangladesh</option>
+												  <option value="BRB">Barbados</option>
+												  <option value="BLR">Belarus</option>
+												  <option value="BEL">Belgium</option>
+												  <option value="BLZ">Belize</option>
+												  <option value="BEN">Benin</option>
+												  <option value="BMU">Bermuda</option>
+												  <option value="BTN">Bhutan</option>
+												  <option value="BOL">Bolivia, Plurinational State of</option>
+												  <option value="BES">Bonaire, Sint Eustatius and Saba</option>
+												  <option value="BIH">Bosnia and Herzegovina</option>
+												  <option value="BWA">Botswana</option>
+												  <option value="BVT">Bouvet Island</option>
+												  <option value="BRA">Brazil</option>
+												  <option value="IOT">British Indian Ocean Territory</option>
+												  <option value="BRN">Brunei Darussalam</option>
+												  <option value="BGR">Bulgaria</option>
+												  <option value="BFA">Burkina Faso</option>
+												  <option value="BDI">Burundi</option>
+												  <option value="KHM">Cambodia</option>
+												  <option value="CMR">Cameroon</option>
+												  <option value="CAN">Canada</option>
+												  <option value="CPV">Cape Verde</option>
+												  <option value="CYM">Cayman Islands</option>
+												  <option value="CAF">Central African Republic</option>
+												  <option value="TCD">Chad</option>
+												  <option value="CHL">Chile</option>
+												  <option value="CHN">China</option>
+												  <option value="CXR">Christmas Island</option>
+												  <option value="CCK">Cocos (Keeling) Islands</option>
+												  <option value="COL">Colombia</option>
+												  <option value="COM">Comoros</option>
+												  <option value="COG">Congo</option>
+												  <option value="COD">Congo, the Democratic Republic of the</option>
+												  <option value="COK">Cook Islands</option>
+												  <option value="CRI">Costa Rica</option>
+												  <option value="CIV">C𴥠d'Ivoire</option>
+												  <option value="HRV">Croatia</option>
+												  <option value="CUB">Cuba</option>
+												  <option value="CUW">Cura袯</option>
+												  <option value="CYP">Cyprus</option>
+												  <option value="CZE">Czech Republic</option>
+												  <option value="DNK">Denmark</option>
+												  <option value="DJI">Djibouti</option>
+												  <option value="DMA">Dominica</option>
+												  <option value="DOM">Dominican Republic</option>
+												  <option value="ECU">Ecuador</option>
+												  <option value="EGY">Egypt</option>
+												  <option value="SLV">El Salvador</option>
+												  <option value="GNQ">Equatorial Guinea</option>
+												  <option value="ERI">Eritrea</option>
+												  <option value="EST">Estonia</option>
+												  <option value="ETH">Ethiopia</option>
+												  <option value="FLK">Falkland Islands (Malvinas)</option>
+												  <option value="FRO">Faroe Islands</option>
+												  <option value="FJI">Fiji</option>
+												  <option value="FIN">Finland</option>
+												  <option value="FRA">France</option>
+												  <option value="GUF">French Guiana</option>
+												  <option value="PYF">French Polynesia</option>
+												  <option value="ATF">French Southern Territories</option>
+												  <option value="GAB">Gabon</option>
+												  <option value="GMB">Gambia</option>
+												  <option value="GEO">Georgia</option>
+												  <option value="DEU">Germany</option>
+												  <option value="GHA">Ghana</option>
+												  <option value="GIB">Gibraltar</option>
+												  <option value="GRC">Greece</option>
+												  <option value="GRL">Greenland</option>
+												  <option value="GRD">Grenada</option>
+												  <option value="GLP">Guadeloupe</option>
+												  <option value="GUM">Guam</option>
+												  <option value="GTM">Guatemala</option>
+												  <option value="GGY">Guernsey</option>
+												  <option value="GIN">Guinea</option>
+												  <option value="GNB">Guinea-Bissau</option>
+												  <option value="GUY">Guyana</option>
+												  <option value="HTI">Haiti</option>
+												  <option value="HMD">Heard Island and McDonald Islands</option>
+												  <option value="VAT">Holy See (Vatican City State)</option>
+												  <option value="HND">Honduras</option>
+												  <option value="HKG">Hong Kong</option>
+												  <option value="HUN">Hungary</option>
+												  <option value="ISL">Iceland</option>
+												  <option value="IND">India</option>
+												  <option value="IDN">Indonesia</option>
+												  <option value="IRN">Iran, Islamic Republic of</option>
+												  <option value="IRQ">Iraq</option>
+												  <option value="IRL">Ireland</option>
+												  <option value="IMN">Isle of Man</option>
+												  <option value="ISR">Israel</option>
+												  <option value="ITA">Italy</option>
+												  <option value="JAM">Jamaica</option>
+												  <option value="JPN">Japan</option>
+												  <option value="JEY">Jersey</option>
+												  <option value="JOR">Jordan</option>
+												  <option value="KAZ">Kazakhstan</option>
+												  <option value="KEN">Kenya</option>
+												  <option value="KIR">Kiribati</option>
+												  <option value="PRK">Korea, Democratic People's Republic of</option>
+												  <option value="KOR">Korea, Republic of</option>
+												  <option value="KWT">Kuwait</option>
+												  <option value="KGZ">Kyrgyzstan</option>
+												  <option value="LAO">Lao People's Democratic Republic</option>
+												  <option value="LVA">Latvia</option>
+												  <option value="LBN">Lebanon</option>
+												  <option value="LSO">Lesotho</option>
+												  <option value="LBR">Liberia</option>
+												  <option value="LBY">Libya</option>
+												  <option value="LIE">Liechtenstein</option>
+												  <option value="LTU">Lithuania</option>
+												  <option value="LUX">Luxembourg</option>
+												  <option value="MAC">Macao</option>
+												  <option value="MKD">Macedonia, the former Yugoslav Republic of</option>
+												  <option value="MDG">Madagascar</option>
+												  <option value="MWI">Malawi</option>
+												  <option value="MYS">Malaysia</option>
+												  <option value="MDV">Maldives</option>
+												  <option value="MLI">Mali</option>
+												  <option value="MLT">Malta</option>
+												  <option value="MHL">Marshall Islands</option>
+												  <option value="MTQ">Martinique</option>
+												  <option value="MRT">Mauritania</option>
+												  <option value="MUS">Mauritius</option>
+												  <option value="MYT">Mayotte</option>
+												  <option value="MEX">Mexico</option>
+												  <option value="FSM">Micronesia, Federated States of</option>
+												  <option value="MDA">Moldova, Republic of</option>
+												  <option value="MCO">Monaco</option>
+												  <option value="MNG">Mongolia</option>
+												  <option value="MNE">Montenegro</option>
+												  <option value="MSR">Montserrat</option>
+												  <option value="MAR">Morocco</option>
+												  <option value="MOZ">Mozambique</option>
+												  <option value="MMR">Myanmar</option>
+												  <option value="NAM">Namibia</option>
+												  <option value="NRU">Nauru</option>
+												  <option value="NPL">Nepal</option>
+												  <option value="NLD">Netherlands</option>
+												  <option value="NCL">New Caledonia</option>
+												  <option value="NZL">New Zealand</option>
+												  <option value="NIC">Nicaragua</option>
+												  <option value="NER">Niger</option>
+												  <option value="NGA">Nigeria</option>
+												  <option value="NIU">Niue</option>
+												  <option value="NFK">Norfolk Island</option>
+												  <option value="MNP">Northern Mariana Islands</option>
+												  <option value="NOR">Norway</option>
+												  <option value="OMN">Oman</option>
+												  <option value="PAK">Pakistan</option>
+												  <option value="PLW">Palau</option>
+												  <option value="PSE">Palestinian Territory, Occupied</option>
+												  <option value="PAN">Panama</option>
+												  <option value="PNG">Papua New Guinea</option>
+												  <option value="PRY">Paraguay</option>
+												  <option value="PER">Peru</option>
+												  <option value="PHL">Philippines</option>
+												  <option value="PCN">Pitcairn</option>
+												  <option value="POL">Poland</option>
+												  <option value="PRT">Portugal</option>
+												  <option value="PRI">Puerto Rico</option>
+												  <option value="QAT">Qatar</option>
+												  <option value="REU">R궮ion</option>
+												  <option value="ROU">Romania</option>
+												  <option value="RUS">Russian Federation</option>
+												  <option value="RWA">Rwanda</option>
+												  <option value="BLM">Saint Barthꭥmy</option>
+												  <option value="SHN">Saint Helena, Ascension and Tristan da Cunha</option>
+												  <option value="KNA">Saint Kitts and Nevis</option>
+												  <option value="LCA">Saint Lucia</option>
+												  <option value="MAF">Saint Martin (French part)</option>
+												  <option value="SPM">Saint Pierre and Miquelon</option>
+												  <option value="VCT">Saint Vincent and the Grenadines</option>
+												  <option value="WSM">Samoa</option>
+												  <option value="SMR">San Marino</option>
+												  <option value="STP">Sao Tome and Principe</option>
+												  <option value="SAU">Saudi Arabia</option>
+												  <option value="SEN">Senegal</option>
+												  <option value="SRB">Serbia</option>
+												  <option value="SYC">Seychelles</option>
+												  <option value="SLE">Sierra Leone</option>
+												  <option value="SGP">Singapore</option>
+												  <option value="SXM">Sint Maarten (Dutch part)</option>
+												  <option value="SVK">Slovakia</option>
+												  <option value="SVN">Slovenia</option>
+												  <option value="SLB">Solomon Islands</option>
+												  <option value="SOM">Somalia</option>
+												  <option value="ZAF">South Africa</option>
+												  <option value="SGS">South Georgia and the South Sandwich Islands</option>
+												  <option value="SSD">South Sudan</option>
+												  <option value="ESP">Spain</option>
+												  <option value="LKA">Sri Lanka</option>
+												  <option value="SDN">Sudan</option>
+												  <option value="SUR">Suriname</option>
+												  <option value="SJM">Svalbard and Jan Mayen</option>
+												  <option value="SWZ">Swaziland</option>
+												  <option value="SWE">Sweden</option>
+												  <option value="CHE">Switzerland</option>
+												  <option value="SYR">Syrian Arab Republic</option>
+												  <option value="TWN">Taiwan, Province of China</option>
+												  <option value="TJK">Tajikistan</option>
+												  <option value="TZA">Tanzania, United Republic of</option>
+												  <option value="THA">Thailand</option>
+												  <option value="TLS">Timor-Leste</option>
+												  <option value="TGO">Togo</option>
+												  <option value="TKL">Tokelau</option>
+												  <option value="TON">Tonga</option>
+												  <option value="TTO">Trinidad and Tobago</option>
+												  <option value="TUN">Tunisia</option>
+												  <option value="TUR">Turkey</option>
+												  <option value="TKM">Turkmenistan</option>
+												  <option value="TCA">Turks and Caicos Islands</option>
+												  <option value="TUV">Tuvalu</option>
+												  <option value="UGA">Uganda</option>
+												  <option value="UKR">Ukraine</option>
+												  <option value="ARE">United Arab Emirates</option>
+												  <option value="GBR">United Kingdom</option>
+												  <option value="USA" selected>United States</option>
+												  <option value="UMI">United States Minor Outlying Islands</option>
+												  <option value="URY">Uruguay</option>
+												  <option value="UZB">Uzbekistan</option>
+												  <option value="VUT">Vanuatu</option>
+												  <option value="VEN">Venezuela, Bolivarian Republic of</option>
+												  <option value="VNM">Viet Nam</option>
+												  <option value="VGB">Virgin Islands, British</option>
+												  <option value="VIR">Virgin Islands, U.S.</option>
+												  <option value="WLF">Wallis and Futuna</option>
+												  <option value="ESH">Western Sahara</option>
+												  <option value="YEM">Yemen</option>
+												  <option value="ZMB">Zambia</option>
+												  <option value="ZWE">Zimbabwe</option>
+											  </select>
+											</div>
+											<div class="form-group">	
+											  <textarea rows="4" id="textarea" required="required"></textarea>
+											  <label class="control-label" for="textarea">About Me</label><i class="mtrl-select"></i>
+											</div>
+											<div class="submit-btns">
+												<button type="button" class="mtr-btn"><span>Cancel</span></button>
+												<button type="button" class="mtr-btn"><span>Update</span></button>
+											</div>
+										</form>
 									</div>
-								</div>
-								
-							
-                                <!-- start modal post -->
-                                <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="newPostLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Create post</h5>
-                                            </div>
-                                            <div class="btn-close">
-                                                <button type="button" id="close" class="btn btn-light" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">X</span>
-                                                </button>
-                                            </div>
-                                            <form id="postForm" enctype="multipart/form-data">
-                                                <div class="modal-body">
-                                                    <div class="friend-info">
-                                                        <figure>
-                                                            <img src="/frontend/images/resources/friend-avatar10.jpg" alt="">
-                                                        </figure>
-                                                        <div class="friend-name">
-															
-                                                            <ins><a href="time-line.html" title="">
-																{{#if member  }}
-																	{{ member.username }}
-																{{/if}}
-															</a></ins>
-                                                            <span>Public</span>
-                                                        </div>
-                                                        <textarea id="post_content" name="content" rows="3" placeholder="Buddy, What the hell are you thinking today?"></textarea>
-                                                        <div class="post-upload" id="option">
-														
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="addToPost">
-                                                        <label for="upload-image" id="lable-add">
-                                                            <p> Add to your post </p>
-                                                        </label>
-                                                        <input type="file" id="upload-image" name="image" style="display:none">
-                                                        {{!-- <input type="text" id="upload-video" style="display:none"> --}}
-                                                        <div> 
-                                                            <label for="upload-image" id="icon-label">
-                                                                <i class="fas fa-image m-2"></i>
-                                                            </label>	
-                                                            
-                                                            <label class="video-btn" id="icon-label">
-                                                                <i class="fab fa-youtube m-2"></i>
-                                                            </label>
-                                                            <label for="upload" id="icon-label" >
-                                                            <i class="far fa-smile m-2"></i>
-                                                            </label>
-                                                        </div> 
-                                                    </div>
-                                                        
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <input type="hidden" name="post_id" id="post_id" value="">
-                                                    <button type="submit" class="btn btn-primary" id="bt-post" disabled >Post</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end modal post -->
-							
-
-
-                                <!-- start modal delete-->
-								<div class="modal" id="confirmDeletePost" tabindex="-1" role="dialog">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title">Delete Post</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											<p>Are you sure to delete this post.</p>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-primary btn_delete_post">Delete</button>
-											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										</div>
-										</div>
-									</div>
-								</div>
-								<!-- end modal delete-->
-
-
-								<!-- add post new box -->
-								<div class="loadMore">
-									
-									{{#each posts}}
-									
-									<div class="central-meta item" id="post-item{{ this._id }}">
-										
-										<div class="user-post">
-											
-											<div class="friend-info" style=" display: inline-block;">
-												{{#if_eq ../member._id this.user._id }}
-												<div class="edit-menu dropleft">
-													<button type="button" id="btn-edit-menu" class="btn btn-light dropdown-toggle-" data-toggle="dropdown" aria-expanded="false">
-														<i class="fas fa-ellipsis-h"></i>
-													</button>
-
-													{{!-- edit dropdown --}}
-													<div class="dropdown-menu" aria-labelledby="btn-edit-menu" >
-														
-														<a class="dropdown-item edit_post" href="javascript:void(0);" data-id="{{ ../this._id }}">Edit</a>
-														<a class="dropdown-item delete_post" href="javascript:void(0);" data-id="{{ ../this._id }}">Delete</a>
-														
-													</div>
-												</div>
-												{{/if_eq}}
-												
-												<figure><img src="/frontend1/images/resources/friend-avatar10.jpg" alt=""></figure>
-												<div class="friend-name">
-													<ins><a href="time-line.html" title="">{{ this.user.username }}</a></ins>
-													<span>published: {{ formatDate this.updatedAt }}</span>
-												</div>
-												<div class="description">
-													<p>{{ this.content }}</p>
-												</div>
-												<div class="post-meta">
-													{{#if this.image}}
-														<img src="/uploads/{{ this.image }}" height="315" alt="">
-													{{/if}}
-													{{#if this.video}}
-														<iframe src="https://www.youtube.com/embed/{{ getYoutubeId this.video }}" height="315" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-													{{/if}}
-													<div class="we-video-info">
-														<ul>
-
-															<li>
-																<span class="like" data-toggle="tooltip" title="like">
-																	<a href="javascript:void(0)" class="total_like bt-like like-post{{ this._id }}" data-post-id="{{ this._id }}" data-like-id="{{data_like this.likes ../member._id}}"><i class="far fa-thumbs-up like-post-icon{{ this._id }} {{liked this.likes ../member._id}}"></i></a>
-																	<ins class="count-like{{ this._id }}" >{{ this.likes.length }}</ins>
-																</span>
-															</li>
-															<li>
-																<span class="comment" data-toggle="tooltip" title="Comments">
-																	<i class="far fa-comment"></i>
-																	<ins class="count-comment{{ this._id }}">{{ this.comments.length }}</ins>
-																</span>
-															</li>
-														</ul>
-													</div>
-													
-												</div>
-											</div>
-											<div class="coment-area">
-												<ul class="we-comet">
-													
-													{{#each this.comments}}
-													<li id="comment{{ this._id }}">
-														<div class="comet-avatar">
-															<img src="/frontend/images/resources/comet-1.jpg" alt="">
-														</div>
-														<div class="we-comment">
-															<div class="coment-head">
-																<h5><a href="time-line.html" title="">{{ this.user.username }}</a></h5>
-																<span>{{ formatDate this.updatedAt }}</span>
-																{{#if_eq ../../member._id this.user._id }}
-																<div class="edit-menu dropleft">
-																	<button type="button" id="btn-edit-menu" class="btn btn-light dropdown-toggle-" data-toggle="dropdown" aria-expanded="false">
-																		<i class="fas fa-ellipsis-h"></i>
-																	</button>
-
-																	{{!-- edit dropdown --}}
-																	<div class="dropdown-menu" aria-labelledby="btn-edit-menu" >
-																		<a class="dropdown-item delete_comment" href="javascript:void(0);" data-id="{{ ../this._id }}">Delete</a>
-																		
-																	</div>
-																</div>
-																{{/if_eq}}
-															</div>
-															<p>{{ this.comment }}</p>
-														</div>
-													</li>
-													{{/each }}
-													
-													<li class="post-comment">
-														<div class="comet-avatar">
-															<img src="/frontend/images/resources/comet-1.jpg" alt="">
-														</div>
-														<div class="post-comt-box">
-															<form name="frm-comment" action="" method="post" class="frm-post-comment" id="frm-post{{ this._id }}">
-																<textarea placeholder="Post your comment" class="inputComment" name="comment"></textarea>
-																<input type="hidden" name="post_id" value="{{ this._id }}" />
-															</form>	
-														</div>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									{{/each}}
-								</div>
-								{{!-- <div>
-									<button type="button" class="btn btn-primary" id="btn-loadMore">Load More</button>
-								</div> --}}
+								</div>	
 							</div><!-- centerl meta -->
-							<div class="col-lg-3">
-								<aside class="sidebar static">
-									<!-- <div class="widget">
-										<h4 class="widget-title">Your page</h4>	
-										<div class="your-page">
-											<figure>
-												<a href="#" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-											</figure>
-											<div class="page-meta">
-												<a href="#" title="" class="underline">My page</a>
-												<span><i class="ti-comment"></i><a href="insight.html" title="">Messages <em>9</em></a></span>
-												<span><i class="ti-bell"></i><a href="insight.html" title="">Notifications <em>2</em></a></span>
-											</div>
-											<div class="page-likes">
-												<ul class="nav nav-tabs likes-btn">
-													<li class="nav-item"><a class="active" href="#link1" data-toggle="tab">likes</a></li>
-													 <li class="nav-item"><a class="" href="#link2" data-toggle="tab">views</a></li>
-												</ul> -->
-												<!-- Tab panes -->
-												<!-- <div class="tab-content">
-												  <div class="tab-pane active fade show " id="link1" >
-													<span><i class="ti-heart"></i>884</span>
-													  <a href="#" title="weekly-likes">35 new likes this week</a>
-													  <div class="users-thumb-list">
-														<a href="#" title="Anderw" data-toggle="tooltip">
-															<img src="images/resources/userlist-1.jpg" alt="">  
-														</a>
-														<a href="#" title="frank" data-toggle="tooltip">
-															<img src="images/resources/userlist-2.jpg" alt="">  
-														</a>
-														<a href="#" title="Sara" data-toggle="tooltip">
-															<img src="images/resources/userlist-3.jpg" alt="">  
-														</a>
-														<a href="#" title="Amy" data-toggle="tooltip">
-															<img src="images/resources/userlist-4.jpg" alt="">  
-														</a>
-														<a href="#" title="Ema" data-toggle="tooltip">
-															<img src="images/resources/userlist-5.jpg" alt="">  
-														</a>
-														<a href="#" title="Sophie" data-toggle="tooltip">
-															<img src="images/resources/userlist-6.jpg" alt="">  
-														</a>
-														<a href="#" title="Maria" data-toggle="tooltip">
-															<img src="images/resources/userlist-7.jpg" alt="">  
-														</a>  
-													  </div>
-												  </div>
-												  <div class="tab-pane fade" id="link2" >
-													  <span><i class="ti-eye"></i>440</span>
-													  <a href="#" title="weekly-likes">440 new views this week</a>
-													  <div class="users-thumb-list">
-														<a href="#" title="Anderw" data-toggle="tooltip">
-															<img src="images/resources/userlist-1.jpg" alt="">  
-														</a>
-														<a href="#" title="frank" data-toggle="tooltip">
-															<img src="images/resources/userlist-2.jpg" alt="">  
-														</a>
-														<a href="#" title="Sara" data-toggle="tooltip">
-															<img src="images/resources/userlist-3.jpg" alt="">  
-														</a>
-														<a href="#" title="Amy" data-toggle="tooltip">
-															<img src="images/resources/userlist-4.jpg" alt="">  
-														</a>
-														<a href="#" title="Ema" data-toggle="tooltip">
-															<img src="images/resources/userlist-5.jpg" alt="">  
-														</a>
-														<a href="#" title="Sophie" data-toggle="tooltip">
-															<img src="images/resources/userlist-6.jpg" alt="">  
-														</a>
-														<a href="#" title="Maria" data-toggle="tooltip">
-															<img src="images/resources/userlist-7.jpg" alt="">  
-														</a>  
-													  </div>
-												  </div>
-												</div>
-											</div>
-										</div>
-									</div> -->
-									<!-- page like widget -->
-									<div class="widget">
-										<h4 class="widget-title">Recent Notifications</h4>
-										<ul class="activitiez">
-											<li>
-												<div class="activity-meta">
-													<i>10 hours Ago</i>
-													<span><a href="#" title="">Commented on Video posted </a></span>
-													<h6>by <a href="time-line.html">black demon.</a></h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>30 Days Ago</i>
-													<span><a href="#" title="">Posted your status. “Hello guys, how are you?”</a></span>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-										</ul>
-									</div>
-								</aside>
-							</div><!-- sidebar -->
+							
 						</div>	
 					</div>
 				</div>
@@ -990,3 +960,4 @@
 	
 	<script src="/frontend/js/main.min.js"></script>
 	<script src="/frontend/js/main.js"></script> 
+	<script src="/frontend/js/map-init.js"></script>

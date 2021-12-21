@@ -4,7 +4,7 @@ const studentRouter = require('./student');
 const authRouter = require('./auth.route');
 const adminRouter = require('./admin.route');
 const memberRouter = require('./member.route');
-const postRouter = require('./post.route')
+const postRouter = require('./post.route');
 
 function route(app) {
     

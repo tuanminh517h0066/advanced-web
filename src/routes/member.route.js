@@ -1,12 +1,23 @@
 const express = require('express');
 const router = express.Router();
+const departmentRouter = require('./department.route');
+
 const  passport = require('passport');
 const userMiddleware = require('../app/middleware/UserMiddleware');
 const HomeController = require('../app/controllers/frontend/HomeController');
 const PostController = require('../app/controllers/frontend/PostController');
+const PersonalController = require('../app/controllers/frontend/PersonalController');
 
 
 router.get('/home',userMiddleware.isMember, HomeController.home );
+
+router.get('/change-password',userMiddleware.isMember, PersonalController.Password);
+
+router.get('/info-setting', userMiddleware.isMember, PersonalController.infoSetting);
+
+router.use('/departments', departmentRouter);
+
+
 
 // local login
 router.get('/login',userMiddleware.checkAuthenticated, function(req, res, next) {

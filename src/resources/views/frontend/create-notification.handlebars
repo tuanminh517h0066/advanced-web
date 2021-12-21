@@ -1,6 +1,4 @@
 
-
-<!--<div class="se-pre-con"></div>-->
 <div class="theme-layout">
 	
 	<div class="responsive-header">
@@ -424,414 +422,30 @@
 											</li>
 										</ul>
 									</div>
-									<!-- Shortcuts -->
-									<div class="widget">
-										<h4 class="widget-title">Department</h4>
-										<ul class="list-group">
-											{{#each departments}}
-											<li class="list-group-item d-flex justify-content-between align-items-center">
-												<a href="#">
-												{{ this.name }}
-												</a>
-												<span class="badge badge-primary badge-pill">14</span>
-											</li>
-											{{/each  }}
-										</ul>
-									</div><!-- friends list sidebar -->
-									
-									
 								</aside>
 							</div><!-- sidebar -->
-							<div class="col-lg-6">
-								<div class="central-meta" id ="new-post-block" >
-									
-									<div class="new-postbox">
-										<div class="row">
-											<div class="col-lg-2 mx-0">
-												<figure>
-													<img src="/frontend/images/resources/admin2.jpg" alt="" class="rounded-circle pt-2">
-												</figure>
+							<div class="col-lg-9">
+								<div class="central-meta">
+									<div class="forum-form">
+										<h5 class="f-title"><i class="ti-info-alt"></i> Create favourite Topic</h5>
+										<form method="post">
+											<div class="form-group">	
+											<input type="text" id="input" required="required"/>
+												<label class="control-label" for="input">Topic Tittle</label><i class="mtrl-select"></i>
+											</div>		
+
+
+											<label class="control-label" for="textarea">Additional Info</label><i class="mtrl-select"></i>
+											<textarea id="summernote" name="editordata"></textarea>
+
+											<div class="submit-btns">
+												<button type="button" class="mtr-btn"><span>Cancel</span></button>
+												<button type="button" class="mtr-btn"><span>Save</span></button>
 											</div>
-											<div class="col-lg-10 mx-0">
-												<div class="row mt-2" id="row-status">
-													<button type="button" class="btn btn-secondary btn-lg btn-block create_post" id="status-block">Buddy, What the hell are you thinking today?</button>
-												</div>
-												<div class="row mt-2"id="row-status" >
-													<div class="col-lg-4 mx-0 px-0">
-														<button type="button" class="btn btn-light create_post" id="icon-block"><i class="fab fa-youtube"></i> Video</button>
-													</div>
-													<div class="col-lg-4 mx-0 px-0">
-														<button type="button" class="btn btn-light create_post" id="icon-block"><i class="fas fa-image"></i> Image</button>
-													</div>
-													<div class="col-lg-4 mx-0 px-0">
-														<button type="button" class="btn btn-light create_post" id="icon-block"><i class="far fa-smile"></i> Status</button>
-													</div>
-												</div>
-											</div>
-										</div>
-										
+										</form>
 									</div>
 								</div>
-								
-							
-                                <!-- start modal post -->
-                                <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="newPostLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Create post</h5>
-                                            </div>
-                                            <div class="btn-close">
-                                                <button type="button" id="close" class="btn btn-light" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">X</span>
-                                                </button>
-                                            </div>
-                                            <form id="postForm" enctype="multipart/form-data">
-                                                <div class="modal-body">
-                                                    <div class="friend-info">
-                                                        <figure>
-                                                            <img src="/frontend/images/resources/friend-avatar10.jpg" alt="">
-                                                        </figure>
-                                                        <div class="friend-name">
-															
-                                                            <ins><a href="time-line.html" title="">
-																{{#if member  }}
-																	{{ member.username }}
-																{{/if}}
-															</a></ins>
-                                                            <span>Public</span>
-                                                        </div>
-                                                        <textarea id="post_content" name="content" rows="3" placeholder="Buddy, What the hell are you thinking today?"></textarea>
-                                                        <div class="post-upload" id="option">
-														
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="addToPost">
-                                                        <label for="upload-image" id="lable-add">
-                                                            <p> Add to your post </p>
-                                                        </label>
-                                                        <input type="file" id="upload-image" name="image" style="display:none">
-                                                        {{!-- <input type="text" id="upload-video" style="display:none"> --}}
-                                                        <div> 
-                                                            <label for="upload-image" id="icon-label">
-                                                                <i class="fas fa-image m-2"></i>
-                                                            </label>	
-                                                            
-                                                            <label class="video-btn" id="icon-label">
-                                                                <i class="fab fa-youtube m-2"></i>
-                                                            </label>
-                                                            <label for="upload" id="icon-label" >
-                                                            <i class="far fa-smile m-2"></i>
-                                                            </label>
-                                                        </div> 
-                                                    </div>
-                                                        
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <input type="hidden" name="post_id" id="post_id" value="">
-                                                    <button type="submit" class="btn btn-primary" id="bt-post" disabled >Post</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end modal post -->
-							
-
-
-                                <!-- start modal delete-->
-								<div class="modal" id="confirmDeletePost" tabindex="-1" role="dialog">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title">Delete Post</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											<p>Are you sure to delete this post.</p>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-primary btn_delete_post">Delete</button>
-											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										</div>
-										</div>
-									</div>
-								</div>
-								<!-- end modal delete-->
-
-
-								<!-- add post new box -->
-								<div class="loadMore">
-									
-									{{#each posts}}
-									
-									<div class="central-meta item" id="post-item{{ this._id }}">
-										
-										<div class="user-post">
-											
-											<div class="friend-info" style=" display: inline-block;">
-												{{#if_eq ../member._id this.user._id }}
-												<div class="edit-menu dropleft">
-													<button type="button" id="btn-edit-menu" class="btn btn-light dropdown-toggle-" data-toggle="dropdown" aria-expanded="false">
-														<i class="fas fa-ellipsis-h"></i>
-													</button>
-
-													{{!-- edit dropdown --}}
-													<div class="dropdown-menu" aria-labelledby="btn-edit-menu" >
-														
-														<a class="dropdown-item edit_post" href="javascript:void(0);" data-id="{{ ../this._id }}">Edit</a>
-														<a class="dropdown-item delete_post" href="javascript:void(0);" data-id="{{ ../this._id }}">Delete</a>
-														
-													</div>
-												</div>
-												{{/if_eq}}
-												
-												<figure><img src="/frontend1/images/resources/friend-avatar10.jpg" alt=""></figure>
-												<div class="friend-name">
-													<ins><a href="time-line.html" title="">{{ this.user.username }}</a></ins>
-													<span>published: {{ formatDate this.updatedAt }}</span>
-												</div>
-												<div class="description">
-													<p>{{ this.content }}</p>
-												</div>
-												<div class="post-meta">
-													{{#if this.image}}
-														<img src="/uploads/{{ this.image }}" height="315" alt="">
-													{{/if}}
-													{{#if this.video}}
-														<iframe src="https://www.youtube.com/embed/{{ getYoutubeId this.video }}" height="315" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-													{{/if}}
-													<div class="we-video-info">
-														<ul>
-
-															<li>
-																<span class="like" data-toggle="tooltip" title="like">
-																	<a href="javascript:void(0)" class="total_like bt-like like-post{{ this._id }}" data-post-id="{{ this._id }}" data-like-id="{{data_like this.likes ../member._id}}"><i class="far fa-thumbs-up like-post-icon{{ this._id }} {{liked this.likes ../member._id}}"></i></a>
-																	<ins class="count-like{{ this._id }}" >{{ this.likes.length }}</ins>
-																</span>
-															</li>
-															<li>
-																<span class="comment" data-toggle="tooltip" title="Comments">
-																	<i class="far fa-comment"></i>
-																	<ins class="count-comment{{ this._id }}">{{ this.comments.length }}</ins>
-																</span>
-															</li>
-														</ul>
-													</div>
-													
-												</div>
-											</div>
-											<div class="coment-area">
-												<ul class="we-comet">
-													
-													{{#each this.comments}}
-													<li id="comment{{ this._id }}">
-														<div class="comet-avatar">
-															<img src="/frontend/images/resources/comet-1.jpg" alt="">
-														</div>
-														<div class="we-comment">
-															<div class="coment-head">
-																<h5><a href="time-line.html" title="">{{ this.user.username }}</a></h5>
-																<span>{{ formatDate this.updatedAt }}</span>
-																{{#if_eq ../../member._id this.user._id }}
-																<div class="edit-menu dropleft">
-																	<button type="button" id="btn-edit-menu" class="btn btn-light dropdown-toggle-" data-toggle="dropdown" aria-expanded="false">
-																		<i class="fas fa-ellipsis-h"></i>
-																	</button>
-
-																	{{!-- edit dropdown --}}
-																	<div class="dropdown-menu" aria-labelledby="btn-edit-menu" >
-																		<a class="dropdown-item delete_comment" href="javascript:void(0);" data-id="{{ ../this._id }}">Delete</a>
-																		
-																	</div>
-																</div>
-																{{/if_eq}}
-															</div>
-															<p>{{ this.comment }}</p>
-														</div>
-													</li>
-													{{/each }}
-													
-													<li class="post-comment">
-														<div class="comet-avatar">
-															<img src="/frontend/images/resources/comet-1.jpg" alt="">
-														</div>
-														<div class="post-comt-box">
-															<form name="frm-comment" action="" method="post" class="frm-post-comment" id="frm-post{{ this._id }}">
-																<textarea placeholder="Post your comment" class="inputComment" name="comment"></textarea>
-																<input type="hidden" name="post_id" value="{{ this._id }}" />
-															</form>	
-														</div>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									{{/each}}
-								</div>
-								{{!-- <div>
-									<button type="button" class="btn btn-primary" id="btn-loadMore">Load More</button>
-								</div> --}}
 							</div><!-- centerl meta -->
-							<div class="col-lg-3">
-								<aside class="sidebar static">
-									<!-- <div class="widget">
-										<h4 class="widget-title">Your page</h4>	
-										<div class="your-page">
-											<figure>
-												<a href="#" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
-											</figure>
-											<div class="page-meta">
-												<a href="#" title="" class="underline">My page</a>
-												<span><i class="ti-comment"></i><a href="insight.html" title="">Messages <em>9</em></a></span>
-												<span><i class="ti-bell"></i><a href="insight.html" title="">Notifications <em>2</em></a></span>
-											</div>
-											<div class="page-likes">
-												<ul class="nav nav-tabs likes-btn">
-													<li class="nav-item"><a class="active" href="#link1" data-toggle="tab">likes</a></li>
-													 <li class="nav-item"><a class="" href="#link2" data-toggle="tab">views</a></li>
-												</ul> -->
-												<!-- Tab panes -->
-												<!-- <div class="tab-content">
-												  <div class="tab-pane active fade show " id="link1" >
-													<span><i class="ti-heart"></i>884</span>
-													  <a href="#" title="weekly-likes">35 new likes this week</a>
-													  <div class="users-thumb-list">
-														<a href="#" title="Anderw" data-toggle="tooltip">
-															<img src="images/resources/userlist-1.jpg" alt="">  
-														</a>
-														<a href="#" title="frank" data-toggle="tooltip">
-															<img src="images/resources/userlist-2.jpg" alt="">  
-														</a>
-														<a href="#" title="Sara" data-toggle="tooltip">
-															<img src="images/resources/userlist-3.jpg" alt="">  
-														</a>
-														<a href="#" title="Amy" data-toggle="tooltip">
-															<img src="images/resources/userlist-4.jpg" alt="">  
-														</a>
-														<a href="#" title="Ema" data-toggle="tooltip">
-															<img src="images/resources/userlist-5.jpg" alt="">  
-														</a>
-														<a href="#" title="Sophie" data-toggle="tooltip">
-															<img src="images/resources/userlist-6.jpg" alt="">  
-														</a>
-														<a href="#" title="Maria" data-toggle="tooltip">
-															<img src="images/resources/userlist-7.jpg" alt="">  
-														</a>  
-													  </div>
-												  </div>
-												  <div class="tab-pane fade" id="link2" >
-													  <span><i class="ti-eye"></i>440</span>
-													  <a href="#" title="weekly-likes">440 new views this week</a>
-													  <div class="users-thumb-list">
-														<a href="#" title="Anderw" data-toggle="tooltip">
-															<img src="images/resources/userlist-1.jpg" alt="">  
-														</a>
-														<a href="#" title="frank" data-toggle="tooltip">
-															<img src="images/resources/userlist-2.jpg" alt="">  
-														</a>
-														<a href="#" title="Sara" data-toggle="tooltip">
-															<img src="images/resources/userlist-3.jpg" alt="">  
-														</a>
-														<a href="#" title="Amy" data-toggle="tooltip">
-															<img src="images/resources/userlist-4.jpg" alt="">  
-														</a>
-														<a href="#" title="Ema" data-toggle="tooltip">
-															<img src="images/resources/userlist-5.jpg" alt="">  
-														</a>
-														<a href="#" title="Sophie" data-toggle="tooltip">
-															<img src="images/resources/userlist-6.jpg" alt="">  
-														</a>
-														<a href="#" title="Maria" data-toggle="tooltip">
-															<img src="images/resources/userlist-7.jpg" alt="">  
-														</a>  
-													  </div>
-												  </div>
-												</div>
-											</div>
-										</div>
-									</div> -->
-									<!-- page like widget -->
-									<div class="widget">
-										<h4 class="widget-title">Recent Notifications</h4>
-										<ul class="activitiez">
-											<li>
-												<div class="activity-meta">
-													<i>10 hours Ago</i>
-													<span><a href="#" title="">Commented on Video posted </a></span>
-													<h6>by <a href="time-line.html">black demon.</a></h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>30 Days Ago</i>
-													<span><a href="#" title="">Posted your status. “Hello guys, how are you?”</a></span>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-										</ul>
-									</div>
-								</aside>
-							</div><!-- sidebar -->
 						</div>	
 					</div>
 				</div>
@@ -988,5 +602,11 @@
 			</form>
 		</div><!-- side panel -->		
 	
-	<script src="/frontend/js/main.min.js"></script>
-	<script src="/frontend/js/main.js"></script> 
+	{{!-- <script src="/frontend/js/main.min.js"></script> --}}
+	<script>
+		$(document).ready(function() {
+			$('#summernote').summernote();
+		});
+  	</script>
+	{{!-- <script src="/frontend/js/main.js"></script>  --}}
+	{{!-- <script src="/frontend/js/map-init.js"></script> --}}
