@@ -605,8 +605,38 @@
 	{{!-- <script src="/frontend/js/main.min.js"></script> --}}
 	<script>
 		$(document).ready(function() {
-			$('#summernote').summernote();
+			$('#summernote').summernote({
+				placeholder: 'fill your notication',
+				tabsize: 2,
+        		height: 200,
+				callbacks: {
+					onImageUpload: function(image, editor, welEditable) {
+						uploadImage(image[0], editor, welEditable);
+					},
+				}
+			});
 		});
+
+		function uploadImage(image, editor, welEditable) {
+			var data = new FormData();
+			data.append("image", image);
+			$.ajax({
+				url: '/member/departments/ajaxUploadImageContent',
+				data: data,
+				cache: false,
+				contentType: false,
+				processData: false,
+				type: "post",
+				success: function(data) {
+					var node = $('<img>').attr('src', data.url);
+					$('#summernote').summernote("insertNode", node[0]);
+					//$('#contentEditor').summernote("editor.insertImage", data.url);
+				},
+				error: function(data) {
+					console.log(data);
+				}
+			});
+		}
   	</script>
 	{{!-- <script src="/frontend/js/main.js"></script>  --}}
 	{{!-- <script src="/frontend/js/map-init.js"></script> --}}
