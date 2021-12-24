@@ -389,7 +389,11 @@ $(document).ready(function() {
 
                         $('.count-like' + post_id).text(count_like);
                         $('.like-post' + post_id).attr('data-like-id', '');
+                        // $('.like-post-icon' + post_id).attr('class', 'far fa-thumbs-up like-post-icon'+post_id);
+                        $('.like-post-icon' + post_id).attr('style', 'font-weight: none;');
+                        
                         $('.like-post-icon' + post_id).removeClass('liked');
+                        
                     }
                 }
             });
@@ -405,7 +409,10 @@ $(document).ready(function() {
 
                     $('.count-like' + post_id).text(count_like);
                     $('.like-post' + post_id).attr('data-like-id', data.id);
+                    // $('.like-post-icon' + post_id).attr('class', 'fas fa-thumbs-up like-post-icon'+post_id);
+                    $('.like-post-icon' + post_id).attr('style', 'font-weight: 900;');
                     $('.like-post-icon' + post_id).addClass('liked');
+                    
                 }
             }); 
         }

@@ -1296,6 +1296,7 @@ header.sticky {
 #icon-block i {
   font-size: 28px;
   margin-right: 5px;
+  /* font-weight: lighter; */
 }
 #status-block {
   background-color: rgba(0, 0, 0, 0.05);
@@ -1347,6 +1348,7 @@ header.sticky {
   cursor: pointer;
   margin: 0;
 }
+
 #addToPost {
   display: flex;
   justify-content: space-between;
@@ -1545,32 +1547,42 @@ form button {
 
 .we-video-info {
   float: left;
-  padding: 15px 0 10px;
+  padding: 35px 0 0;
   width: 100%;
   position: relative;
   z-index: 0;
 }
+.we-video-info .row {
+  border-top: 1px solid #ccc;
+  margin: auto;
+}
 
-.we-video-info > ul {
+/* .we-video-info > .row {
   float: left;
   width: 100%;
   line-height: 27px;
   padding-left: 0;
   margin-bottom: 0;
-}
+} */
 
 .social-media {
   vertical-align: sub;
 }
 
-.we-video-info > ul li {
+.we-video-info > .row .col-md-6 {
   display: inline-block;
   font-size: 13px;
-  margin-right: 40px;
+  padding: 6px 0;
+  /* margin-right: 40px; */
 }
 
-.we-video-info > ul li span {
-  font-size: 16px;
+.we-video-info > .row .col-md-6 button {
+  padding: 5px 0;
+  /* margin-right: 40px; */
+}
+
+.we-video-info > .row .col-md-6 span {
+  /* font-size: 16px; */
   font-weight: 400;
   margin-right: 3px;
   position: relative;
@@ -1586,7 +1598,7 @@ form button {
 .upload-date > i {
   font-size: 13px;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 100;
   margin-left: 5px;
   text-transform: capitalize;
 }
@@ -1597,27 +1609,36 @@ form button {
   transition: all 0.2s linear 0s;
 }
 
-.we-video-info > ul li span ins {
-  font-size: 11px;
-  left: 20px;
+.we-video-info > .row .col-md-6 span ins {
+  font-size: 13px;
+  /* left: 35px; */
   position: absolute;
   text-decoration: none;
-  top: -10px;
+  /* top: -10px; */
+}
+.we-video-info > .row .col-md-6 .like ins {
+  left: -100px;
+  top: -42px;
+}
+.we-video-info > .row .col-md-6 .comment ins {
+  top: -42px;
+  right: -100px;
 }
 
-.we-video-info > ul li span.like {
+.we-video-info > .row .col-md-6 span.like {
   /* color: green; */
+  background-position: 0 0;
   cursor: pointer;
-  transition: all 0.2s linear 0s;
+  /* transition: all 0.2s linear 0s; */
 }
 
 .we-video-info
-  > ul
-  li
+  > .row
+  .col-md-6
   span.like:hover
   .we-video-info
-  > ul
-  li
+  > .row
+  .col-md-6
   span.dislike:hover {
   trnsform: scale(1.1);
 }
@@ -1921,6 +1942,7 @@ for some reason nth-child(1) is always busy and elements starting from 2 */
   vertical-align: top;
   position: relative;
   width: 65%;
+  border-radius: 15px;
 }
 
 .we-comment::before,
@@ -2021,7 +2043,7 @@ li.post-comment .comet-avatar {
 .post-comt-box form textarea {
   background: #f3f3f3 none repeat scroll 0 0;
   border-color: transparent;
-  border-radius: 3px;
+  border-radius: 15px;
   color: #000000;
   font-size: 13.5px;
   font-weight: 500;
