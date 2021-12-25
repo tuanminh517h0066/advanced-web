@@ -583,6 +583,57 @@
 												<a class="dropdown-item edit_post" href="javascript:void(0);" data-id="{{ ../this._id }}">Edit</a>
 												<a class="dropdown-item delete_post" href="javascript:void(0);" data-id="{{ ../this._id }}">Delete</a>
 												
+												<figure><img src="/frontend1/images/resources/friend-avatar10.jpg" alt=""></figure>
+												<div class="friend-name">
+													<ins><a href="time-line.html" title="">{{ this.user.username }}</a></ins>
+													<span>published: {{ formatDate this.updatedAt }}</span>
+												</div>
+												<div class="description">
+													<p>{{ this.content }}</p>
+												</div>
+												<div class="post-meta">
+													{{#if this.image}}
+														<img src="/uploads/{{ this.image }}" height="315" alt="">
+													{{/if}}
+													{{#if this.video}}
+														<iframe src="https://www.youtube.com/embed/{{ getYoutubeId this.video }}" height="315" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+													{{/if}}
+													<div class="we-video-info">
+														<div class="row" >
+															<div class="col-md-6">
+																<button type="button" class="btn btn-light " id="icon-block">
+																	<span class="like" data-toggle="tooltip" title="like">
+																		<a href="javascript:void(0)" class="total_like bt-like like-post{{ this._id }}" data-post-id="{{ this._id }}" data-like-id="{{data_like this.likes ../member._id}}"><i class="far fa-thumbs-up like-post-icon{{ this._id }} {{liked this.likes ../member._id}}"></i></a>
+																		<ins class="count-like{{ this._id }}" >{{ this.likes.length }} Like</ins>
+																	</span>
+																</button>
+															</div>
+															<div class="col-md-6">
+																<button type="button" class="btn btn-light " id="icon-block">
+																	<span class="comment" data-toggle="tooltip" title="Comments">
+																		<i class="far fa-comment"></i>
+																		<ins class="count-comment{{ this._id }}">{{ this.comments.length }} Comments</ins>
+																	</span>
+																</button>
+															</div>
+														</div>
+														{{!-- <ul>
+															<li>
+																<span class="like" data-toggle="tooltip" title="like">
+																	<a href="javascript:void(0)" class="total_like bt-like like-post{{ this._id }}" data-post-id="{{ this._id }}" data-like-id="{{data_like this.likes ../member._id}}"><i class="far fa-thumbs-up like-post-icon{{ this._id }} {{liked this.likes ../member._id}}"></i></a>
+																	<ins class="count-like{{ this._id }}" >{{ this.likes.length }}</ins>
+																</span>
+															</li>
+															<li>
+																<span class="comment" data-toggle="tooltip" title="Comments">
+																	<i class="far fa-comment"></i>
+																	<ins class="count-comment{{ this._id }}">{{ this.comments.length }}</ins>
+																</span>
+															</li>
+														</ul> --}}
+													</div>
+													
+												</div>
 											</div>
 										</div>
 										{{/if_eq}}
