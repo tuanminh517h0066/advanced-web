@@ -104,7 +104,7 @@ img {
 }
 
 .theme-layout.boxed {
-  background: none repeat scroll 0 0 #ffffff;
+  /* background: none repeat scroll 0 0 #ffffff; */
   float: none;
   margin: 0 auto;
   overflow: hidden;
@@ -126,7 +126,7 @@ section {
 
 .gap {
   float: left;
-  padding: 60px 0;
+  padding: 20px 0;
   position: relative;
   width: 100%;
 }
@@ -291,7 +291,10 @@ section {
 .gray-bg {
   float: left;
   width: 100%;
-  background: #f4f2f2;
+  background: url("/frontend/images/background.jpg");
+  background-repeat: repeat-y;
+  background-size: cover;
+  background-position: center;
 }
 
 [type='submit'],
@@ -631,13 +634,15 @@ header.sticky {
 /*--- topbar ---*/
 
 .topbar {
-  background: #fff;
+  width: 100%;
+  background-color: rgba(255, 255, 255);
   display: block;
   height: 60px;
   padding: 0 48px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   z-index: 99;
-  position: relative;
+  position: sticky;
+  top: 0;
 }
 
 .logo {
@@ -1125,6 +1130,11 @@ header.sticky {
 
 /*--- sidebar widgets ---*/
 
+.list-group{
+  max-height: 175px;
+  overflow: auto;
+}
+
 .sidebar {
   display: table;
   float: none;
@@ -1140,7 +1150,7 @@ header.sticky {
   margin-bottom: 30px;
   background: #fdfdfd;
   border: 1px solid #ede9e9;
-  border-radius: 3px;
+  border-radius: 10px;
 }
 
 .sidebar .widget:last-child {
@@ -1250,6 +1260,10 @@ header.sticky {
 }
 
 .activity-meta > h6 a {
+}
+.activitiez {
+  height: 520px;
+  overflow: auto;
 }
 
 .activitiez > li::before {
@@ -3567,7 +3581,7 @@ a.add-butn {
 
 .page-meta {
   display: inline-block;
-  padding-left: 10px;
+  /* padding-left: 10px; */
   vertical-align: middle;
   width: 69.8%;
 }
@@ -3576,6 +3590,7 @@ a.add-butn {
   display: inline-block;
   padding: 0 20px 10px;
   width: 100%;
+  text-align: center;
 }
 
 .page-meta > a {
@@ -4740,9 +4755,11 @@ canvas {
   position: relative;
 }
 
-.static,
-.static > div {
-  position: static !important;
+.static {
+  /* position: static !important; */
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 80px;
 }
 
 /*--- sticky sidebar End ---*/
@@ -4765,6 +4782,8 @@ canvas {
 }
 
 /*--- main menu ---*/
+
+
 
 .top-area > ul.main-menu > li ul {
   left: 0;
