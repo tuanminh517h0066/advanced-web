@@ -64,6 +64,10 @@ body {
   padding: 0;
   overflow-x: hidden;
   color: #545454;
+  background: url("/frontend/images/background.jpg");
+  background-repeat: repeat-y;
+  background-size: cover;
+  background-position: center;
 }
 
 p {
@@ -291,10 +295,10 @@ section {
 .gray-bg {
   float: left;
   width: 100%;
-  background: url("/frontend/images/background.jpg");
+  /* background: url("/frontend/images/background.jpg");
   background-repeat: repeat-y;
   background-size: cover;
-  background-position: center;
+  background-position: center; */
 }
 
 [type='submit'],
