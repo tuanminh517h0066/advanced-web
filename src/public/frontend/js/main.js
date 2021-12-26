@@ -193,6 +193,8 @@ $(document).ready(function() {
 
     $(window).scroll(function() {
         if($(window).scrollTop() == $(document).height() - $(window).height()) {
+            // var load = loadForm();
+            // $('#load').removeAttr('hidden');
             $.ajax({
                 type: "post",
                 url: "/post/loadmore",
@@ -203,28 +205,65 @@ $(document).ready(function() {
                 success: function(data) {
                     console.log(data.posts);
                     console.log(data.current_account);
-                    var status_edit_del = 0;
-                    
-                    
-                    
-                    var post ='';
-                    data.posts.forEach(function(element) {  
-
-                        if(String(data.current_account) === String(element.user._id)) {
-                            status_edit_del = 1
+                    var load = loadForm();
+                    if(data.posts.length > 0) {
+                        if ($("#load")[0]){
+                            // Do something if class exists
+                        } else {
+                            
+                            $('.loadMore').append(load);
                         }
-
-                        post += '<div class="central-meta item" id="post-item' + element._id + '">'
-                        post += postForm(element, status_edit_del, data.current_account);
-                        post += '</div>'
+                    }
+                    // $('.loadMore').append(load);
+                    
+                    setTimeout(function (){
+                        console.log("check time out")
+                        // $('.loadingPost').hide();
+                        $('.loadMore').find('#load').remove();
+                        var status_edit_del = 0;
+                        var post ='';
+                        data.posts.forEach(function(element) {  
+    
+                            if(String(data.current_account) === String(element.user._id)) {
+                                status_edit_del = 1
+                            }
+    
+                            post += '<div class="central-meta item" id="post-item' + element._id + '">'
+                            post += postForm(element, status_edit_del, data.current_account);
+                            post += '</div>'
+                            
+                        }); 
+                        $( ".loadMore" ).append( post );
                         
-                    }); 
-                    $( ".loadMore" ).append( post );
+                    }, 1000);
+                    
                     startFrom = startFrom+2;
-                }
+                    
+                },
             });
         }
     });
+
+    function loadForm() {
+        load = '<div class="central-meta item" id="load">';
+        // load  = '<div id="checkLoad">'
+        load += '<div class="header-post">'
+		load += '<div class="space-img"></div>'						
+		load += '<div class="space-friend-name">'							
+		load += '<div class="space-name"></div>'							
+		load += '<div class="space-span"></div>'								
+		load += '</div>'									
+		load += '</div>'							
+		load += '<div class="body-post">'						
+		load += '<div class="space"></div>'						
+		load += '<div class="space"></div>'							
+		load += '<div class="space"></div>'							
+		load += '</div>'							
+		load += '</div>'
+        
+        return load;					
+
+    }
 
     function postForm(data, status_edit_del, current_account) {
         
@@ -262,11 +301,10 @@ $(document).ready(function() {
         }
 
         post += '<div class="we-video-info">'
-        post += '<ul>'
 
         var liked = '';
         var data_like = '';
-        
+
         data.likes.forEach(function (element){
             console.log('member_like'+element.user._id);
             
@@ -279,23 +317,27 @@ $(document).ready(function() {
             }
         })	
 
-        console.log(data.comments.length);
 
-        post +=	'<li>'
-        post += '<span class="like" data-toggle="tooltip" title="like">'												
-        post += '<a href="javascript:void(0)" class="total_like bt-like like-post' + data._id + '" data-post-id="' + data._id + '" data-like-id="'+ data_like +'"><i class="far fa-thumbs-up like-post-icon' + data._id + ' '+ liked +'"></i></a>'													
-        post += '<ins class="count-like' + data._id + '" >'+ data.likes.length +'</ins>'													
-        post += '</span>'												
-        post += '</li>'		
-
-        post += '<li>'
-        post += '<span class="comment" data-toggle="tooltip" title="Comments">'
-        post += '<i class="far fa-comment"></i>'
-        post += '<ins>'+ data.comments.length +'</ins>'
-        post += '</span>'
-        post += '</li>'
+        post += '<div class="row" >'
+		post += '<div class="col-md-6">'											
+		post += '<button type="button" class="btn btn-light " id="icon-block">'												
+		post += '<span class="like" data-toggle="tooltip" title="like">'													
+		post += '<a href="javascript:void(0)" class="total_like bt-like like-post' + data._id + '" data-post-id="' + data._id + '" data-like-id="'+ data_like +'"><i class="far fa-thumbs-up like-post-icon' + data._id + ' '+ liked +'"> Like</i></a>'														
+		post += '<ins class="count-like' + data._id + '" >'+ data.likes.length +'</ins>'														
+		post += '</span>'													
+		post += '</button>'												
+		post += '</div>'											
+		post += '<div class="col-md-6">'											
+		post += '<button type="button" class="btn btn-light " id="icon-block">'												
+		post += '<span class="comment" data-toggle="tooltip" title="Comments">'													
+		post += '<i class="far fa-comment"> Comments</i>'														
+		post += '<ins class="count-comment' + data._id + '">'+ data.comments.length +'</ins>'														
+		post += '</span>'													
+		post += '</button>'												
+		post += '</div>'										
+		post += '</div>'			
         
-        post += '</ul>'
+        
         post += '</div>'
         post += '</div>'
         post += '</div>'
