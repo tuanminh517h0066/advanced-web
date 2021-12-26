@@ -3879,7 +3879,7 @@ a.add-butn.more-action {
   font-weight: 600;
   text-transform: capitalize;
   color: #000;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   padding-bottom: 20px;
   position: relative;
   display: inline-block;
@@ -3916,7 +3916,7 @@ a.add-butn.more-action {
 /*--- edit basic info page ---*/
 
 .editing-info > form {
-  margin-top: 25px;
+  /* margin-top: 25px; */
 }
 
 form .form-group.half {
@@ -5412,6 +5412,12 @@ canvas {
 .form-group textarea:focus,
 .form-group textarea:valid {
   color: #2a2a2a;
+}
+
+.form-group input {
+  color: #000;
+  padding: 15px;
+  border: 0.1px solid rgb(209, 209, 209);
 }
 
 .row.widget-page {
