@@ -22,7 +22,7 @@ router.post('/new',userMiddleware.isMember,upload.single('image'), PostControlle
 
 router.post('/edit',userMiddleware.isMember,PostController.edit);
 
-router.post('/delete',userMiddleware.isMember, PostController.delete)
+router.post('/delete',userMiddleware.isMember, PostController.delete);
 
 router.post('/loadmore',userMiddleware.isMember, PostController.loadMore);
 

@@ -428,19 +428,28 @@
 								<div class="central-meta">
 									<div class="forum-form">
 										<h5 class="f-title"><i class="ti-info-alt"></i> Create favourite Topic</h5>
-										<form method="post">
+										<form method="post" action="/member/departments/notification/post">
 											<div class="form-group">	
-											<input type="text" id="input" required="required"/>
+											<input type="text" id="input" name="noti_title" value="{{ noti_item.title }}"/>
 												<label class="control-label" for="input">Topic Tittle</label><i class="mtrl-select"></i>
 											</div>		
 
 
 											<label class="control-label" for="textarea">Additional Info</label><i class="mtrl-select"></i>
-											<textarea id="summernote" name="editordata"></textarea>
+											<textarea id="summernote" name="description">{{{ noti_item.description }}}</textarea>
+
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="1" name="important_status" id="flexCheckDefault" {{#if noti_item.status }} checked {{/if}} >
+												<label class="form-check-label" for="flexCheckDefault">
+													IMPORTANT
+												</label>
+											</div>
 
 											<div class="submit-btns">
+												<input type="hidden" name="notification_id" value="{{ noti_item._id }}">
+												<input type="hidden" name="department_id" value="{{ department_item._id }}">
 												<button type="button" class="mtr-btn"><span>Cancel</span></button>
-												<button type="button" class="mtr-btn"><span>Save</span></button>
+												<button type="submit" class="mtr-btn"><span>Save</span></button>
 											</div>
 										</form>
 									</div>

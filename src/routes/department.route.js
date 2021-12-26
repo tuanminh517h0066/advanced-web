@@ -25,6 +25,12 @@ router.get('/:department_id',userMiddleware.isMember, DepartmentController.depar
 
 router.get('/:department_id/notification/create', userMiddleware.isMember, DepartmentController.createNoti);
 
+router.get('/:department_id/notification/:notification_id/edit', userMiddleware.isMember, DepartmentController.editNoti);
+
+router.post('/notification/delete', userMiddleware.isMember,DepartmentController.deleteNoti);
+
+router.post('/notification/post', userMiddleware.isMember, DepartmentController.postNoti);
+
 router.post('/ajaxUploadImageContent', userMiddleware.isMember, upload.single('image'), DepartmentController.ajaxUploadImageContent);
 
 module.exports = router;

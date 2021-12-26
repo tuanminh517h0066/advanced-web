@@ -607,16 +607,16 @@
 													<div class="col-md-6">
 														<button type="button" class="btn btn-light " id="icon-block">
 															<span class="like" data-toggle="tooltip" title="like">
-																<a href="javascript:void(0)" class="total_like bt-like like-post{{ this._id }}" data-post-id="{{ this._id }}" data-like-id="{{data_like this.likes ../member._id}}"><i class="far fa-thumbs-up like-post-icon{{ this._id }} {{liked this.likes ../member._id}}"></i></a>
-																<ins class="count-like{{ this._id }}" >{{ this.likes.length }} Like</ins>
+																<a href="javascript:void(0)" class="total_like bt-like like-post{{ this._id }}" data-post-id="{{ this._id }}" data-like-id="{{data_like this.likes ../member._id}}"><i class="far fa-thumbs-up like-post-icon{{ this._id }} {{liked this.likes ../member._id}}"> Like</i></a>
+																<ins class="count-like{{ this._id }}" >{{ this.likes.length }} </ins> 
 															</span>
 														</button>
 													</div>
 													<div class="col-md-6">
 														<button type="button" class="btn btn-light " id="icon-block">
 															<span class="comment" data-toggle="tooltip" title="Comments">
-																<i class="far fa-comment"></i>
-																<ins class="count-comment{{ this._id }}">{{ this.comments.length }} Comments</ins>
+																<i class="far fa-comment"> Comments</i>
+																<ins class="count-comment{{ this._id }}">{{ this.comments.length }} </ins> 
 															</span>
 														</button>
 													</div>
@@ -686,6 +686,24 @@
 								</div>
 							</div>
 							{{/each}}
+
+							{{!-- <div class="central-meta item loadingPost" id="load" style="display: none;"> --}}
+								{{!-- <div id="checkLoad"> --}}
+								{{!-- <div class="header-post">
+									<div class="space-img"></div>
+									<div class="space-friend-name">
+										<div class="space-name"></div>
+										<div class="space-span"></div>	
+									</div>
+								</div>
+								<div class="body-post">
+									<div class="space"></div>
+									<div class="space"></div>
+									<div class="space"></div>
+								</div> --}}
+								{{!-- </div> --}}
+							
+							{{!-- </div> --}}
 						</div>
 						{{!-- <div>
 							<button type="button" class="btn btn-primary" id="btn-loadMore">Load More</button>

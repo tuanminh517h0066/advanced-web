@@ -295,10 +295,10 @@ section {
 .gray-bg {
   float: left;
   width: 100%;
-  /* background: url("/frontend/images/background.jpg");
+  /* background: url('/frontend/images/background.jpg');
   background-repeat: repeat-y;
   background-size: cover;
-  background-position: center; */
+  background-position: center;  */
 }
 
 [type='submit'],
@@ -1134,7 +1134,7 @@ header.sticky {
 
 /*--- sidebar widgets ---*/
 
-.list-group{
+.list-group {
   max-height: 175px;
   overflow: auto;
 }
@@ -1291,6 +1291,7 @@ header.sticky {
   width: 100%;
   margin-bottom: 20px;
   padding: 25px;
+  border-radius: 6px;
 }
 
 .new-postbox {
@@ -1309,7 +1310,7 @@ header.sticky {
   padding: 35px;
 }
 #icon-block {
-  font-size: 22px;
+  font-size: 20px;
 }
 #icon-block i {
   font-size: 28px;
@@ -1486,7 +1487,7 @@ form button {
   width: 100%;
 }
 .liked {
-  color: rgb(45, 32, 224);
+  color: #2078f4;
 }
 .post-upload img {
   border-radius: 10px;
@@ -1642,14 +1643,80 @@ form button {
   top: -42px;
   right: -100px;
 }
+.we-video-info > .row .col-md-6 span.comment {
+  /* color: green; */
+  background-position: 0 0;
+  cursor: pointer;
+  color: #65676b;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* transition: all 0.2s linear 0s; */
+}
+
+.we-video-info #icon-block i {
+  font-size: 18px;
+}
 
 .we-video-info > .row .col-md-6 span.like {
   /* color: green; */
   background-position: 0 0;
   cursor: pointer;
+  color: #65676b;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   /* transition: all 0.2s linear 0s; */
 }
+.we-video-info {
+  font-size: none;
+}
 
+#load .header-post .space-friend-name {
+  display: inline-block;
+  width: 90%;
+}
+
+#load .header-post .space-img {
+  display: inline-block;
+  background-color: #e4e6eb;
+  border-radius: 50%;
+  margin-right: 8px;
+  width: 48px;
+  height: 48px;
+}
+#load {
+  padding: 0;
+}
+#load .header-post {
+  display: inline-block;
+  width: 100%;
+  padding: 25px;
+}
+
+#load .body-post {
+  width: 100%;
+  padding: 174px 25px 25px;
+  justify-content: space-around;
+  display: flex;
+}
+#load .body-post .space {
+  width: 96px;
+  border-radius: 25px;
+  height: 12px;
+  background-color: #e4e6eb;
+}
+
+#load .header-post .space-name {
+  background-color: #e4e6eb;
+  width: 128px;
+  height: 12px;
+  border-radius: 25px;
+  margin-top: 7.95px;
+}
+#load .header-post .space-span {
+  background-color: #e4e6eb;
+  width: 145.5px;
+  height: 12px;
+  border-radius: 25px;
+  margin: 7.95px 0;
+}
 .we-video-info
   > .row
   .col-md-6
@@ -4808,8 +4875,6 @@ canvas {
 }
 
 /*--- main menu ---*/
-
-
 
 .top-area > ul.main-menu > li ul {
   left: 0;

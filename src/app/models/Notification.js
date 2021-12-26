@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const Department = new Schema({
+const Notification = new Schema({
     title: {type: String},
     description: {type: String},
+    status: {type: Number},
     department: 
     {
         type: mongoose.Schema.Types.ObjectId,
@@ -16,9 +17,8 @@ const Department = new Schema({
         }
     ]
     
-    
 }, {
     timestamps: true,
 });
 
-module.exports = mongoose.model('Department', Department);
+module.exports = mongoose.model('Notification', Notification);
