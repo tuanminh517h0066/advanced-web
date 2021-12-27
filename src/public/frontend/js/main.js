@@ -256,8 +256,7 @@ $(document).ready(function() {
 		load += '</div>'							
 		load += '<div class="body-post">'						
 		load += '<div class="space"></div>'						
-		load += '<div class="space"></div>'							
-		load += '<div class="space"></div>'							
+		load += '<div class="space"></div>'														
 		load += '</div>'							
 		load += '</div>'
         
@@ -429,7 +428,7 @@ $(document).ready(function() {
                     if(data.success == true){
                         count_like = count_like - 1;
 
-                        $('.count-like' + post_id).text(count_like);
+                        $('.count-like' + post_id).text(count_like + " Like");
                         $('.like-post' + post_id).attr('data-like-id', '');
                         // $('.like-post-icon' + post_id).attr('class', 'far fa-thumbs-up like-post-icon'+post_id);
                         $('.like-post-icon' + post_id).attr('style', 'font-weight: none;');
@@ -449,7 +448,7 @@ $(document).ready(function() {
                     console.log(data.id);
                     count_like = count_like + 1;
 
-                    $('.count-like' + post_id).text(count_like);
+                    $('.count-like' + post_id).text(count_like + " Like");
                     $('.like-post' + post_id).attr('data-like-id', data.id);
                     // $('.like-post-icon' + post_id).attr('class', 'fas fa-thumbs-up like-post-icon'+post_id);
                     $('.like-post-icon' + post_id).attr('style', 'font-weight: 900;');
@@ -497,7 +496,7 @@ $(document).ready(function() {
                 
                 var status_edit_del = 1;
 
-                $('.count-comment' + post_id).text(count_comment);
+                $('.count-comment' + post_id).text(count_comment + ' Comments');
                 _this.find('textarea[name=comment]').val('');
 
                 var comment = '';
@@ -566,7 +565,7 @@ $(document).ready(function() {
                 if(data.success == true){
                     count_comment = count_comment - 1;
 
-                    $('.count-comment' + post_id).text(count_comment);
+                    $('.count-comment' + post_id).text(count_comment + ' Comments');
                     
                     $('#comment' + id).remove();
                 }
