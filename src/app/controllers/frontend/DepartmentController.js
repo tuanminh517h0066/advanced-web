@@ -10,7 +10,7 @@ class DepartmentController {
 
         const departments = await Department.find({});
 
-        res.render('frontend/create-notification',{
+        res.render('frontend/department-list',{
             departments: mutipleMongooseToObject(departments)
         });
     }
