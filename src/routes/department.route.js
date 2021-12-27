@@ -27,6 +27,8 @@ router.get('/:department_id/notification/create', userMiddleware.isMember, Depar
 
 router.get('/:department_id/notification/:notification_id/edit', userMiddleware.isMember, DepartmentController.editNoti);
 
+router.get('/:department_id/notification/:notification_id/detail', userMiddleware.isMember, DepartmentController.detailNoti);
+
 router.post('/notification/delete', userMiddleware.isMember,DepartmentController.deleteNoti);
 
 router.post('/notification/post', userMiddleware.isMember, DepartmentController.postNoti);

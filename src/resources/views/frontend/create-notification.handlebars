@@ -381,39 +381,23 @@
 									</div> --}}
 									<!-- page like widget -->
 									<div class="widget">
-										<h4 class="widget-title">Your page</h4>	
+										<h4 class="widget-title">{{ department_item.name }}</h4>	
 										
-										<div class="your-page">
-											<figure>
-												<a href="#" title=""><img src="/frontend/images/resources/friend-avatar9.jpg" alt=""></a>
-											</figure>
-											<div class="page-meta">
-												<a href="#" title="" class="underline">My page</a>
-												{{!-- <span><i class="ti-comment"></i><a href="insight.html" title="">Messages <em>9</em></a></span>
-												<span><i class="ti-bell"></i><a href="insight.html" title="">Notifications <em>2</em></a></span> --}}
-											</div>
-										</div>
 										<div class="widget"></div>
 										{{!-- <h4 class="widget-title">Shortcuts</h4> --}}
 										<ul class="naves">
+											{{#each department_item.users}}
+											{{#if_eq ../member._id this._id }}
 											<li>
 												<i class="ti-clipboard"></i>
-												<a href="#" title="">News feed</a>
+												<a href="/member/departments/{{ ../../department_item._id }}/notification/create" title="">create notification</a>
 											</li>
+											{{/if_eq}}
+											{{/each}}
 
 											<li>
-												<i class="ti-clipboard"></i>
-												<a href="/member/departments/list" >Departments</a>
-											</li>
-											
-											<li>
-												<i class="ti-files"></i>
-												<a href="#" title="">My pages</a>
-											</li>
-											
-											<li>
 												<i class="ti-bell"></i>
-												<a href="#" title="">Notifications</a>
+												<a href="/member/departments/{{ department_item._id }}" title="">Notifications</a>
 											</li>
 											
 											<li>

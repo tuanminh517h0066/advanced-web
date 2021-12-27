@@ -40,6 +40,9 @@ class DepartmentController {
     async createNoti(req, res, next) {
         
         const department_item = await Department.findOne({_id: req.params.department_id})
+        .populate({
+            path: 'users',
+        });
         const current_account = req.user;
 
         res.render('frontend/create-notification', {
@@ -53,10 +56,16 @@ class DepartmentController {
         var noti_id = req.params.notification_id;
         var noti_item = await Notification.findOne({_id: noti_id})
         const department_item = await Department.findOne({_id: req.params.department_id})
+        .populate({
+            path: 'users',
+        });
+        const current_account = req.user;
+
        
         res.render('frontend/create-notification',{
             department_item: mongooseToObject(department_item),
             noti_item: mongooseToObject(noti_item),
+            member: mongooseToObject(current_account),
         })
     }
 
@@ -76,6 +85,24 @@ class DepartmentController {
         });
 
         res.redirect('back');
+    }
+
+    async detailNoti(req, res, next) {
+
+        var noti_id = req.params.notification_id;
+        var noti_item = await Notification.findOne({_id: noti_id})
+
+        const department_item = await Department.findOne({_id: req.params.department_id})
+        .populate({
+            path: 'users',
+        });
+        const current_account = req.user;
+
+        res.render('frontend/detail-notification',{
+            department_item: mongooseToObject(department_item),
+            noti_item: mongooseToObject(noti_item),
+            member: mongooseToObject(current_account),
+        })
     }
 
     async postNoti(req, res, next) {

@@ -423,7 +423,7 @@
 										<h4 class="widget-title">Department</h4>
 									</div>
 									<div class="col-sm-5" style="padding: 15px 30px 0px; color: #088dcd">
-										<a href="#" title="" class="underline">View all</a>
+										<a href="/member/departments/list" title="" class="underline">View all</a>
 									</div>
 								</div>
 								<ul class="list-group">
@@ -432,7 +432,7 @@
 										<a href="/member/departments/{{ this._id }}">
 										{{ this.name }}
 										</a>
-										<span class="badge badge-primary badge-pill">14</span>
+										<span class="badge badge-primary badge-pill">{{ this.notifications.length }}</span>
 									</li>
 									{{/each  }}
 								</ul>
@@ -798,75 +798,15 @@
 									</div>
 								</div>
 								<ul class="activitiez">
+									{{#each notifications}}
 									<li>
 										<div class="activity-meta">
-											<i>10 hours Ago</i>
-											<span><a href="#" title="">Commented on Video posted </a></span>
-											<h6>by <a href="time-line.html">black demon.</a></h6>
+											<i>{{ formatDate this.createdAt }}</i>
+											<span><a href="/member/departments/{{ this.department._id }}/notification/{{ this._id }}/detail" title="">{{this.title}} </a></span>
+											<h6>by <a href="/member/departments/{{ this.department._id }}">{{ this.department.name }}.</a></h6>
 										</div>
 									</li>
-									<li>
-										<div class="activity-meta">
-											<i>30 Days Ago</i>
-											<span><a href="#" title="">Posted your status. “Hello guys, how are you?”</a></span>
-										</div>
-									</li>
-									<li>
-										<div class="activity-meta">
-											<i>2 Years Ago</i>
-											<span><a href="#" title="">Share a video on her timeline.</a></span>
-											<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-										</div>
-									</li>
-									<li>
-										<div class="activity-meta">
-											<i>2 Years Ago</i>
-											<span><a href="#" title="">Share a video on her timeline.</a></span>
-											<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-										</div>
-									</li>
-									<li>
-										<div class="activity-meta">
-											<i>2 Years Ago</i>
-											<span><a href="#" title="">Share a video on her timeline.</a></span>
-											<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-										</div>
-									</li>
-									<li>
-										<div class="activity-meta">
-											<i>2 Years Ago</i>
-											<span><a href="#" title="">Share a video on her timeline.</a></span>
-											<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-										</div>
-									</li>
-									<li>
-										<div class="activity-meta">
-											<i>2 Years Ago</i>
-											<span><a href="#" title="">Share a video on her timeline.</a></span>
-											<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-										</div>
-									</li>
-									<li>
-										<div class="activity-meta">
-											<i>2 Years Ago</i>
-											<span><a href="#" title="">Share a video on her timeline.</a></span>
-											<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-										</div>
-									</li>
-									<li>
-										<div class="activity-meta">
-											<i>2 Years Ago</i>
-											<span><a href="#" title="">Share a video on her timeline.</a></span>
-											<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-										</div>
-									</li>
-									<li>
-										<div class="activity-meta">
-											<i>2 Years Ago</i>
-											<span><a href="#" title="">Share a video on her timeline.</a></span>
-											<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-										</div>
-									</li>
+									{{/each}}
 								</ul>
 							</div>
 						</aside>
