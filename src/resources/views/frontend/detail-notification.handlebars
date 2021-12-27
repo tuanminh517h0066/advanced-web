@@ -1,5 +1,4 @@
 
-<!--<div class="se-pre-con"></div>-->
 <div class="theme-layout">
 	
 	<div class="responsive-header">
@@ -410,56 +409,15 @@
 								</aside>
 							</div><!-- sidebar -->
 							<div class="col-lg-9">
-                                <div class="central-meta">
-									<div class="groups">
-										<span><i class="fa fa-users"></i> Notification</span>
+								<div class="central-meta">
+									<div class="forum-form">
+										<h5 class="f-title"><i class="ti-info-alt"></i> Detail Notification</h5>
+										<h3>{{ noti_item.title }}</h3>
+                                        <p>{{{ noti_item.description }}}</p>
+                                        <p>{{ noti_item.status }}</p>
 									</div>
-									
-									<ul class="nearby-contct">
-										{{#each notifications }}
-										<li>
-											<p>{{ this.title }}
-											{{#if this.status}}
-											<strong>Important</strong>
-											{{/if}}
-											</p>
-											{{#each ../department_item.users}}
-												{{#if_eq ../../member._id this._id }}
-													<a href="/member/departments/{{ ../../../department_item._id  }}/notification/{{ ../../this._id }}/edit" class="btn btn-success">Edit</a>
-													<a href="javascript:void(0)" class="btn btn-danger delete-noti" data-id="{{ ../../this._id }}">Delete</a>
-												{{/if_eq}}
-											{{/each}}
-											
-											<a href="/member/departments/{{ ../department_item._id }}/notification/{{ this._id }}/detail" class="btn btn-primary">View detail</a>
-										</li>
-										{{/each}}
-									</ul>
 								</div>
 							</div><!-- centerl meta -->
-
-								<div class="modal" id="confirmDeleteNotification" tabindex="-1" role="dialog">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title">Delete notification</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											<p>Are you sure to delete this notification.</p>
-										</div>
-										<form action="/member/departments/notification/delete" method="post">
-										<div class="modal-footer">
-											<input type="hidden" name="notification_id" id="notification-id">
-											<button type="submit" class="btn btn-primary">Delete</button>
-											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										</div>
-										</form>
-										</div>
-									</div>
-								</div>
-
 						</div>	
 					</div>
 				</div>
@@ -616,17 +574,7 @@
 			</form>
 		</div><!-- side panel -->		
 	
-	<script src="/frontend/js/main.min.js"></script>
-	<script src="/frontend/js/main.js"></script> 
-	<script>
-		$(document).ready(function() {
-			$(document).on('click','.delete-noti', function() {
-				var noti_id = $(this).data('id');
-
-				$('#confirmDeleteNotification').find('#notification-id').val(noti_id);
-				$('#confirmDeleteNotification').modal('show');
-			})
-
-		})
-	</script>
-	<script src="/frontend/js/map-init.js"></script>
+	{{!-- <script src="/frontend/js/main.min.js"></script> --}}
+	
+	{{!-- <script src="/frontend/js/main.js"></script>  --}}
+	{{!-- <script src="/frontend/js/map-init.js"></script> --}}
