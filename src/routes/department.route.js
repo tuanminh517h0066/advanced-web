@@ -4,6 +4,7 @@ const userMiddleware = require('../app/middleware/UserMiddleware');
 const DepartmentController = require('../app/controllers/frontend/DepartmentController');
 
 const multer  = require('multer')
+const { body } = require('express-validator');
 
 
 // const upload = multer({ dest: './src/public/uploads/' });
@@ -31,7 +32,11 @@ router.get('/:department_id/notification/:notification_id/detail', userMiddlewar
 
 router.post('/notification/delete', userMiddleware.isMember,DepartmentController.deleteNoti);
 
-router.post('/notification/post', userMiddleware.isMember, DepartmentController.postNoti);
+router.post('/notification/post', 
+userMiddleware.isMember,
+body('noti_title').not().isEmpty().withMessage('must fill this blank'),
+body('description').not().isEmpty().withMessage('must fill this blank'),
+DepartmentController.postNoti);
 
 router.post('/ajaxUploadImageContent', userMiddleware.isMember, upload.single('image'), DepartmentController.ajaxUploadImageContent);
 
