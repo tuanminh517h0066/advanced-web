@@ -4,6 +4,8 @@ const Notification = require('../../models/Notification');
 const { mutipleMongooseToObject } = require('../../../util/mongoose');
 const { mongooseToObject } = require('../../../util/mongoose');
 
+const { body, validationResult } = require('express-validator');
+
 class DepartmentController {
     
     async list(req, res, next) {
@@ -107,6 +109,14 @@ class DepartmentController {
 
     async postNoti(req, res, next) {
 
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            console.log(errors);
+            res.redirect('back',{
+                errors: mutipleMongooseToObject(errors),
+            })
+        return res.status(400).json({ errors: errors.array() });
+        }
 
         var deparment_id = req.body.department_id;
 
