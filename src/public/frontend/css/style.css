@@ -271,6 +271,15 @@ section {
   text-overflow: ellipsis;
 }
 
+#noti-name {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 1;
+}
+
 .box {
   padding: 2px 16px;
 }
@@ -1125,7 +1134,7 @@ header.sticky {
   display: inline-block;
   position: relative;
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   background: #fdfdfd;
   border: 1px solid #ede9e9;
   border-radius: 10px;
@@ -1280,14 +1289,11 @@ header.sticky {
   width: 10.4%;
 }
 
-#new-post-block {
-  padding: 35px;
-}
 #icon-block {
-  font-size: 20px;
+  font-size: 18px;
 }
 #icon-block i {
-  font-size: 28px;
+  font-size: 20px;
   margin-right: 5px;
   /* font-weight: lighter; */
 }
@@ -1298,6 +1304,7 @@ header.sticky {
   border-radius: 25px;
   font-size: 22px;
   text-align: left;
+  margin-right: 15px;
 }
 .modal-header {
   justify-content: space-around;
@@ -1967,6 +1974,7 @@ for some reason nth-child(1) is always busy and elements starting from 2 */
   display: inline-block;
   margin-top: 10px;
   width: 100%;
+  margin-bottom: 0px;
 }
 
 .we-comet {
@@ -1974,6 +1982,7 @@ for some reason nth-child(1) is always busy and elements starting from 2 */
   width: 100%;
   padding-left: 0;
   list-style: none;
+  padding-bottom: 0;
 }
 
 .we-comet > li {

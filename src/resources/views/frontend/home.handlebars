@@ -222,9 +222,9 @@
 								<h4 class="widget-title">Your page</h4>	
 								
 								<div class="your-page">
-									<figure>
-										<img src="/frontend/images/resources/friend-avatar9.jpg" alt="">
-									</figure>
+									{{!-- <figure> --}}
+										<img src="/frontend/images/resources/friend-avatar9.jpg" alt="" style="width: 50%; border-radius: 20px">
+									{{!-- </figure> --}}
 									<br>
 									<div class="page-meta">
 										<a href="#" title="" class="underline">
@@ -279,30 +279,32 @@
 						</aside>
 					</div><!-- sidebar -->
 					<div class="col-lg-6">
-						<div class="central-meta" id ="new-post-block" >
+						<div class="central-meta" id ="new-post-block" style="padding: 10px;">
 							
 							<div class="new-postbox">
-								<div class="row">
+								<div class="row" >
 									<div class="col-lg-2 mx-0">
-										<figure>
-											<img src="/frontend/images/resources/admin2.jpg" alt="" class="rounded-circle pt-2">
+										<figure style="text-align: center; margin-bottom: 5px">
+											<img src="/frontend/images/resources/admin2.jpg" alt="" class="rounded-circle" >
 										</figure>
 									</div>
 									<div class="col-lg-10 mx-0">
-										<div class="row mt-2" id="row-status">
-											<button type="button" class="btn btn-secondary btn-lg btn-block create_post" id="status-block">Buddy, What the hell are you thinking today?</button>
+										<div class="row mt-2" id="row-status" >
+											<button type="button" class="btn btn-secondary btn-block create_post" id="status-block">Hi, what are you thinking today?</button>
 										</div>
-										<div class="row mt-2"id="row-status" >
-											<div class="col-lg-4 mx-0 px-0">
-												<button type="button" class="btn btn-light create_post" id="icon-block"><i class="fab fa-youtube"></i> Video</button>
-											</div>
-											<div class="col-lg-4 mx-0 px-0">
-												<button type="button" class="btn btn-light create_post" id="icon-block"><i class="fas fa-image"></i> Image</button>
-											</div>
-											<div class="col-lg-4 mx-0 px-0">
-												<button type="button" class="btn btn-light create_post" id="icon-block"><i class="far fa-smile"></i> Status</button>
-											</div>
-										</div>
+										
+									</div>
+								</div>
+								<hr style="margin: 0px 0px 10px 0px;">
+								<div class="row">
+									<div class="col-sm-4">
+										<button type="button" class="btn btn-light create_post" id="icon-block"><i class="fab fa-youtube"></i> Video</button>
+									</div>
+									<div class="col-sm-4">
+										<button type="button" class="btn btn-light create_post" id="icon-block"><i class="fas fa-image"></i> Image</button>
+									</div>
+									<div class="col-sm-4">
+										<button type="button" class="btn btn-light create_post" id="icon-block"><i class="far fa-smile"></i> Status</button>
 									</div>
 								</div>
 								
@@ -338,7 +340,7 @@
 													</a></ins>
 													<span>Public</span>
 												</div>
-												<textarea id="post_content" name="content" rows="3" placeholder="Buddy, What the hell are you thinking today?"></textarea>
+												<textarea id="post_content" name="content" rows="3" placeholder="Hi, what are you thinking today?"></textarea>
 												<div class="post-upload" id="option">
 												
 												</div>
@@ -402,7 +404,7 @@
 									
 							{{#each posts}}
 							
-							<div class="central-meta item" id="post-item{{ this._id }}">
+							<div class="central-meta item" id="post-item{{ this._id }}" style="padding: 25px 25px 0 25px;">
 								
 								<div class="user-post">
 									
@@ -426,7 +428,7 @@
 										<figure><img src="/frontend1/images/resources/friend-avatar10.jpg" alt=""></figure>
 										<div class="friend-name">
 											<ins><a href="time-line.html" title="">{{ this.user.username }}</a></ins>
-											<span>published: {{ formatDate this.updatedAt }}</span>
+											<span>published: {{ formatDate this.createdAt }}</span>
 										</div>
 										<div class="description">
 											<p>{{ this.content }}</p>
@@ -560,7 +562,7 @@
 									<li>
 										<div class="activity-meta">
 											<i>{{ formatDate this.createdAt }}</i>
-											<span><a href="/member/departments/{{ this.department._id }}/notification/{{ this._id }}/detail" title="">{{this.title}} </a></span>
+											<span ><a  href="/member/departments/{{ this.department._id }}/notification/{{ this._id }}/detail" title="" id="noti-name">{{this.title}} </a></span>
 											<h6>by <a href="/member/departments/{{ this.department._id }}">{{ this.department.name }}.</a></h6>
 										</div>
 									</li>

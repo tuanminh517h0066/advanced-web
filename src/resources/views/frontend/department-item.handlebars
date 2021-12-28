@@ -259,22 +259,31 @@
 										{{#each notifications }}
 										<li>
 											<p>
-											{{#if this.status}}
-											
-											<strong style="color: red;"><i class="fas fa-exclamation"></i> </strong> 
-											{{/if}}
-											<span style="font-size: 18px; font-weight:bold">{{ this.title }}</span>
+												{{#if this.status}}
+												
+												<strong style="color: red;"><i class="fas fa-exclamation"></i> </strong> 
+												{{/if}}
+												<span style="font-size: 18px; font-weight:bold">{{ this.title }}</span>
 											</p>
-											{{#each ../department_item.users}}
-												{{#if_eq ../../member._id this._id }}
-													<a href="/member/departments/{{ ../../../department_item._id  }}/notification/{{ ../../this._id }}/edit" class="btn btn-success">Edit</a>
-													<a href="javascript:void(0)" class="btn btn-danger delete-noti" data-id="{{ ../../this._id }}">Delete</a>
-												{{/if_eq}}
-											{{/each}}
+											<div class="row">
+												<div class="col-lg-10">
+													{{#each ../department_item.users}}
+														{{#if_eq ../../member._id this._id }}
+															<a href="/member/departments/{{ ../../../department_item._id  }}/notification/{{ ../../this._id }}/edit" class="btn btn-success">Edit</a>
+															<a href="javascript:void(0)" class="btn btn-danger delete-noti" data-id="{{ ../../this._id }}">Delete</a>
+														{{/if_eq}}
+													{{/each}}
+													
+													<a href="/member/departments/{{ ../department_item._id }}/notification/{{ this._id }}/detail" class="btn btn-primary">View detail</a>
+												</div>
+												<div class="col-lg 2" style="float: right;">
+													<span style="color: gray; font-style: italic; font-size: 12px">{{ formatDate this.createdAt}}</span>
+												</div>
+											</div>
 											
-											<a href="/member/departments/{{ ../department_item._id }}/notification/{{ this._id }}/detail" class="btn btn-primary">View detail</a>
 										</li>
 										{{/each}}
+										
 									</ul>
 								</div>
 							</div><!-- centerl meta -->
