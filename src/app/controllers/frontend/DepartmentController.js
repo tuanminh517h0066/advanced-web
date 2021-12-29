@@ -50,8 +50,10 @@ class DepartmentController {
         res.render('frontend/create-notification', {
             department_item: mongooseToObject(department_item),
             member: mongooseToObject(current_account),
+            errors: req.session.errors
         });
-        
+
+        req.session.errors = null;
     }
 
     async editNoti(req, res, next) {
@@ -68,7 +70,9 @@ class DepartmentController {
             department_item: mongooseToObject(department_item),
             noti_item: mongooseToObject(noti_item),
             member: mongooseToObject(current_account),
+            errors: req.session.errors
         })
+        req.session.errors = null;
     }
 
     async deleteNoti(req, res, next) {
@@ -109,55 +113,55 @@ class DepartmentController {
 
     async postNoti(req, res, next) {
 
-        // const errors = validationResult(req);
-        // if (!errors.isEmpty()) {
-        //     console.log(errors);
-        //     res.redirect('back',{
-        //         errors: mutipleMongooseToObject(errors),
-        //     })
-        // return res.status(400).json({ errors: errors.array() });
-        // }
+        const errors = validationResult(req).array();
+        if (errors) {
+            req.session.errors = errors;
+            req.session.success = false;
+            res.redirect('back')
+        } 
+        else {
+            var deparment_id = req.body.department_id;
 
-        var deparment_id = req.body.department_id;
+            Notification.findOne({ '_id': req.body.notification_id }, async function(err, notification) {
+                if (err) {
+                    console.log(err)
+                }
+                if (notification) {
+                    console.log('update notification');
+                    
+                    notification.title = req.body.noti_title;
+                    notification.department = deparment_id;
+                    notification.description = req.body.description;
+                    notification.status = req.body.important_status;
+                    
+                    notification.save();
+                    // res.json({success: true, type: 'update', post});
+                }
+                if (!notification) {
+                    console.log('new notification');
+                    const newNoti = new Notification();
+                    newNoti.title = req.body.noti_title;
+                    newNoti.department = deparment_id;
+                    newNoti.description = req.body.description;
+                    newNoti.status = req.body.important_status;
+    
+                    newNoti.save( async function(err,newNoti){
+                        if (err) {
+                            console.log(err);
+                        }
+                        else{
+                            const department = await Department.findById(deparment_id);
+                            department.notifications.push(newNoti._id);
+                            await department.save();
+    
+                        }
+                    })
+                }
+            })
+    
+            res.redirect(`/member/departments/${deparment_id}`);
+        }
 
-        Notification.findOne({ '_id': req.body.notification_id }, async function(err, notification) {
-            if (err) {
-                console.log(err)
-            }
-            if (notification) {
-                console.log('update notification');
-                
-                notification.title = req.body.noti_title;
-                notification.department = deparment_id;
-                notification.description = req.body.description;
-                notification.status = req.body.important_status;
-                
-                notification.save();
-                // res.json({success: true, type: 'update', post});
-            }
-            if (!notification) {
-                console.log('new notification');
-                const newNoti = new Notification();
-                newNoti.title = req.body.noti_title;
-                newNoti.department = deparment_id;
-                newNoti.description = req.body.description;
-                newNoti.status = req.body.important_status;
-
-                newNoti.save( async function(err,newNoti){
-                    if (err) {
-                        console.log(err);
-                    }
-                    else{
-                        const department = await Department.findById(deparment_id);
-                        department.notifications.push(newNoti._id);
-                        await department.save();
-
-                    }
-                })
-            }
-        })
-
-        res.redirect(`/member/departments/${deparment_id}`);
     }
 
 

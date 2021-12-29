@@ -60,6 +60,8 @@ class PersonalController {
     async postSetting(req, res, next) {
         const department_arr = req.body.departments;
         const username = req.body.username;
+        const departments = await Department.find({});
+        // console.log(departments)
  
         
         const current_user = await User.findOne({_id: req.user._id });
@@ -68,6 +70,14 @@ class PersonalController {
             current_user.save();
         }
 
+        departments.forEach( async (element, index) =>  { 
+            const department = await Department.findOne(element._id);
+
+            department.users.pull(req.user._id);
+            await department.save();
+        })
+
+        
         const update_current_user = await User.findOne({_id: req.user._id });
         update_current_user.username = req.body.username;
         update_current_user.departments = [];
@@ -78,7 +88,16 @@ class PersonalController {
         department_arr.forEach((element, index) => { 
             update_current_user.departments.push(element);
         })
-        update_current_user.save();
+        update_current_user.save(async function(err,user) {
+            if (err) console.log(err);
+
+            department_arr.forEach( async (element, index) =>  { 
+                const department = await Department.findById(element)
+                department.users.push(user._id);
+                await department.save();
+                
+            })
+        });
 
         res.redirect('back');
     }

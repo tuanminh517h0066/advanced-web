@@ -34,8 +34,8 @@ router.post('/notification/delete', userMiddleware.isMember,DepartmentController
 
 router.post('/notification/post', 
 userMiddleware.isMember,
-body('noti_title').not().isEmpty().withMessage('must fill this blank'),
-body('description').not().isEmpty().withMessage('must fill this blank'),
+body('noti_title').not().isEmpty().withMessage('must fill title'),
+body('description').not().isEmpty().withMessage('must fill this description'),
 DepartmentController.postNoti);
 
 router.post('/ajaxUploadImageContent', userMiddleware.isMember, upload.single('image'), DepartmentController.ajaxUploadImageContent);
