@@ -83,7 +83,7 @@ class MemberController {
             // await department.save();
             department_arr.forEach( async (element, index) =>  { 
                 const department = await Department.findById(element)
-                department.users = user._id;
+                department.users.push(user._id);
                 await department.save();
                 
             })

@@ -107,6 +107,21 @@ app.engine('handlebars', handlebars({
             })
             
             return data_like;
+        },
+        checked_option: (a,b) => {
+            var option_arr = a;
+            var option_user = b;
+            var checked = '';
+
+            option_arr.forEach(function (element){
+
+                if (String(element) === String(option_user)) {
+                    
+                    checked = 'selected';
+                }
+            })
+
+            return checked;
         }
     }
 }));

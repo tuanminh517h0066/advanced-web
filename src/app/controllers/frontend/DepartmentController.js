@@ -110,13 +110,13 @@ class DepartmentController {
     async postNoti(req, res, next) {
 
         const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            console.log(errors);
-            res.redirect('back',{
-                errors: mutipleMongooseToObject(errors),
-            })
-        return res.status(400).json({ errors: errors.array() });
-        }
+        // if (!errors.isEmpty()) {
+        //     console.log(errors);
+        //     res.redirect('back',{
+        //         errors: mutipleMongooseToObject(errors),
+        //     })
+        // return res.status(400).json({ errors: errors.array() });
+        // }
 
         var deparment_id = req.body.department_id;
 

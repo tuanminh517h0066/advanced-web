@@ -12,8 +12,10 @@ const PersonalController = require('../app/controllers/frontend/PersonalControll
 router.get('/home',userMiddleware.isMember, HomeController.home );
 
 router.get('/change-password',userMiddleware.isMember, PersonalController.Password);
+router.post('/change-password/post', userMiddleware.isMember, PersonalController.postPass);
 
 router.get('/info-setting', userMiddleware.isMember, PersonalController.infoSetting);
+router.post('/info-setting/post', userMiddleware.isMember, PersonalController.postSetting)
 
 router.use('/departments', departmentRouter);
 

@@ -8,6 +8,9 @@ const User = new Schema({
     email: {type: String, required: true},
     password: {type: String},
     role: {type: String, required: true},
+    avatar: {type: String},
+    student_card: {type: String},
+    phone_number: {type: String},
     departments: [
         {
             type: mongoose.Schema.Types.ObjectId,
