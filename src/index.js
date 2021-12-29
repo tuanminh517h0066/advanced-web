@@ -91,6 +91,22 @@ app.engine('handlebars', handlebars({
             
             return liked;
         },
+        style_liked: (a, b) => {
+            var like_arr = a;
+            var user_id = b;
+            var style_liked = '';
+            
+            like_arr.forEach(function (element){
+                
+                if (String(element.user._id) === String(user_id)) {
+                    
+                    style_liked = 'style="font-weight: 900;"';
+                    
+                }
+            })
+
+            return style_liked;
+        },
         data_like: (a, b) => {
 
             var like_arr = a;
