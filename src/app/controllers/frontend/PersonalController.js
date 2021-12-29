@@ -19,10 +19,7 @@ class PersonalController {
         var current_pass = req.body.currentpw;
         var new_pass     = req.body.newpw;
         var confirmpass  = req.body.confirmpw;
-
-
         
-       
         try {
             if(bcrypt.compareSync(current_pass, password_db))
             {
@@ -49,9 +46,9 @@ class PersonalController {
     async infoSetting(req, res, next) {
 
         const departments = await Department.find({});
-        const current_account = req.user;
+        // const current_account = req.user;
 
-        // const current_account = await User.findById(req.user._id).populate('departments');
+        const current_account = await User.findById(req.user._id);
         // console.log(current_account);
 
         res.render('frontend/info-setting',{
@@ -62,19 +59,26 @@ class PersonalController {
 
     async postSetting(req, res, next) {
         const department_arr = req.body.departments;
-        
         const username = req.body.username;
+ 
         
         const current_user = await User.findOne({_id: req.user._id });
-        current_user.username = req.body.username;
+        if(!current_user.departments) {
+            current_user.departments = [];
+            current_user.save();
+        }
+
+        const update_current_user = await User.findOne({_id: req.user._id });
+        update_current_user.username = req.body.username;
+        update_current_user.departments = [];
         if(req.file) { 
-            current_user.avatar = req.file.filename;
+            update_current_user.avatar = req.file.filename;
           
         }
-        // department_arr.forEach((element, index) => { 
-        //     current_user.departments.push(element);
-        // })
-        current_user.save();
+        department_arr.forEach((element, index) => { 
+            update_current_user.departments.push(element);
+        })
+        update_current_user.save();
 
         res.redirect('back');
     }
