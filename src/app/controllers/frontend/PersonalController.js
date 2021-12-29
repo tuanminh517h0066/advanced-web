@@ -63,12 +63,17 @@ class PersonalController {
     async postSetting(req, res, next) {
         const department_arr = req.body.departments;
         
-        var current_user = await User.findOne({_id: req.user._id });
+        const username = req.body.username;
+        
+        const current_user = await User.findOne({_id: req.user._id });
         current_user.username = req.body.username;
-
-        department_arr.forEach((element, index) => { 
-            current_user.departments.push(element);
-        })
+        if(req.file) { 
+            current_user.avatar = req.file.filename;
+          
+        }
+        // department_arr.forEach((element, index) => { 
+        //     current_user.departments.push(element);
+        // })
         current_user.save();
 
         res.redirect('back');

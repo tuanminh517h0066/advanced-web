@@ -281,8 +281,13 @@ $(document).ready(function() {
         post += '</div>'	
         }					
 
-
-        post += '<figure><img src="/frontend1/images/resources/friend-avatar10.jpg" alt=""></figure>'
+        if (data.user.avatar) {
+            post += '<figure><img src="/uploads/'+ data.user.avatar +'" alt=""></figure>'
+        }
+        else {
+            post += '<figure><img src="/frontend/images/user-avatar.png" alt=""></figure>'
+        }
+        
         post += '<div class="friend-name">'
         post += '<ins><a href="time-line.html" title="">' + data.user.username + '</a></ins>'
         post += '<span>published: ' +  formatDate(data.createdAt) + '</span>'
@@ -369,8 +374,13 @@ $(document).ready(function() {
 
         //post comment
         post += '<li class="post-comment">'
-		post += '<div class="comet-avatar">'												
-		post += '<img src="/frontend/images/resources/comet-1.jpg" alt="">'													
+		post += '<div class="comet-avatar">'		
+        if (data.user.avatar) {
+            post += '<img src="/uploads/'+ data.user.avatar +'" alt="">'
+        }
+        else {
+            post += '<img src="/frontend/images/user-avatar.png" alt="">'
+        }																			
 		post += '</div>'												
 		post += '<div class="post-comt-box">'												
 		post += '<form name="frm-comment" action="" method="post" class="frm-post-comment" id="frm-post{{ this._id }}">'													
@@ -517,8 +527,13 @@ $(document).ready(function() {
     });
 
     function showComment(data, status_edit_del) {
-        var comment = '<div class="comet-avatar">'								
-            comment += '<img src="/frontend/images/resources/comet-1.jpg" alt="">'									
+        var comment = '<div class="comet-avatar">'	
+            if (data.user.avatar) {
+                comment += '<img src="/uploads/'+ data.user.avatar +'" alt="">'
+            }
+            else {
+                comment += '<img src="/frontend/images/user-avatar.png" alt="">'
+            }																
             comment += '</div>'								
             comment += '<div class="we-comment">'								
             comment += '<div class="coment-head">'									

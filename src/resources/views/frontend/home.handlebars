@@ -223,7 +223,11 @@
 								
 								<div class="your-page">
 									{{!-- <figure> --}}
-										<img src="/frontend/images/resources/friend-avatar9.jpg" alt="" style="width: 50%; border-radius: 20px">
+										{{#if member.avatar }}
+										<img src="/uploads/{{ member.avatar }}" alt="" style="width: 50%; border-radius: 20px">
+										{{else}}
+										<img src="/frontend/images/user-avatar.png" alt="" style="width: 50%; border-radius: 20px">
+										{{/if}}
 									{{!-- </figure> --}}
 									<br>
 									<div class="page-meta">
@@ -285,7 +289,11 @@
 								<div class="row" >
 									<div class="col-lg-2 mx-0">
 										<figure style="text-align: center; margin-bottom: 5px">
-											<img src="/frontend/images/resources/admin2.jpg" alt="" class="rounded-circle" >
+											{{#if member.avatar }}
+											<img src="/uploads/{{ member.avatar }}" alt="" class="rounded-circle" >
+											{{else}}
+											<img src="/frontend/images/user-avatar.png" alt="" class="rounded-circle" >
+											{{/if}}
 										</figure>
 									</div>
 									<div class="col-lg-10 mx-0">
@@ -329,7 +337,11 @@
 										<div class="modal-body">
 											<div class="friend-info">
 												<figure>
-													<img src="/frontend/images/resources/friend-avatar10.jpg" alt="">
+													{{#if member.avatar }}
+													<img src="/uploads/{{ member.avatar }}" alt="">
+													{{else}}
+													<img src="/frontend/images/user-avatar.png" alt="">
+													{{/if}}
 												</figure>
 												<div class="friend-name">
 													
@@ -425,7 +437,13 @@
 										</div>
 										{{/if_eq}}
 										
-										<figure><img src="/frontend1/images/resources/friend-avatar10.jpg" alt=""></figure>
+										<figure>
+											{{#if this.user.avatar }}
+											<img src="/uploads/{{ this.user.avatar }}" alt="">
+											{{else}}
+											<img src="/frontend/images/user-avatar.png" alt="">
+											{{/if}}
+										</figure>
 										<div class="friend-name">
 											<ins><a href="time-line.html" title="">{{ this.user.username }}</a></ins>
 											<span>published: {{ formatDate this.createdAt }}</span>
@@ -483,7 +501,11 @@
 											{{#each this.comments}}
 											<li id="comment{{ this._id }}">
 												<div class="comet-avatar">
-													<img src="/frontend/images/resources/comet-1.jpg" alt="">
+													{{#if this.user.avatar }}
+													<img src="/uploads/{{ this.user.avatar }}" alt="">
+													{{else}}
+													<img src="/frontend/images/user-avatar.png" alt="">
+													{{/if}}
 												</div>
 												<div class="we-comment">
 													<div class="coment-head">
@@ -510,7 +532,11 @@
 											
 											<li class="post-comment">
 												<div class="comet-avatar">
-													<img src="/frontend/images/resources/comet-1.jpg" alt="">
+													{{#if this.user.avatar }}
+													<img src="/uploads/{{ this.user.avatar }}" alt="">
+													{{else}}
+													<img src="/frontend/images/user-avatar.png" alt="">
+													{{/if}}
 												</div>
 												<div class="post-comt-box">
 													<form name="frm-comment" action="" method="post" class="frm-post-comment" id="frm-post{{ this._id }}">
