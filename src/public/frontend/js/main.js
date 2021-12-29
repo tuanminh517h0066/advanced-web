@@ -285,7 +285,7 @@ $(document).ready(function() {
         post += '<figure><img src="/frontend1/images/resources/friend-avatar10.jpg" alt=""></figure>'
         post += '<div class="friend-name">'
         post += '<ins><a href="time-line.html" title="">' + data.user.username + '</a></ins>'
-        post += '<span>published: ' +  formatDate(data.updatedAt) + '</span>'
+        post += '<span>published: ' +  formatDate(data.createdAt) + '</span>'
         post += '</div>'
         post += '<div class="description">'
         post += '<p>' + data.content + '</p>'

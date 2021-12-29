@@ -109,7 +109,7 @@ class DepartmentController {
 
     async postNoti(req, res, next) {
 
-        const errors = validationResult(req);
+        // const errors = validationResult(req);
         // if (!errors.isEmpty()) {
         //     console.log(errors);
         //     res.redirect('back',{
