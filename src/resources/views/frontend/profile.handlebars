@@ -219,7 +219,7 @@
 					<div class="col-lg-3" id="side-bar">
 						<aside class="sidebar static">
 							<div class="widget">
-								<h4 class="widget-title">Your page</h4>	
+								<h4 class="widget-title">Profile</h4>	
 								
 								<div class="your-page">
 									{{!-- <figure> --}}
@@ -237,20 +237,30 @@
 											{{/if}}
 										</a>
 									</div>
+                                    <input type="hidden" id="profile_member_id" value="{{ member._id }}">
 								</div>
 								<div class="widget"></div>
 								<ul class="naves">
+
+                                    {{#if_eq current_member._id member._id }}
+                                    {{#if ../member.password}}
 									<li>
 										<i class="ti-clipboard"></i>
-										<a href="/member/profile/{{ member._id }}" >My page</a>
+										<a href="/member/change-password" >Change password</a>
 									</li>
-		
-									
-									<li>
-										<i class="ti-bell"></i>
-										<a href="#" title="">Notifications</a>
+                                    {{/if}}
+                                    {{/if_eq }}
+
+                                    {{#if_eq current_member._id member._id }}
+                                    <li>
+										<i class="ti-clipboard"></i>
+										<a href="/member/info-setting">Info setting</a>
 									</li>
-									
+                                    {{/if_eq }}
+                                    <li>
+										<i class="ti-power-off"></i>
+										<a href="/member/home" title="">home</a>
+									</li>
 									<li>
 										<i class="ti-power-off"></i>
 										<a href="/member/logout" title="">Logout</a>
@@ -283,14 +293,15 @@
 						</aside>
 					</div><!-- sidebar -->
 					<div class="col-lg-6">
+                        {{#if_eq current_member._id member._id }}
 						<div class="central-meta" id ="new-post-block" style="padding: 10px;">
 							
 							<div class="new-postbox">
 								<div class="row" >
 									<div class="col-lg-2 mx-0">
 										<figure style="text-align: center; margin-bottom: 5px">
-											{{#if member.avatar }}
-											<img src="/uploads/{{ member.avatar }}" alt="" class="rounded-circle" >
+											{{#if ../member.avatar }}
+											<img src="/uploads/{{ ../member.avatar }}" alt="" class="rounded-circle" >
 											{{else}}
 											<img src="/frontend/images/user-avatar.png" alt="" class="rounded-circle" >
 											{{/if}}
@@ -315,10 +326,9 @@
 										<button type="button" class="btn btn-light create_post" id="icon-block"><i class="far fa-smile"></i> Status</button>
 									</div>
 								</div>
-								
 							</div>
 						</div>
-						
+						{{/if_eq }}
 					
 						<!-- start modal post -->
 						<div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="newPostLabel" aria-hidden="true">
@@ -345,7 +355,7 @@
 												</figure>
 												<div class="friend-name">
 													
-													<ins><a href="/member/profile/{{ member._id }}" title="">
+													<ins><a href="time-line.html" title="">
 														{{#if member  }}
 															{{ member.username }}
 														{{/if}}
@@ -445,7 +455,7 @@
 											{{/if}}
 										</figure>
 										<div class="friend-name">
-											<ins><a href="/member/profile/{{ this.user._id }}" title="">{{ this.user.username }}</a></ins>
+											<ins><a href="time-line.html" title="">{{ this.user.username }}</a></ins>
 											<span>published: {{ formatDate this.createdAt }}</span>
 										</div>
 										<div class="description">
@@ -511,7 +521,7 @@
 													<div class="coment-head">
 														<h5><a href="/member/profile/{{ this.user._id }}" title="">{{ this.user.username }}</a></h5>
 														<span>{{ formatDate this.updatedAt }}</span>
-														{{#if_eq ../../member._id this.user._id }}
+														{{#if_eq ../../current_member._id this.user._id }}
 														<div class="edit-menu dropleft">
 															<button type="button" id="btn-edit-menu" class="btn btn-light dropdown-toggle-" data-toggle="dropdown" aria-expanded="false">
 																<i class="fas fa-ellipsis-h"></i>

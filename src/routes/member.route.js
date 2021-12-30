@@ -35,7 +35,9 @@ router.get('/change-password',userMiddleware.isMember, PersonalController.Passwo
 router.post('/change-password/post', userMiddleware.isMember, PersonalController.postPass);
 
 router.get('/info-setting', userMiddleware.isMember, PersonalController.infoSetting);
-router.post('/info-setting/post', userMiddleware.isMember, upload.single('image'), PersonalController.postSetting)
+router.post('/info-setting/post', userMiddleware.isMember, upload.single('image'), PersonalController.postSetting);
+
+router.get('/profile/:member_id', userMiddleware.isMember,PersonalController.ProfileIndex);
 
 router.use('/departments', departmentRouter);
 

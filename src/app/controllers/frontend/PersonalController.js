@@ -2,6 +2,9 @@
 const User = require('../../models/User');
 const Department = require('../../models/Department');
 
+const Post = require('../../models/Post');
+const Notification = require('../../models/Notification');
+
 const { mutipleMongooseToObject } = require('../../../util/mongoose');
 const { mongooseToObject } = require('../../../util/mongoose');
 
@@ -100,6 +103,35 @@ class PersonalController {
         });
 
         res.redirect('back');
+    }
+
+    async ProfileIndex(req, res, next) {
+        var member_id = req.params.member_id;
+        const departments = await Department.find({});
+        const member = await User.findOne({_id: member_id})
+        const current_member = req.user;
+        const notifications = await Notification.find({}).populate('department').sort('-createdAt').limit(10);
+
+        const posts = await Post.find({user: member_id}).populate('department user')
+        .populate({
+            path: 'likes',
+            populate: {path: "user"}
+        })
+        .populate({
+            path: 'comments',
+            populate: {path: "user"},
+            options: { sort: { createdAt: -1 } },
+        })
+        .sort('-updatedAt').limit(5);
+        
+        res.render('frontend/profile', {
+            departments: mutipleMongooseToObject(departments),
+            posts: mutipleMongooseToObject(posts),
+            notifications: mutipleMongooseToObject(notifications),
+            member: mongooseToObject(member),
+            current_member: mongooseToObject(current_member)
+            
+        });
     }
 }
 

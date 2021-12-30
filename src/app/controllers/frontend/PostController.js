@@ -122,26 +122,40 @@ class PostController {
 
         var startForm = parseInt(req.body.start);
         var current_account = req.user._id
-        // console.log(current_account);
-        
-        const posts = await Post.find({})
-        .populate('department user')
-        .populate({
-            path: 'likes',
-            populate: {path: "user"}
-        })
-        .populate({
-            path: 'comments',
-            populate: {path: "user"},
-            options: { sort: { createdAt: -1 } },
-        })
-        .skip(startForm).sort('-updatedAt')
-        .limit(2)
-        .exec();
-        
-        // console.log(posts);
-
-        res.json({current_account: current_account, posts});
+        var profile_member_id = req.body.profile_member_id
+        if (profile_member_id == '') {
+            const posts = await Post.find({})
+            .populate('department user')
+            .populate({
+                path: 'likes',
+                populate: {path: "user"}
+            })
+            .populate({
+                path: 'comments',
+                populate: {path: "user"},
+                options: { sort: { createdAt: -1 } },
+            })
+            .skip(startForm).sort('-updatedAt')
+            .limit(2)
+            .exec();
+            res.json({current_account: current_account, posts});
+        } else {
+            const posts = await Post.find({user: profile_member_id})
+            .populate('department user')
+            .populate({
+                path: 'likes',
+                populate: {path: "user"}
+            })
+            .populate({
+                path: 'comments',
+                populate: {path: "user"},
+                options: { sort: { createdAt: -1 } },
+            })
+            .skip(startForm).sort('-updatedAt')
+            .limit(2)
+            .exec();
+            res.json({current_account: current_account, posts});
+        }
     }
 
     async ajaxLike(req,res,next) {
