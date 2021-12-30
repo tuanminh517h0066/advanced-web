@@ -27,16 +27,33 @@ class DepartmentController {
             path: 'users',
         });
 
-        const notifications = await Notification.find( { department: department_id } ).populate({
-            path: 'department',
-        });
+        // const notifications = await Notification.find( { department: department_id } ).populate({
+        //     path: 'department',
+        // });  
+        try{ 
+            const page = req.query.page || 1;
+            const limit = 2;
+            const skip = (page -1) *limit;
+            const notifications = await Notification.find( { department: department_id }  ).populate({
+                path: 'department',
+            })
+            .sort({updatedAt:-1})
+            .limit(limit)
+            .skip(skip);
 
-
-        res.render('frontend/department-item', {
-            department_item: mongooseToObject(department_item),
-            member: mongooseToObject(current_account),
-            notifications: mutipleMongooseToObject(notifications),
-        });
+            const count = await Notification.countDocuments({ department: department_id });
+            console.log('count: ' + count)
+            const pages = Math.ceil(count / limit);
+            res.render('frontend/department-item', {
+                department_item: mongooseToObject(department_item),
+                member: mongooseToObject(current_account),
+                notifications: mutipleMongooseToObject(notifications),
+                currentPage: page,
+                pages: pages
+            });
+        }catch(error){
+            console.log(error);
+        }
     }
 
     async createNoti(req, res, next) {
