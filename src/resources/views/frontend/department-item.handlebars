@@ -285,21 +285,9 @@
 										{{/each}}
 										
 									</ul>
-									<div>{{currentPage}}</div>
-									<div>{{pages}}</div>
-									<nav aria-label="Page navigation example">
-										<ul class="pagination justify-content-center">
-											<li class="page-item disabled" id="li_previous">
-											<a class="page-link" id="previous" tabindex="-1">Previous</a>
-											</li>
-											<li class="page-item active"><a class="page-link" href="#">1</a></li>
-
-											<li class="page-item"><a class="page-link" href="#">2</a></li>
-											<li class="page-item"><a class="page-link" href="#">...</a></li>
-											<li class="page-item"><a class="page-link" href="#">3</a></li>
-											<li class="page-item">
-											<a class="page-link" id="next" >Next</a>
-											</li>
+									<nav aria-label="Page navigation example " class="mt-3">
+										<ul class="pagination justify-content-center mb-0">
+											{{{pagination}}}
 										</ul>
 									</nav>
 								
@@ -348,27 +336,6 @@
 				$('#confirmDeleteNotification').modal('show');
 			})
 
-		})
-
-		$('#previous').click(function() {
-				if ({{currentPage}} > 1)
-				{
-					console.log();
-					var link = '/member/departments/{{ department_item._id }} /?page=' + ({{currentPage}} - 1);
-					$('#li_previous').prop("disabled", false);
-					$('#previous').attr("href", link);
-				}
-
-			})
-
-		$('#next').click(function() {
-				if ({{currentPage}} < {{pages}})
-				{
-					console.log('next success');
-					var link = '/member/departments/{{ department_item._id }} /?page=' + ({{currentPage}} + 1);
-					$('#next').attr("href", link);
-				}
-				console.log('next failed');		
-			});
+		})		
 	</script>
 	<script src="/frontend/js/map-init.js"></script>

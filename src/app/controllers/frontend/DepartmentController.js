@@ -26,14 +26,21 @@ class DepartmentController {
         .populate({
             path: 'users',
         });
+        
 
         // const notifications = await Notification.find( { department: department_id } ).populate({
         //     path: 'department',
-        // });  
+        // }); 
+        // res.render('frontend/department-item', {
+        //     department_item: mongooseToObject(department_item),
+        //     member: mongooseToObject(current_account),
+        //     notifications: mutipleMongooseToObject(notifications), 
+        // });
         try{ 
             const page = req.query.page || 1;
-            const limit = 2;
+            const limit = 10;
             const skip = (page -1) *limit;
+            let paginationHtml = ''
             const notifications = await Notification.find( { department: department_id }  ).populate({
                 path: 'department',
             })
@@ -41,15 +48,49 @@ class DepartmentController {
             .limit(limit)
             .skip(skip);
 
+            
             const count = await Notification.countDocuments({ department: department_id });
-            console.log('count: ' + count)
             const pages = Math.ceil(count / limit);
+            if(page == 1)
+            {
+                paginationHtml+= '<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>'
+            }else
+            {
+                paginationHtml+= '<li class="page-item "><a class="page-link" href="/member/departments/'+department_id+'/'+'?page=' + (Number(page) - 1) + '" tabindex="-1">Previous</a></li>'
+            }
+            var i = (Number(page) > 3 ? Number(page) - 2 : 1)
+            if(i !== 1) 
+            {
+                paginationHtml+= '<li class="page-item disabled"><a class="page-link" href="#">...</a></li>'
+            }
+            for(; i <= (Number(page) + 2) && i <= pages; i++) 
+            {
+                if(i == page)
+                {
+                    paginationHtml+= '<li class="page-item active"><a class="page-link" href="/member/departments/'+department_id+'/'+'?page=' + i + '">'+i+'</a></li>'
+                }
+                else
+                {
+                    paginationHtml+= '<li class="page-item"><a class="page-link" href="/member/departments/'+department_id+'/'+'?page=' + i + '">'+i+'</a></li>'
+                }
+                if (i == Number(page) + 2 && i < pages)
+                {
+                    paginationHtml+= '<li class="page-item disabled"><a class="page-link" href="#">...</a></li>'
+                }
+            }
+            if(page == pages)
+            {
+                paginationHtml+= '<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Next</a></li>'
+            }else
+            {
+                paginationHtml+= '<li class="page-item "><a class="page-link" href="/member/departments/'+department_id+'/'+'?page=' + (Number(page) + 1) + '" tabindex="-1">Next</a></li>'
+            }
+
             res.render('frontend/department-item', {
                 department_item: mongooseToObject(department_item),
                 member: mongooseToObject(current_account),
                 notifications: mutipleMongooseToObject(notifications),
-                currentPage: page,
-                pages: pages
+                pagination: paginationHtml
             });
         }catch(error){
             console.log(error);
@@ -131,14 +172,16 @@ class DepartmentController {
     async postNoti(req, res, next) {
 
         const errors = validationResult(req).array();
-        if (errors) {
+        console.log('enter postNoti'); 
+        if (errors != '') {
             req.session.errors = errors;
             req.session.success = false;
             res.redirect('back')
+            console.log('enter if'); 
         } 
         else {
             var deparment_id = req.body.department_id;
-
+            console.log('enter else');  
             Notification.findOne({ '_id': req.body.notification_id }, async function(err, notification) {
                 if (err) {
                     console.log(err)
@@ -170,7 +213,7 @@ class DepartmentController {
                             const department = await Department.findById(deparment_id);
                             department.notifications.push(newNoti._id);
                             await department.save();
-    
+                             
                         }
                     })
                 }
