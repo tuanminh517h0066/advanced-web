@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userMiddleware = require('../app/middleware/UserMiddleware');
 const DepartmentController = require('../app/controllers/frontend/DepartmentController');
+const fs = require('fs');
 
 const multer  = require('multer')
 const { body } = require('express-validator');
@@ -11,7 +12,14 @@ const { body } = require('express-validator');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './src/public/uploads/')
+      const dir ='./src/public/uploads/'
+        fs.exists(dir, exist => {
+        if (!exist) {
+          return fs.mkdir(dir, error => cb(error, dir))
+        }
+        return cb(null, dir)
+        })
+      // cb(null, './src/public/')
     },
     filename: function (req, file, cb) {
       cb(null, file.fieldname + '-' + Date.now())
@@ -34,8 +42,8 @@ router.post('/notification/delete', userMiddleware.isMember,DepartmentController
 
 router.post('/notification/post', 
 userMiddleware.isMember,
-body('noti_title').not().isEmpty().withMessage('must fill this blank'),
-body('description').not().isEmpty().withMessage('must fill this blank'),
+body('noti_title').not().isEmpty().withMessage('must fill title'),
+body('description').not().isEmpty().withMessage('must fill this description'),
 DepartmentController.postNoti);
 
 router.post('/ajaxUploadImageContent', userMiddleware.isMember, upload.single('image'), DepartmentController.ajaxUploadImageContent);

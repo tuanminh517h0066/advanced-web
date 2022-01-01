@@ -195,11 +195,22 @@ $(document).ready(function() {
         if($(window).scrollTop() == $(document).height() - $(window).height()) {
             // var load = loadForm();
             // $('#load').removeAttr('hidden');
+            var profile_member_id = '';
+            
+            if ($("#profile_member_id")[0]){
+                profile_member_id = $('#profile_member_id').val();
+                console.log(profile_member_id);
+            } else {
+                console.log('doesnt')
+            }
+            
+            console.log('member_id_loadmore'+profile_member_id);
             $.ajax({
                 type: "post",
                 url: "/post/loadmore",
                 data: {
                     start: startFrom,
+                    profile_member_id: profile_member_id,
                 },
                 
                 success: function(data) {
@@ -289,7 +300,7 @@ $(document).ready(function() {
         }
         
         post += '<div class="friend-name">'
-        post += '<ins><a href="time-line.html" title="">' + data.user.username + '</a></ins>'
+        post += '<ins><a href="/member/profile/'+ data.user._id +'" title="">' + data.user.username + '</a></ins>'
         post += '<span>published: ' +  formatDate(data.createdAt) + '</span>'
         post += '</div>'
         post += '<div class="description">'
@@ -308,6 +319,7 @@ $(document).ready(function() {
 
         var liked = '';
         var data_like = '';
+        var style_liked = '';
 
         data.likes.forEach(function (element){
             console.log('member_like'+element.user._id);
@@ -316,6 +328,7 @@ $(document).ready(function() {
             if (String(element.user._id) === String(current_account)) {
                 
                 liked = 'liked';
+                style_liked = 'style="font-weight: 900;"';
                 data_like = element._id;
                 
             }
@@ -326,7 +339,7 @@ $(document).ready(function() {
 		post += '<div class="col-md-6">'											
 		post += '<button type="button" class="btn btn-light " id="icon-block">'												
 		post += '<span class="like" data-toggle="tooltip" title="like">'													
-		post += '<a href="javascript:void(0)" class="total_like bt-like like-post' + data._id + '" data-post-id="' + data._id + '" data-like-id="'+ data_like +'"><i class="far fa-thumbs-up like-post-icon' + data._id + ' '+ liked +'" style="font-weight: 900;"> Like</i></a>'														
+		post += '<a href="javascript:void(0)" class="total_like bt-like like-post' + data._id + '" data-post-id="' + data._id + '" data-like-id="'+ data_like +'"><i class="far fa-thumbs-up like-post-icon' + data._id + ' '+ liked +'" '+style_liked+'> Like</i></a>'														
 		post += '<ins class="count-like' + data._id + '" >'+ data.likes.length +' Likes</ins>'														
 		post += '</span>'													
 		post += '</button>'												
@@ -537,7 +550,7 @@ $(document).ready(function() {
             comment += '</div>'								
             comment += '<div class="we-comment">'								
             comment += '<div class="coment-head">'									
-            comment += '<h5><a href="time-line.html" title="">'+ data.user.username +'</a></h5>'										
+            comment += '<h5><a href="/member/profile/'+ data.user._id +'" title="">'+ data.user.username +'</a></h5>'										
             comment += '<span>'+ formatDate(data.user.createdAt) +'</span>'
                 if(status_edit_del == 1) {	
 

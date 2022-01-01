@@ -218,6 +218,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="row" id="page-contents">
+							
 							<div class="col-lg-3">
 								<aside class="sidebar static">
 									<div class="widget">
@@ -239,6 +240,11 @@
 								</aside>
 							</div><!-- sidebar -->
 							<div class="col-lg-9" style="padding-right: 70px;">
+								{{#if errors }}
+									{{#each errors }}
+										<p class="alert alert-danger">{{ this.msg }}</p>
+									{{/each}}
+								{{/if}}
 								<div class="central-meta">
 									<div class="forum-form">
 										<h5 class="f-title"><i class="ti-info-alt"></i> Create new notification</h5>

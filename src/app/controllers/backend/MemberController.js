@@ -9,17 +9,28 @@ const { mutipleMongooseToObject } = require('../../../util/mongoose');
 const { mongooseToObject } = require('../../../util/mongoose');
 
 class MemberController {
-    async listMember(req, res, next) {
+    async listTeacher(req, res, next) {
 
-        const members = await User.find({});
+        // const members = await User.find({});
         const admin_name = req.user;
-        // console.log(admin_name);
-        const member_check = await Member.find({}).populate({ path: 'departments' })
-        // console.log(member_check);
-        // console.log('%j', member_check);
-
+        const members = await User.find({role: 1}).populate({ path: 'departments' }).sort('-createdAt')
+        
 
         res.render('backend/Admin', {
+            members: mutipleMongooseToObject(members),
+            admin: mongooseToObject(admin_name),
+            layout: 'backend'
+        });
+    }
+
+    async listStudent(req, res, next) {
+
+        // const members = await User.find({});
+        const admin_name = req.user;
+        const members = await User.find({role: 0}).sort('-createdAt')
+        
+
+        res.render('backend/member/student-list', {
             members: mutipleMongooseToObject(members),
             admin: mongooseToObject(admin_name),
             layout: 'backend'
@@ -45,6 +56,22 @@ class MemberController {
             departments: mutipleMongooseToObject(departments),
             layout: 'backend'
         });    
+    }
+
+    async deleteMember(req, res, next) {
+
+        var member_id = req.body.member_id;
+        
+        User.findOneAndDelete({_id: member_id }, function (err, docs) {
+            if (err){
+                console.log(err)
+            }
+            else{
+                console.log("Deleted User : ", docs);
+            }
+        });
+
+        res.redirect('back');
     }
 
     async post(req, res, next) {
@@ -88,11 +115,6 @@ class MemberController {
                 
             })
         });
-
-        
-        
-
-
 
         // //sendmail
         // const transporter = nodeMailer.createTransport({
