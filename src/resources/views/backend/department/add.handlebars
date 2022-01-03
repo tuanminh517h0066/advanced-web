@@ -1,0 +1,27 @@
+<div class="d-sm-flex justify-content-between align-items-start">
+    <div>
+    <h4 class="card-title card-title-dash">Department Form</h4>
+    </div>
+    <div>
+    <a href="/admin/department/list" class="btn btn-primary btn-lg text-white mb-0 me-0" >Back</a>
+    </div>
+</div>
+<div class="table-responsive  mt-1">
+    {{#if errors }}
+        {{#each errors }}
+            <p class="alert alert-danger">{{ this.msg }}</p>
+        {{/each}}
+    {{/if}}
+    <form method="post" action="/admin/department/post">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Enter name" value="{{ department_item.name }}">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Facility</label>
+            <input type="checkbox" name="facility_status" value="1" {{#if department_item.facility_status}} checked {{/if}}>
+        </div>
+        <input type="hidden" name="department_id" value="{{ department_item._id }}">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>

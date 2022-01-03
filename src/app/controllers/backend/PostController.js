@@ -10,7 +10,6 @@ class PostController {
 
         const postList = await Post.find({}).populate('user').sort('-createdAt');
         const admin_name = req.user;
-        console.log(postList);
 
         res.render('backend/post/list', {
             posts: mutipleMongooseToObject(postList),

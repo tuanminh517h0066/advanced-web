@@ -14,9 +14,8 @@ const Department = new Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Notification",
         }
-    ]
-    
-    
+    ],
+    facility_status: { type: Number }
 }, {
     timestamps: true,
 });

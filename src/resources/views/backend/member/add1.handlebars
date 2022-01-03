@@ -7,6 +7,11 @@
     </div>
 </div>
 <div class="table-responsive  mt-1">
+    {{#if errors }}
+        {{#each errors }}
+            <p class="alert alert-danger">{{ this.msg }}</p>
+        {{/each}}
+    {{/if}}
     <form method="post" action="/admin/member-post">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>

@@ -1,0 +1,74 @@
+<div class="d-sm-flex justify-content-between align-items-start">
+    <div>
+    <h4 class="card-title card-title-dash">Department Managment</h4>
+    </div>
+    <div>
+    <a href="/admin/department/add" class="btn btn-primary btn-lg text-white mb-0 me-0"><i class="mdi mdi-account-plus"></i>Add new department</a>
+    </div>
+</div>
+<div class="table-responsive  mt-1">
+    <table class="table select-table">
+    <thead>
+        <tr>
+        <th>No.</th>
+        <th>Name</th>
+        <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+      {{#each departments}}
+        <tr>
+          <td>{{ sum @index 1 }}</td>
+          <td>
+                <h6>{{ this.name }}</h6>
+          </td>
+          
+        <td>
+          {{!-- <button type="button" class="btn btn-warning" style="color: white;">Edit</button> --}}
+          {{!-- <button type="button" class="btn btn-danger" style="color: white;">Delete</button> --}}
+          <a href="/admin/department/edit/{{ this._id }}" class="btn btn-warning" style="color: white;">Edit</a>
+          <a href="javascript:void(0)" class="btn btn-danger delete-department" data-id="{{ this._id }}" style="color: white;">Delete</a>
+        </td>
+        </tr>
+        {{/each}}
+    </tbody>
+    </table>
+
+    <div class="modal" id="confirmDeleteDepartment" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Member</h5>
+                {{!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span> --}}
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to delete this member.</p>
+            </div>
+            <form action="/admin/department/delete" method="post">
+            <div class="modal-footer">
+                <input type="hidden" name="department_id" id="department-id">
+                
+                <button type="submit" class="btn btn-primary">Delete</button>
+                <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
+            </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $(document).on('click','.delete-department', function() {
+            var department_id = $(this).data('id');
+
+            $('#confirmDeleteDepartment').find('#department-id').val(department_id);
+            $('#confirmDeleteDepartment').modal('show');
+        })
+
+        $(document).on('click','.close-modal', function() {
+            $('#confirmDeleteDepartment').modal('hide');
+        })
+    })
+</script>

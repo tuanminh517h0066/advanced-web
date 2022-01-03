@@ -172,12 +172,12 @@ class DepartmentController {
     async postNoti(req, res, next) {
 
         const errors = validationResult(req).array();
-        console.log('enter postNoti'); 
+        
         if (errors != '') {
             req.session.errors = errors;
             req.session.success = false;
             res.redirect('back')
-            console.log('enter if'); 
+           
         } 
         else {
             var deparment_id = req.body.department_id;
