@@ -31,11 +31,7 @@ DepartmentController.postDepartment);
 router.post('/member-post', 
 userMiddleware.isAdmin,
 body('email').not().isEmpty().withMessage('must fill email').custom((value, {req, loc, path}) => {
-  return User.findOne({
-      where: {
-          email: req.body.email,
-      }
-  }).then(user => {
+  return User.findOne({'email': req.body.email}).then(user => {
       if (user) {
           return Promise.reject('Email already in use');
       }
