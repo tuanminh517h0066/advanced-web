@@ -8,6 +8,8 @@ const userMiddleware = require('../app/middleware/UserMiddleware');
 const memberController = require('../app/controllers/backend/MemberController');
 const PostController = require('../app/controllers/backend/PostController');
 const DepartmentController = require('../app/controllers/backend/DepartmentController');
+const CommentController = require('../app/controllers/backend/CommentController');
+const NotificationController = require('../app/controllers/backend/NotificationController');
 const { body } = require('express-validator');
 
 
@@ -18,6 +20,13 @@ router.get('/add1', userMiddleware.isAdmin, memberController.addMember);
 
 router.get('/post/list',userMiddleware.isAdmin, PostController.postList);
 router.post('/post/delete', userMiddleware.isAdmin, PostController.deletePost);
+
+
+router.get('/comment/list', userMiddleware.isAdmin, CommentController.commentList);
+router.post('/comment/delete', userMiddleware.isAdmin, CommentController.deleteComment);
+
+router.get('/notification/list', userMiddleware.isAdmin, NotificationController.notificationList);
+router.post('/notification/delete', userMiddleware.isAdmin, NotificationController.deleteNotification);
 
 router.get('/department/list', userMiddleware.isAdmin, DepartmentController.departmentList);
 router.get('/department/add', userMiddleware.isAdmin, DepartmentController.addDepartment);

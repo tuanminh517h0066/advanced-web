@@ -1,0 +1,87 @@
+<div class="d-sm-flex justify-content-between align-items-start">
+    <div>
+    <h4 class="card-title card-title-dash">Comment Managment</h4>
+    </div>
+    
+</div>
+<div class="table-responsive  mt-1">
+    <table class="table select-table">
+    <thead>
+        <tr>
+        <th>No.</th>
+        <th>User name</th>
+        <th>Content</th>
+        <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+      {{#each comments}}
+        <tr>
+          <td>{{ sum @index 1 }}</td>
+          <td>
+                <div class="d-flex ">
+                    {{#if this.user.avatar }}
+                    <img src="/uploads/{{ this.user.avatar }}" alt="">
+                    {{else}}
+                    <img src="/frontend/images/user-avatar.png" alt="">
+                    {{/if}}
+                
+                    <div>
+                        <h6>{{this.user.email}}</h6>
+                        <p>{{this.user.username}}</p>
+                    </div>
+              </div>
+          </td>
+          <td>
+              <p>{{ this.comment }}</p>
+              <!-- <p>company type</p> -->
+          </td>
+          
+        <td>
+          {{!-- <button type="button" class="btn btn-warning" style="color: white;">Edit</button> --}}
+          {{!-- <button type="button" class="btn btn-danger" style="color: white;">Delete</button> --}}
+          
+          <a href="javascript:void(0)" class="btn btn-danger delete-comment" data-id="{{ this._id }}" style="color: white;">Delete</a>
+        </td>
+        </tr>
+        {{/each}}
+    </tbody>
+    </table>
+
+    <div class="modal" id="confirmDeleteComment" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Comment</h5>
+                {{!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span> --}}
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to delete this comment.</p>
+            </div>
+            <form action="/admin/comment/delete" method="post">
+            <div class="modal-footer">
+                <input type="hidden" name="comment_id" id="comment-id">
+                <button type="submit" class="btn btn-primary">Delete</button>
+                <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
+            </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $(document).on('click','.delete-comment', function() {
+            var comment_id = $(this).data('id');
+
+            $('#confirmDeleteComment').find('#comment-id').val(comment_id);
+            $('#confirmDeleteComment').modal('show');
+        })
+
+        $(document).on('click','.close-modal', function() {
+            $('#confirmDeleteComment').modal('hide');
+        })
+    })
+</script>
