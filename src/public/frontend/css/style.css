@@ -54,7 +54,7 @@ button:focus {
 }
 
 img {
-  height: auto;
+  object-fit: cover;
   max-width: 100%;
 }
 
@@ -678,7 +678,6 @@ header.sticky {
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
-  position: relative;
   line-height: 60px;
 }
 
@@ -701,6 +700,7 @@ header.sticky {
   display: inline-block;
   transform: scale(0.7);
   vertical-align: inherit;
+  object-fit: cover;
 }
 
 .form-search {
@@ -3653,6 +3653,10 @@ a.add-butn {
   max-width: 55px;
   vertical-align: middle;
   width: 55px;
+}
+
+.your-page img {
+  border-radius: 20px;
 }
 
 .page-meta {

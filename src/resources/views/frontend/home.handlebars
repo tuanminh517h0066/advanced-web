@@ -8,18 +8,16 @@
 		
 		<div class="top-area">
 			<div class="user-img">
-				<img src="/frontend/images/resources/admin.jpg" alt="">
-				<span class="status f-online"></span>
-				<div class="user-setting">
-					<a href="#" title=""><span class="status f-online"></span>online</a>
-					<a href="#" title=""><span class="status f-away"></span>away</a>
-					<a href="#" title=""><span class="status f-off"></span>offline</a>
-					<a href="#" title=""><i class="ti-user"></i> view profile</a>
-					<a href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a>
-					<a href="#" title=""><i class="ti-target"></i>activity log</a>
-					<a href="#" title=""><i class="ti-settings"></i>account setting</a>
-					<a href="/member/logout" title=""><i class="ti-power-off"></i>log out</a>
-				</div>
+				{{!-- <img class="dropdown-toggle" data-toggle="dropdown" src="/frontend/images/resources/admin.jpg" alt=""> --}}
+				{{#if member.avatar }}
+				<img src="/uploads/{{ member.avatar }}" class="dropdown-toggle" data-toggle="dropdown" alt="" height="60px" width="60px">
+				{{else}}
+				<img src="/frontend/images/user-avatar.png" class="dropdown-toggle" data-toggle="dropdown" alt="" height="60px" width="60px">
+				{{/if}}
+				<div class="dropdown-menu">  
+					<a class="dropdown-item" href="#"> <i class="fa fa-home"></i> My page</a>
+					<a class="dropdown-item" href="/member/logout"> <i class="ti-power-off"></i> Logout</a>
+				</div>  
 			</div>
 		</div>
 	</div><!-- topbar -->
@@ -34,13 +32,12 @@
 								<h4 class="widget-title">Your page</h4>	
 								
 								<div class="your-page">
-									{{!-- <figure> --}}
-										{{#if member.avatar }}
-										<img src="/uploads/{{ member.avatar }}" alt="" style="width: 50%; border-radius: 20px">
-										{{else}}
-										<img src="/frontend/images/user-avatar.png" alt="" style="width: 50%; border-radius: 20px">
-										{{/if}}
-									{{!-- </figure> --}}
+									{{#if member.avatar }}
+									<img src="/uploads/{{ member.avatar }}" alt="" height="150px" width="150px">
+									{{else}}
+									<img src="/frontend/images/user-avatar.png"  alt="" height="150px" width="150px">
+									{{/if}}
+										
 									<br>
 									<div class="page-meta">
 										<a href="#" title="" class="underline">
@@ -61,11 +58,6 @@
 									<li>
 										<i class="ti-bell"></i>
 										<a href="#" title="">Notifications</a>
-									</li>
-									
-									<li>
-										<i class="ti-power-off"></i>
-										<a href="/member/logout" title="">Logout</a>
 									</li>
 								</ul>
 							</div>
@@ -102,9 +94,9 @@
 									<div class="col-lg-2 mx-0">
 										<figure style="text-align: center; margin-bottom: 5px; ">
 											{{#if member.avatar }}
-											<img src="/uploads/{{ member.avatar }}" alt="" class="rounded-circle" style="width: 70%">
+											<img src="/uploads/{{ member.avatar }}" alt="" class="rounded-circle" height="60px" width="60px">
 											{{else}}
-											<img src="/frontend/images/user-avatar.png" alt="" class="rounded-circle" style="width: 70%">
+											<img src="/frontend/images/user-avatar.png" alt="" class="rounded-circle" height="60px" width="60px">
 											{{/if}}
 										</figure>
 									</div>
@@ -251,9 +243,9 @@
 										
 										<figure>
 											{{#if this.user.avatar }}
-											<img src="/uploads/{{ this.user.avatar }}" alt="">
+											<img src="/uploads/{{ this.user.avatar }}" alt="" height="50px" width="50px">
 											{{else}}
-											<img src="/frontend/images/user-avatar.png" alt="">
+											<img src="/frontend/images/user-avatar.png" alt="" height="50px" width="50px">
 											{{/if}}
 										</figure>
 										<div class="friend-name">
@@ -314,9 +306,9 @@
 											<li id="comment{{ this._id }}">
 												<div class="comet-avatar">
 													{{#if this.user.avatar }}
-													<img src="/uploads/{{ this.user.avatar }}" alt="">
+													<img src="/uploads/{{ this.user.avatar }}" alt="" height="40px" width="40px">
 													{{else}}
-													<img src="/frontend/images/user-avatar.png" alt="">
+													<img src="/frontend/images/user-avatar.png" alt="" height="40px" width="40px">
 													{{/if}}
 												</div>
 												<div class="we-comment">
@@ -345,9 +337,9 @@
 											<li class="post-comment">
 												<div class="comet-avatar">
 													{{#if this.user.avatar }}
-													<img src="/uploads/{{ this.user.avatar }}" alt="">
+													<img src="/uploads/{{ this.user.avatar }}" alt="" height="40px" width="40px">
 													{{else}}
-													<img src="/frontend/images/user-avatar.png" alt="">
+													<img src="/frontend/images/user-avatar.png" alt="" height="40px" width="40px">
 													{{/if}}
 												</div>
 												<div class="post-comt-box">
