@@ -67,6 +67,7 @@ app.engine('handlebars', handlebars({
             return dateStr
         },
         if_eq: (a, b, opts) => {
+            
             if (String(a) === String(b)) {
                 return opts.fn(this);
             } else {

@@ -30,6 +30,8 @@ var storage = multer.diskStorage({
 
 router.get('/list', userMiddleware.isMember, DepartmentController.list );
 
+router.get('/notifications/list',userMiddleware.isMember, DepartmentController.notificationList )
+
 router.get('/:department_id',userMiddleware.isMember, DepartmentController.departmentDetail);
 
 router.get('/:department_id/notification/create', userMiddleware.isMember, DepartmentController.createNoti);

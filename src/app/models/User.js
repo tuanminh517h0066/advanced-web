@@ -9,8 +9,12 @@ const User = new Schema({
     password: {type: String},
     role: {type: String, required: true},
     avatar: {type: String},
-    student_card: {type: String},
+    class: {type: String},
     phone_number: {type: String},
+    facility: { 
+        type: mongoose.Schema.Types.ObjectId ,
+        ref: "Department"
+    },
     departments: [
         {
             type: mongoose.Schema.Types.ObjectId,

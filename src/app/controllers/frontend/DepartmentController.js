@@ -17,6 +17,68 @@ class DepartmentController {
         });
     }
 
+    async notificationList(req, res, next) {
+        const current_account = req.user;
+        try{ 
+            const page = req.query.page || 1;
+            const limit = 10;
+            const skip = (page -1) *limit;
+            let paginationHtml = ''
+            const notifications = await Notification.find({}).populate({
+                path: 'department',
+            })
+            .sort({updatedAt:-1})
+            .limit(limit)
+            .skip(skip);
+
+            
+            const count = await Notification.countDocuments({});
+            const pages = Math.ceil(count / limit);
+            if(page == 1)
+            {
+                paginationHtml+= '<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>'
+            }else
+            {
+                paginationHtml+= '<li class="page-item "><a class="page-link" href="/member/departments/notifications/list/'+'?page=' + (Number(page) - 1) + '" tabindex="-1">Previous</a></li>'
+            }
+            var i = (Number(page) > 3 ? Number(page) - 2 : 1)
+            if(i !== 1) 
+            {
+                paginationHtml+= '<li class="page-item disabled"><a class="page-link" href="#">...</a></li>'
+            }
+            for(; i <= (Number(page) + 2) && i <= pages; i++) 
+            {
+                if(i == page)
+                {
+                    paginationHtml+= '<li class="page-item active"><a class="page-link" href="/member/departments/notifications/list/'+'?page=' + i + '">'+i+'</a></li>'
+                }
+                else
+                {
+                    paginationHtml+= '<li class="page-item"><a class="page-link" href="/member/departments/notifications/list/'+'?page=' + i + '">'+i+'</a></li>'
+                }
+                if (i == Number(page) + 2 && i < pages)
+                {
+                    paginationHtml+= '<li class="page-item disabled"><a class="page-link" href="#">...</a></li>'
+                }
+            }
+            if(page == pages)
+            {
+                paginationHtml+= '<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Next</a></li>'
+            }else
+            {
+                paginationHtml+= '<li class="page-item "><a class="page-link" href="/member/departments/notifications/list/'+'?page=' + (Number(page) + 1) + '" tabindex="-1">Next</a></li>'
+            }
+
+            res.render('frontend/notification-list', {
+                member: mongooseToObject(current_account),
+                notifications: mutipleMongooseToObject(notifications),
+                pagination: paginationHtml
+            });
+        }catch(error){
+            console.log(error);
+        }
+    }
+
     async departmentDetail(req, res, next) {
 
         const current_account = req.user;
@@ -27,15 +89,6 @@ class DepartmentController {
             path: 'users',
         });
         
-
-        // const notifications = await Notification.find( { department: department_id } ).populate({
-        //     path: 'department',
-        // }); 
-        // res.render('frontend/department-item', {
-        //     department_item: mongooseToObject(department_item),
-        //     member: mongooseToObject(current_account),
-        //     notifications: mutipleMongooseToObject(notifications), 
-        // });
         try{ 
             const page = req.query.page || 1;
             const limit = 10;
