@@ -80,6 +80,75 @@ class MemberController {
         res.redirect('back');
     }
 
+    async editDepartmentMember(req, res, next) {
+        var member_id = req.params.id;
+        var member = await User.findOne({'_id': member_id })
+        var departments = await Department.find({});
+        var admin_name = req.user;
+
+        res.render('backend/member/edit-department',{
+            admin: mongooseToObject(admin_name),
+            departments: mutipleMongooseToObject(departments),
+            member: mongooseToObject(member),
+            layout: 'backend',
+            errors: req.session.errors,
+        });
+
+        req.session.errors = null;
+    }
+
+    async postDepartmentMember(req, res, next) {
+        const department_arr = req.body.departments;
+        const departments = await Department.find({});
+        const member_id = req.body.member_id;
+
+        const errors = validationResult(req).array();
+
+        if (errors != '') {
+            req.session.errors = errors;
+            req.session.success = false;
+            
+            res.redirect('back')
+        // return res.status(400).json({ errors: errors.array() });
+        } else {
+            
+            const current_user = await User.findOne({_id: member_id });
+            if(!current_user.departments) {
+                current_user.departments = [];
+                current_user.save();
+            }
+            departments.forEach( async (element, index) =>  { 
+                const department = await Department.findOne(element._id);
+
+                department.users.pull(member_id);
+                await department.save();
+            })
+
+            const update_current_user = await User.findOne({_id: member_id });
+
+            update_current_user.departments = [];
+
+            department_arr.forEach((element, index) => { 
+                update_current_user.departments.push(element);
+            })
+
+            update_current_user.save(async function(err,user) {
+                if (err) console.log(err);
+                if(user.role == 1) {
+                    department_arr.forEach( async (element, index) =>  { 
+                        const department = await Department.findById(element)
+                        department.users.push(user._id);
+                        await department.save();
+                        
+                    })
+                }
+                
+            });
+        }
+
+        res.redirect('back');
+    }
+
     async post(req, res, next) {
 
         // Finds the validation errors in this request and wraps them in an object with handy functions

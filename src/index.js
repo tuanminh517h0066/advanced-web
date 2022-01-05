@@ -129,14 +129,17 @@ app.engine('handlebars', handlebars({
             var option_arr = a;
             var option_user = b;
             var checked = '';
+            
+            if (typeof option_arr !== "undefined") {
+                
+                option_arr.forEach(function (element){
 
-            option_arr.forEach(function (element){
-
-                if (String(element) === String(option_user)) {
-                    
-                    checked = 'selected';
-                }
-            })
+                    if (String(element) === String(option_user)) {
+                        
+                        checked = 'selected';
+                    }
+                })
+            }
 
             return checked;
         }

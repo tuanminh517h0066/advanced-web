@@ -1,0 +1,35 @@
+<div class="d-sm-flex justify-content-between align-items-start">
+    <div>
+    <h4 class="card-title card-title-dash">Edit Teacher Department</h4>
+    </div>
+    <div>
+    <a href="/admin/index" class="btn btn-primary btn-lg text-white mb-0 me-0" >Back</a>
+    </div>
+</div>
+<div class="table-responsive  mt-1">
+    {{#if errors }}
+        {{#each errors }}
+            <p class="alert alert-danger">{{ this.msg }}</p>
+        {{/each}}
+    {{/if}}
+    <form method="post" action="/admin/member/edit/department/post">
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Department</label>
+
+            <select class="form-control js-example-basic-multiple" name="departments[]" multiple="multiple">
+                {{#each departments}}
+                   <option value="{{ this._id }}" {{ checked_option ../member.departments this._id}} >{{ this.name }}</option>
+                {{/each}}
+            </select>
+        </div>
+        <input type="hidden" name="member_id" value="{{ member._id }}">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+       
+       $('.js-example-basic-multiple').select2();
+    });
+</script>
