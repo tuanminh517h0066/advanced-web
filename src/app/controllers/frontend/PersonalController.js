@@ -50,6 +50,7 @@ class PersonalController {
 
         const departments = await Department.find({});
         // const current_account = req.user;
+        const facilites = await Department.find({facility_status: 1})
 
         const current_account = await User.findById(req.user._id);
         // console.log(current_account);
@@ -57,6 +58,7 @@ class PersonalController {
         res.render('frontend/info-setting',{
             member: mongooseToObject(current_account),
             departments: mutipleMongooseToObject(departments),
+            facilites: mutipleMongooseToObject(facilites),
         });
     }
 
@@ -65,20 +67,22 @@ class PersonalController {
         const username = req.body.username;
         const departments = await Department.find({});
         // console.log(departments)
- 
+        console.log(department_arr);
+        if (typeof department_arr !== "undefined") {
         
-        const current_user = await User.findOne({_id: req.user._id });
-        if(!current_user.departments) {
-            current_user.departments = [];
-            current_user.save();
+        
+            const current_user = await User.findOne({_id: req.user._id });
+            if(!current_user.departments) {
+                current_user.departments = [];
+                current_user.save();
+            }
+            departments.forEach( async (element, index) =>  { 
+                const department = await Department.findOne(element._id);
+
+                department.users.pull(req.user._id);
+                await department.save();
+            })
         }
-
-        departments.forEach( async (element, index) =>  { 
-            const department = await Department.findOne(element._id);
-
-            department.users.pull(req.user._id);
-            await department.save();
-        })
 
         
         const update_current_user = await User.findOne({_id: req.user._id });
@@ -88,18 +92,34 @@ class PersonalController {
             update_current_user.avatar = req.file.filename;
           
         }
-        department_arr.forEach((element, index) => { 
-            update_current_user.departments.push(element);
-        })
+        if(req.body.class) {
+            update_current_user.class = req.body.class;
+
+        }
+
+        if(req.body.facility) {
+            update_current_user.facility = req.body.facility;
+        }
+
+        if (typeof department_arr !== "undefined") {
+
+            department_arr.forEach((element, index) => { 
+                update_current_user.departments.push(element);
+            })
+        }
+
+
         update_current_user.save(async function(err,user) {
             if (err) console.log(err);
-
-            department_arr.forEach( async (element, index) =>  { 
-                const department = await Department.findById(element)
-                department.users.push(user._id);
-                await department.save();
-                
-            })
+            if(user.role == 1) {
+                department_arr.forEach( async (element, index) =>  { 
+                    const department = await Department.findById(element)
+                    department.users.push(user._id);
+                    await department.save();
+                    
+                })
+            }
+            
         });
 
         res.redirect('back');

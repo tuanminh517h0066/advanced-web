@@ -542,10 +542,10 @@ $(document).ready(function() {
     function showComment(data, status_edit_del) {
         var comment = '<div class="comet-avatar">'	
             if (data.user.avatar) {
-                comment += '<img src="/uploads/'+ data.user.avatar +'" alt="">'
+                comment += '<img src="/uploads/'+ data.user.avatar +'" alt="" height="40px" width="40px">'
             }
             else {
-                comment += '<img src="/frontend/images/user-avatar.png" alt="">'
+                comment += '<img src="/frontend/images/user-avatar.png" alt="" height="40px" width="40px">'
             }																
             comment += '</div>'								
             comment += '<div class="we-comment">'								

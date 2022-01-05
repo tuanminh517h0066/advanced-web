@@ -45,13 +45,14 @@
 											
 											<li>
 												<i class="ti-mouse-alt"></i>
-												<a href="/member/home" title="">New feed</a>
+												<a href="/member/home" title="">Home</a>
 											</li>
-											
+											{{#if ../member.password}}
 											<li>
 												<i class="ti-lock"></i>
 												<a href="/member/change-password" title="">change password</a>
 											</li>
+											{{/if}}
 											
 										</ul>
 									</div>
@@ -81,7 +82,15 @@
 												{{#if_eq member.role 0}}
 												<div class="form-group col-md-6">
 													<label for="department">Class</label>
-													<input type="text" class="form-control" name="class" value="">
+													<input type="text" class="form-control" name="class" value="{{ ../member.class }}">
+												</div>
+												<div class="form-group col-md-6">
+													<label for="department">Facility</label>
+													<select class="form-control" name="facility">
+														{{#each ../facilites}}
+															<option value="{{ this._id }}" {{#if_eq ../../member.facility this._id }} selected {{/if_eq}} >{{ this.name }}</option>
+														{{/each}}
+													</select>
 												</div>
 												{{/if_eq }}
 

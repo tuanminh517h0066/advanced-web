@@ -50,6 +50,13 @@ body('username').not().isEmpty().withMessage('must fill username'),
 body('departments').not().isEmpty().withMessage('must fill departments'),
 memberController.post);
 
+
+router.get('/member/edit/department/:id', userMiddleware.isAdmin, memberController.editDepartmentMember);
+router.post('/member/edit/department/post',
+userMiddleware.isAdmin, 
+body('departments').not().isEmpty().withMessage('must fill departments'),
+memberController.postDepartmentMember);
+
 router.post('/member/delete',userMiddleware.isAdmin, memberController.deleteMember);
 
 router.get('/login',userMiddleware.checkNotAuthenticated, function(req, res, next) {
