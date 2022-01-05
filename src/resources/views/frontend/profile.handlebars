@@ -1,25 +1,22 @@
-<!--<div class="se-pre-con"></div>-->
 <div class="theme-layout">
 	
 	<div class="topbar stick">
 		<div class="logo">
-			<a title="" href="/member/home"><img src="/frontend/images/logo.png" alt=""></a>
+			<a title="" href="/member/home"><img src="/frontend/images/tdt_logo.png" alt="" height="50px" width="auto"></a>
 		</div>
 		
 		<div class="top-area">
 			<div class="user-img">
-				<img src="/frontend/images/resources/admin.jpg" alt="">
-				<span class="status f-online"></span>
-				<div class="user-setting">
-					<a href="#" title=""><span class="status f-online"></span>online</a>
-					<a href="#" title=""><span class="status f-away"></span>away</a>
-					<a href="#" title=""><span class="status f-off"></span>offline</a>
-					<a href="#" title=""><i class="ti-user"></i> view profile</a>
-					<a href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a>
-					<a href="#" title=""><i class="ti-target"></i>activity log</a>
-					<a href="#" title=""><i class="ti-settings"></i>account setting</a>
-					<a href="/member/logout" title=""><i class="ti-power-off"></i>log out</a>
-				</div>
+				{{!-- <img class="dropdown-toggle" data-toggle="dropdown" src="/frontend/images/resources/admin.jpg" alt=""> --}}
+				{{#if member.avatar }}
+				<img src="/uploads/{{ member.avatar }}" class="dropdown-toggle" data-toggle="dropdown" alt="" height="60px" width="60px">
+				{{else}}
+				<img src="/frontend/images/user-avatar.png" class="dropdown-toggle" data-toggle="dropdown" alt="" height="60px" width="60px">
+				{{/if}}
+				<div class="dropdown-menu">  
+					<a class="dropdown-item" href="/member/profile/{{ member._id }}"> <i class="fa fa-home"></i> My page</a>
+					<a class="dropdown-item" href="/member/logout"> <i class="ti-power-off"></i> Logout</a>
+				</div>  
 			</div>
 		</div>
 	</div><!-- topbar -->
@@ -34,13 +31,11 @@
 								<h4 class="widget-title">Profile</h4>	
 								
 								<div class="your-page">
-									{{!-- <figure> --}}
-										{{#if member.avatar }}
-										<img src="/uploads/{{ member.avatar }}" alt="" style="width: 50%; border-radius: 20px">
-										{{else}}
-										<img src="/frontend/images/user-avatar.png" alt="" style="width: 50%; border-radius: 20px">
-										{{/if}}
-									{{!-- </figure> --}}
+									{{#if member.avatar }}
+									<img src="/uploads/{{ member.avatar }}" alt="" height="150px" width="150px">
+									{{else}}
+									<img src="/frontend/images/user-avatar.png" alt="" height="150px" width="150px">
+									{{/if}}
 									<br>
 									<div class="page-meta">
 										<a href="#" title="" class="underline">
@@ -109,9 +104,9 @@
 									<div class="col-lg-2 mx-0">
 										<figure style="text-align: center; margin-bottom: 5px">
 											{{#if ../member.avatar }}
-											<img src="/uploads/{{ ../member.avatar }}" alt="" class="rounded-circle" >
+											<img src="/uploads/{{ ../member.avatar }}" alt="" class="rounded-circle" height="60px" width="60px">
 											{{else}}
-											<img src="/frontend/images/user-avatar.png" alt="" class="rounded-circle" >
+											<img src="/frontend/images/user-avatar.png" alt="" class="rounded-circle" height="60px" width="60px">
 											{{/if}}
 										</figure>
 									</div>
@@ -156,7 +151,7 @@
 											<div class="friend-info">
 												<figure>
 													{{#if member.avatar }}
-													<img src="/uploads/{{ member.avatar }}" alt="">
+													<img src="/uploads/{{ member.avatar }}" alt="" >
 													{{else}}
 													<img src="/frontend/images/user-avatar.png" alt="">
 													{{/if}}
@@ -257,9 +252,9 @@
 										
 										<figure>
 											{{#if this.user.avatar }}
-											<img src="/uploads/{{ this.user.avatar }}" alt="">
+											<img src="/uploads/{{ this.user.avatar }}" alt="" height="50px" width="50px">
 											{{else}}
-											<img src="/frontend/images/user-avatar.png" alt="">
+											<img src="/frontend/images/user-avatar.png" alt="" height="50px" width="50px">
 											{{/if}}
 										</figure>
 										<div class="friend-name">
@@ -295,20 +290,6 @@
 														</button>
 													</div>
 												</div>
-												{{!-- <ul>
-													<li>
-														<span class="like" data-toggle="tooltip" title="like">
-															<a href="javascript:void(0)" class="total_like bt-like like-post{{ this._id }}" data-post-id="{{ this._id }}" data-like-id="{{data_like this.likes ../member._id}}"><i class="far fa-thumbs-up like-post-icon{{ this._id }} {{liked this.likes ../member._id}}"></i></a>
-															<ins class="count-like{{ this._id }}" >{{ this.likes.length }}</ins>
-														</span>
-													</li>
-													<li>
-														<span class="comment" data-toggle="tooltip" title="Comments">
-															<i class="far fa-comment"></i>
-															<ins class="count-comment{{ this._id }}">{{ this.comments.length }}</ins>
-														</span>
-													</li>
-												</ul> --}}
 											</div>
 											
 										</div>
@@ -320,9 +301,9 @@
 											<li id="comment{{ this._id }}">
 												<div class="comet-avatar">
 													{{#if this.user.avatar }}
-													<img src="/uploads/{{ this.user.avatar }}" alt="">
+													<img src="/uploads/{{ this.user.avatar }}" alt="" height="40px" width="40px">
 													{{else}}
-													<img src="/frontend/images/user-avatar.png" alt="">
+													<img src="/frontend/images/user-avatar.png" alt="" height="40px" width="40px">
 													{{/if}}
 												</div>
 												<div class="we-comment">
@@ -351,9 +332,9 @@
 											<li class="post-comment">
 												<div class="comet-avatar">
 													{{#if this.user.avatar }}
-													<img src="/uploads/{{ this.user.avatar }}" alt="">
+													<img src="/uploads/{{ this.user.avatar }}" alt="" height="40px" width="40px">
 													{{else}}
-													<img src="/frontend/images/user-avatar.png" alt="">
+													<img src="/frontend/images/user-avatar.png" alt="" height="40px" width="40px">
 													{{/if}}
 												</div>
 												<div class="post-comt-box">
@@ -368,27 +349,7 @@
 								</div>
 							</div>
 							{{/each}}
-						
-							{{!-- <div class="central-meta item loadingPost" id="load" style="display: none;"> --}}
-								{{!-- <div id="checkLoad"> --}}
-								{{!-- <div class="header-post">
-									<div class="space-img"></div>
-									<div class="space-friend-name">
-										<div class="space-name"></div>
-										<div class="space-span"></div>	
-									</div>
-								</div>
-								<div class="body-post">
-									<div class="space"></div>
-									<div class="space"></div>
-								</div> --}}
-								{{!-- </div> --}}
-							
-							{{!-- </div> --}}
 						</div>
-						{{!-- <div>
-							<button type="button" class="btn btn-primary" id="btn-loadMore">Load More</button>
-						</div> --}}
 					</div><!-- centerl meta -->
 					<div class="col-lg-3" id="side-bar">
 						<aside class="sidebar static">
