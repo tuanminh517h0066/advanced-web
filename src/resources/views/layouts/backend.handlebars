@@ -26,26 +26,25 @@
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   {{!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script> --}}
 
-
+  <style>
+    #nav li:active{
+      {{!-- color: red; --}}
+      background-color: red;
+    }
+    a {
+    color: #337ab7;
+    text-decoration: none;
+    }
+    li{
+        list-style:none;
+    }
+  </style>
 </head>
-<body class='sidebar-icon-only'>
-  <div class="container-scroller"> 
+<body>
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-        <div class="me-3">
-          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
-            <span class="icon-menu"></span>
-          </button>
-        </div>
-        <div>
-          <a class="navbar-brand brand-logo" href="index.html">
-            <img src="images/logo.svg" alt="logo" />
-          </a>
-          <a class="navbar-brand brand-logo-mini" href="index.html">
-            <img src="images/logo-mini.svg" alt="logo" />
-          </a>
-        </div>
+       <img src="/frontend/images/tdt_logo.png" alt="" style="width: 70%">
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-top"> 
         <ul class="navbar-nav">
@@ -63,10 +62,9 @@
 
           <li class="nav-item dropdown d-none d-lg-block user-dropdown">
             <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-              <img class="img-xs rounded-circle" src="/backend/images/user-avatar.png" alt="Profile image"> </a>
+              <img class="img-xs rounded-circle" src="/backend/images/admin.png" alt="Profile image"> </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-              <div class="dropdown-header text-center">
-                <img class="img-md rounded-circle" src="" alt="Profile image">
+              <div class="dropdown-header">
                 <p class="mb-1 mt-3 font-weight-semibold">
                   {{#if admin  }}
                     {{ admin.username }}
@@ -78,64 +76,59 @@
                   {{/if}}
                 </p>
               </div>
-              {{!-- <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Activity</a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a> --}}
               <a class="dropdown-item" href="/admin/logout"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
             </div>
           </li>
         </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-bs-toggle="offcanvas">
+        {{!-- <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-bs-toggle="offcanvas">
           <span class="mdi mdi-menu"></span>
-        </button>
+        </button> --}}
       </div>
     </nav>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
-      <!-- partial:partials/_settings-panel.html -->
-
-      <div id="right-sidebar" class="settings-panel">
-        <i class="settings-close ti-close"></i>
-        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
-          </li>
-        </ul>
-      </div>
-      <!-- partial -->
-      <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="Admin.html">
-              <i class="mdi mdi-grid-large menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
+            <a class="nav-link" href="/admin/index">
+              <i class="mdi mdi-account-multiple menu-icon"></i>
+              <span class="menu-title">Teacher</span>
             </a>
           </li>
-          <li class="nav-item nav-category">UI Elements</li>
+          {{!-- <li class="nav-item nav-category">UI Elements</li> --}}
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="menu-icon mdi mdi-floor-plan"></i>
-              <span class="menu-title">UI Elements</span>
-              <i class="menu-arrow"></i> 
+            <a class="nav-link" href="/admin/student/list">
+              <i class="menu-icon mdi mdi-account-card-details"></i>
+              <span class="menu-title">Student</span>
             </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-              </ul>
-            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/department/list">
+              <i class="menu-icon mdi mdi-format-float-left"></i>
+              <span class="menu-title">Department</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/notification/list">
+              <i class="menu-icon mdi mdi-bell-ring-outline"></i>
+              <span class="menu-title">Notifications</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/post/list">
+              <i class="menu-icon mdi mdi-newspaper"></i>
+              <span class="menu-title">Post</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/comment/list">
+              <i class="menu-icon mdi mdi-comment-processing-outline"></i>
+              <span class="menu-title">Comment</span>
+            </a>
           </li>
         </ul>
       </nav>
       <!-- partial -->
-
-      
 
     <div class="main-panel">
       <div class="content-wrapper" style="padding-top: 0; padding-bottom: 0;">
@@ -145,15 +138,13 @@
               <div class="tab-content tab-content-basic">
                 <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
                   <div class="row flex-grow">
-                      <div class="col-12 grid-margin stretch-card">
+                    <div class="col-12 grid-margin stretch-card">
                       <div class="card card-rounded">
-                        
                           <div class="card-body">
                             {{{body}}}
                           </div>
-
                       </div>
-                      </div>
+                    </div>
                 </div>
               </div>
             </div>
@@ -164,6 +155,7 @@
       <!-- main-panel ends -->
     </div>
     <!-- page-body-wrapper ends -->
+    </div>
   </div>
   <!-- container-scroller -->
 
@@ -181,7 +173,22 @@
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script>
-    
+    $(function() {
+      setNavigation();
+    });
+    function setNavigation(){
+        var path = window.location.pathname;
+        path = path.replace(/\/$/, "");
+        path = decodeURIComponent(path);
+
+        $('#nav a').each(function(){
+            var href = $(this).attr('href');
+
+            if(path.substring(0, href.length) === href){
+                $(this).closest('li').addClass('active');
+            }
+        });
+    }
   </script>
 </body>
 
