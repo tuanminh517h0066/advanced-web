@@ -10,38 +10,52 @@ const { mongooseToObject } = require('../../../util/mongoose');
 
 const bcrypt = require("bcrypt-nodejs");
 
+const { body, validationResult } = require('express-validator');
+
 class PersonalController {
     
     async Password(req, res, next) {
-        
-        res.render('frontend/change-password');
+        var current_member = req.user;
+        res.render('frontend/change-password',{
+            errors: req.session.errors,
+            member: mongooseToObject(current_member)
+        });
+        req.session.errors = null;
     }
 
     async postPass(req, res, next) {
-        var password_db  = req.user.password;
-        var current_pass = req.body.currentpw;
-        var new_pass     = req.body.newpw;
-        var confirmpass  = req.body.confirmpw;
-        
-        try {
-            if(bcrypt.compareSync(current_pass, password_db))
-            {
-                
-                if(new_pass == confirmpass) {
-                    var current_user = await User.findOne({_id: req.user._id });
-                    current_user.password = current_user.encryptPassword(confirmpass);
-                    current_user.save();
+        const errors = validationResult(req).array();
+        if (errors != '') {
+            req.session.errors = errors;
+            req.session.success = false;
+            res.redirect('back')
+        // return res.status(400).json({ errors: errors.array() });
+        } else {
+            var password_db  = req.user.password;
+            var current_pass = req.body.currentpw;
+            var new_pass     = req.body.newpw;
+            var confirmpass  = req.body.confirmpw;
+            try {
+                if(bcrypt.compareSync(current_pass, password_db))
+                {
                     
-
-                    res.redirect('back');
+                    if(new_pass == confirmpass) {
+                        var current_user = await User.findOne({_id: req.user._id });
+                        current_user.password = current_user.encryptPassword(confirmpass);
+                        current_user.save();
+                        
+    
+                        res.redirect('back');
+                    }
+                } else
+                {
+                    console.log('wrong password');
                 }
-            } else
-            {
-                console.log('wrong password');
+            } catch (err) {
+                next(err);
             }
-        } catch (err) {
-            next(err);
         }
+        
 
         // res.render('back');
     }
@@ -68,23 +82,7 @@ class PersonalController {
         const departments = await Department.find({});
         // console.log(departments)
         console.log(department_arr);
-        if (typeof department_arr !== "undefined") {
-        
-        
-            const current_user = await User.findOne({_id: req.user._id });
-            if(!current_user.departments) {
-                current_user.departments = [];
-                current_user.save();
-            }
-            departments.forEach( async (element, index) =>  { 
-                const department = await Department.findOne(element._id);
-
-                department.users.pull(req.user._id);
-                await department.save();
-            })
-        }
-
-        
+ 
         const update_current_user = await User.findOne({_id: req.user._id });
         update_current_user.username = req.body.username;
         update_current_user.departments = [];
@@ -101,24 +99,12 @@ class PersonalController {
             update_current_user.facility = req.body.facility;
         }
 
-        if (typeof department_arr !== "undefined") {
-
-            department_arr.forEach((element, index) => { 
-                update_current_user.departments.push(element);
-            })
-        }
+        
 
 
         update_current_user.save(async function(err,user) {
             if (err) console.log(err);
-            if(user.role == 1) {
-                department_arr.forEach( async (element, index) =>  { 
-                    const department = await Department.findById(element)
-                    department.users.push(user._id);
-                    await department.save();
-                    
-                })
-            }
+            
             
         });
 

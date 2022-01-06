@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const User = require('../app/models/User');
 const departmentRouter = require('./department.route');
 
 const  passport = require('passport');
@@ -9,6 +10,8 @@ const PostController = require('../app/controllers/frontend/PostController');
 const PersonalController = require('../app/controllers/frontend/PersonalController');
 const multer  = require('multer')
 const fs = require('fs');
+const { body } = require('express-validator');
+const bcrypt = require("bcrypt-nodejs");
 
 
 var storage = multer.diskStorage({
@@ -32,7 +35,18 @@ var upload = multer({ storage: storage })
 router.get('/home',userMiddleware.isMember, HomeController.home );
 
 router.get('/change-password',userMiddleware.isMember, PersonalController.Password);
-router.post('/change-password/post', userMiddleware.isMember, PersonalController.postPass);
+router.post('/change-password/post', 
+userMiddleware.isMember, 
+body('currentpw').not().isEmpty().withMessage('must fill current password'),
+body('newpw').not().isEmpty().withMessage('must fill new password'), 
+body('confirmpw').not().isEmpty().withMessage('must fill confirm password').custom((value, {req, loc, path}) => {
+    var newpw = req.body.newpw;
+    var confirmpw = req.body.confirmpw;
+    if(newpw !== confirmpw) {
+      return Promise.reject('Password must is the same');
+    }
+}), 
+PersonalController.postPass);
 
 router.get('/info-setting', userMiddleware.isMember, PersonalController.infoSetting);
 router.post('/info-setting/post', userMiddleware.isMember, upload.single('image'), PersonalController.postSetting);
