@@ -4186,7 +4186,7 @@ canvas {
   position: relative;
 }
 
-.static {
+.static{
   /* position: static !important; */
   position: -webkit-sticky; /* Safari */
   position: sticky;

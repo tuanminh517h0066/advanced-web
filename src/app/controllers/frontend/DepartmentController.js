@@ -9,10 +9,11 @@ const { body, validationResult } = require('express-validator');
 class DepartmentController {
     
     async list(req, res, next) {
-
+        const current_account = req.user;
         const departments = await Department.find({});
 
         res.render('frontend/department-list',{
+            member: mongooseToObject(current_account),
             departments: mutipleMongooseToObject(departments)
         });
     }
