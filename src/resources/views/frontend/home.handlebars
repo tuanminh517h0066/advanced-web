@@ -89,18 +89,18 @@
 						<div class="central-meta" id ="new-post-block" style="padding: 10px;">
 							
 							<div class="new-postbox">
-								<div class="row" >
-									<div class="col-lg-2 mx-0">
+								<div class="row">
+									<div class="col-sm-2">
 										<figure style="text-align: center; margin-bottom: 5px; ">
 											{{#if member.avatar }}
-											<img src="/uploads/{{ member.avatar }}" alt="" class="rounded-circle" height="60px" width="60px">
+											<img src="/uploads/{{ member.avatar }}" alt="" class="rounded-circle" height="45px" width="45px">
 											{{else}}
-											<img src="/frontend/images/user-avatar.png" alt="" class="rounded-circle" height="60px" width="60px">
+											<img src="/frontend/images/user-avatar.png" alt="" class="rounded-circle" height="45px" width="45px">
 											{{/if}}
 										</figure>
 									</div>
-									<div class="col-lg-10 mx-0">
-										<div class="row mt-2" id="row-status" >
+									<div class="col-sm-10">
+										<div class="row" id="row-status" >
 											<button type="button" class="btn btn-secondary btn-block create_post" id="status-block">Hi, what are you thinking today?</button>
 										</div>
 										
@@ -141,9 +141,9 @@
 											<div class="friend-info">
 												<figure>
 													{{#if member.avatar }}
-													<img src="/uploads/{{ member.avatar }}" alt="">
+													<img src="/uploads/{{ member.avatar }}" alt="" height="40px" width="40px">
 													{{else}}
-													<img src="/frontend/images/user-avatar.png" alt="">
+													<img src="/frontend/images/user-avatar.png" alt="" height="40px" width="40px">
 													{{/if}}
 												</figure>
 												<div class="friend-name">
@@ -242,9 +242,9 @@
 										
 										<figure>
 											{{#if this.user.avatar }}
-											<img src="/uploads/{{ this.user.avatar }}" alt="" height="50px" width="50px">
+											<img src="/uploads/{{ this.user.avatar }}" alt="" height="45px" width="45px">
 											{{else}}
-											<img src="/frontend/images/user-avatar.png" alt="" height="50px" width="50px">
+											<img src="/frontend/images/user-avatar.png" alt="" height="45px" width="45px">
 											{{/if}}
 										</figure>
 										<div class="friend-name">

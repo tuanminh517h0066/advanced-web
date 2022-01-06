@@ -293,10 +293,10 @@ $(document).ready(function() {
         }					
 
         if (data.user.avatar) {
-            post += '<figure><img src="/uploads/'+ data.user.avatar +'" alt=""></figure>'
+            post += '<figure><img src="/uploads/'+ data.user.avatar +'" alt="" height="45px" width="45px"></figure>'
         }
         else {
-            post += '<figure><img src="/frontend/images/user-avatar.png" alt=""></figure>'
+            post += '<figure><img src="/frontend/images/user-avatar.png" alt="" height="45px" width="45px"></figure>'
         }
         
         post += '<div class="friend-name">'
@@ -389,10 +389,10 @@ $(document).ready(function() {
         post += '<li class="post-comment">'
 		post += '<div class="comet-avatar">'		
         if (data.user.avatar) {
-            post += '<img src="/uploads/'+ data.user.avatar +'" alt="">'
+            post += '<img src="/uploads/'+ data.user.avatar +'" alt="" height="40px" width="40px">'
         }
         else {
-            post += '<img src="/frontend/images/user-avatar.png" alt="">'
+            post += '<img src="/frontend/images/user-avatar.png" alt="" height="40px" width="40px">'
         }																			
 		post += '</div>'												
 		post += '<div class="post-comt-box">'												
