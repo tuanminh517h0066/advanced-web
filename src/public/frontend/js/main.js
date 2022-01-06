@@ -398,7 +398,7 @@ $(document).ready(function() {
 		post += '<div class="post-comt-box">'												
 		post += '<form name="frm-comment" action="" method="post" class="frm-post-comment" id="frm-post{{ this._id }}">'													
 		post += '<textarea placeholder="Post your comment" class="inputComment" name="comment"></textarea>'														
-		post += '<input type="hidden" name="post_id" value="{{ this._id }}" />'													
+		post += '<input type="hidden" name="post_id" value="'+ data._id + '" />'													
 		post += '</form>'														
 		post += '</div>'											
 		post += '</li>'														
@@ -491,6 +491,7 @@ $(document).ready(function() {
         var keyCode = e.keyCode || e.which;
 
         if (keyCode === 13) { 
+            console.log(1);
             
             var comment = _this.find('textarea[name=comment]').val() || '';
             var post_id = _this.find('input[name=post_id]').val();
@@ -527,10 +528,8 @@ $(document).ready(function() {
                 comment += 	showComment(data.comment, status_edit_del);			
                 comment += '</li>'		
 
-                $( ".we-comet" ).prepend( comment );	
+                $('#post-item'+post_id).find( ".we-comet" ).prepend( comment );	
 
-                            
-                
             }
             });
 
