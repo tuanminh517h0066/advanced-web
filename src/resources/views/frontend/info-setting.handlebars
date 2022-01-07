@@ -34,9 +34,9 @@
 										
 										<div class="your-page">
 											{{#if member.avatar }}
-											<img src="/uploads/{{ member.avatar }}" alt="" style="width: 50%; border-radius: 20px">
+											<img src="/uploads/{{ member.avatar }}" alt="" height="150px" width="150px">
 											{{else}}
-											<img src="/frontend/images/user-avatar.png" alt="" style="width: 50%; border-radius: 20px">
+											<img src="/frontend/images/user-avatar.png" alt="" height="150px" width="150px">
 											{{/if}}
 											<br>
 										</div>
@@ -44,7 +44,7 @@
 										<ul class="naves">
 											
 											<li>
-												<i class="ti-mouse-alt"></i>
+												<i class="fa fa-home"></i>
 												<a href="/member/home" title="">Home</a>
 											</li>
 											{{#if ../member.password}}
@@ -85,7 +85,7 @@
 													<input type="text" class="form-control" name="class" value="{{ ../member.class }}">
 												</div>
 												<div class="form-group col-md-6">
-													<label for="department">Facility</label>
+													<label for="department">Faculty </label>
 													<select class="form-control" name="facility">
 														{{#each ../facilites}}
 															<option value="{{ this._id }}" {{#if_eq ../../member.facility this._id }} selected {{/if_eq}} >{{ this.name }}</option>
@@ -108,19 +108,20 @@
 											</div>
 											
 											<div class="form-row">
-												<div class="form-group col-md-6">
-													{{#if member.avatar }}
-													<img src="/uploads/{{ member.avatar }}" class="image-person" alt="" style="width: 50%; border-radius: 20px">
-													{{else}}
-													<img src="/frontend/images/user-avatar.png" class="image-person" alt="" style="width: 50%; border-radius: 20px">
-													{{/if}}
-												</div>
+												
 												<div class="form-group col-md-6">
 													<span>Avatar</span>
 													<div class="custom-file">
 														<input type="file" class="custom-file-input" id="image-personal" name="image">
 														<label class="custom-file-label"  for="customFile">Choose file</label>
 													</div>
+												</div>
+												<div class="form-group col-md-6 d-flex justify-content-center">
+													{{#if member.avatar }}
+													<img src="/uploads/{{ member.avatar }}" class="image-person" alt="" style="width: 50%; border-radius: 20px">
+													{{else}}
+													<img src="/frontend/images/user-avatar.png" class="image-person" alt="" style="width: 50%; border-radius: 20px">
+													{{/if}}
 												</div>
 											</div>
 
