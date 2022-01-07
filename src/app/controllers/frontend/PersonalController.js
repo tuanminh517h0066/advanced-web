@@ -18,9 +18,11 @@ class PersonalController {
         var current_member = req.user;
         res.render('frontend/change-password',{
             errors: req.session.errors,
+            success: req.session.success,
             member: mongooseToObject(current_member)
         });
         req.session.errors = null;
+        req.session.success = null;
     }
 
     async postPass(req, res, next) {
@@ -28,7 +30,7 @@ class PersonalController {
         if (errors != '') {
             // console.log(errors);
             req.session.errors = errors;
-            req.session.success = false;
+            
             res.redirect('back')
         // return res.status(400).json({ errors: errors.array() });
         } else {
@@ -45,7 +47,7 @@ class PersonalController {
                         current_user.password = current_user.encryptPassword(confirmpass);
                         current_user.save();
                         
-    
+                        req.session.success = [{ msg: 'update password successfully' }]
                         res.redirect('back');
                     }else {
                         req.session.errors = [{ msg: 'must be same password' }]
@@ -75,10 +77,13 @@ class PersonalController {
         // console.log(current_account);
 
         res.render('frontend/info-setting',{
+            success: req.session.success,
             member: mongooseToObject(current_account),
             departments: mutipleMongooseToObject(departments),
             facilites: mutipleMongooseToObject(facilites),
         });
+
+        req.session.success = null;
     }
 
     async postSetting(req, res, next) {
@@ -112,6 +117,8 @@ class PersonalController {
             
             
         });
+
+        req.session.success = [{ msg: 'update profile successfully' }]
 
         res.redirect('back');
     }
