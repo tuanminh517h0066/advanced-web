@@ -39,17 +39,14 @@ router.post('/change-password/post',
 userMiddleware.isMember, 
 body('currentpw').not().isEmpty().withMessage('must fill current password'),
 body('newpw').not().isEmpty().withMessage('must fill new password'), 
-body('confirmpw').not().isEmpty().withMessage('must fill confirm password').custom((value, {req, loc, path}) => {
-    var newpw = req.body.newpw;
-    var confirmpw = req.body.confirmpw;
-    if(newpw !== confirmpw) {
-      return Promise.reject('Password must is the same');
-    }
-}), 
+body('confirmpw').not().isEmpty().withMessage('must fill confirm password'), 
 PersonalController.postPass);
 
 router.get('/info-setting', userMiddleware.isMember, PersonalController.infoSetting);
-router.post('/info-setting/post', userMiddleware.isMember, upload.single('image'), PersonalController.postSetting);
+router.post('/info-setting/post', userMiddleware.isMember, upload.single('image'), 
+body('currentpw').not().isEmpty().withMessage('must fill current password'),
+body('newpw').not().isEmpty().withMessage('must fill new password'),
+PersonalController.postSetting);
 
 router.get('/profile/:member_id', userMiddleware.isMember,PersonalController.ProfileIndex);
 

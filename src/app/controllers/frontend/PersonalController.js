@@ -26,6 +26,7 @@ class PersonalController {
     async postPass(req, res, next) {
         const errors = validationResult(req).array();
         if (errors != '') {
+            // console.log(errors);
             req.session.errors = errors;
             req.session.success = false;
             res.redirect('back')
@@ -46,10 +47,14 @@ class PersonalController {
                         
     
                         res.redirect('back');
+                    }else {
+                        req.session.errors = [{ msg: 'must be same password' }]
+                        res.redirect('back');
                     }
                 } else
                 {
-                    console.log('wrong password');
+                    req.session.errors = [{ msg: 'wrong password' }]
+                    res.redirect('back');
                 }
             } catch (err) {
                 next(err);
