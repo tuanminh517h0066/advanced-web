@@ -48,11 +48,14 @@
 								</div>
 								<div class="widget"></div>
 								<ul class="naves">
-
+									<li>
+										<i class="fa fa-home"></i>
+										<a href="/member/home" title="">home</a>
+									</li>
                                     {{#if_eq current_member._id member._id }}
                                     {{#if ../member.password}}
 									<li>
-										<i class="ti-clipboard"></i>
+										<i class="fas fa-lock"></i>
 										<a href="/member/change-password" >Change password</a>
 									</li>
                                     {{/if}}
@@ -60,14 +63,11 @@
 
                                     {{#if_eq current_member._id member._id }}
                                     <li>
-										<i class="ti-clipboard"></i>
+										<i class="fas fa-cogs"></i>
 										<a href="/member/info-setting">Info setting</a>
 									</li>
                                     {{/if_eq }}
-                                    <li>
-										<i class="fa fa-home"></i>
-										<a href="/member/home" title="">home</a>
-									</li>
+                                    
 								</ul>
 							</div>
 							<!-- Shortcuts -->

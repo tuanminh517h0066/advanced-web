@@ -53,9 +53,9 @@
 								<div class="central-meta">
 									<div class="forum-form">
 										<h5 class="f-title"><i class="ti-info-alt"></i> Create new notification</h5>
-										<form method="post" action="/member/departments/notification/post">
+										<form method="post" action="/member/departments/notification/post" id="createNotification">
 											<div class="form-group">	
-												<input type="text" id="input" name="noti_title" value="{{ noti_item.title }}"/>
+												<input type="text" id="noti_title" name="noti_title" value="{{ noti_item.title }}"/>
 												<label class="control-label" for="input">Notification Tittle</label><i class="mtrl-select"></i>
 											</div>		
 
@@ -73,8 +73,7 @@
 											<div class="submit-btns">
 												<input type="hidden" name="notification_id" value="{{ noti_item._id }}">
 												<input type="hidden" name="department_id" value="{{ department_item._id }}">
-												<button type="button" class="mtr-btn"><span>Cancel</span></button>
-												<button type="submit" class="mtr-btn"><span>Save</span></button>
+												<button type="button" class="mtr-btn" onclick="sendNotification()"><span>Save</span></button>
 											</div>
 										</form>
 									</div>
@@ -88,6 +87,9 @@
 	</section>	
 	
 	{{!-- <script src="/frontend/js/main.min.js"></script> --}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	
 	<script>
 		$(document).ready(function() {
 			$('#summernote').summernote({
@@ -122,6 +124,22 @@
 				}
 			});
 		}
+
+		const socket = io();
+
+		function sendNotification() {
+			var noti_title = $("#noti_title").val()
+			var widget_title = $(".widget-title").text()
+			var flexCheckDefault = $('#flexCheckDefault').is(":checked") ? 1: 0;
+			
+			socket.emit("sendNotification", {
+				"noti_title" : noti_title,
+				"widget_title" : widget_title,
+				"flexCheckDefault": flexCheckDefault
+			});
+			console.log("send from client")
+			$("#createNotification").submit()				
+		}
   	</script>
-	{{!-- <script src="/frontend/js/main.js"></script>  --}}
+	{{!-- <script src="/frontend/js/main.js"></scrip>  --}}
 	{{!-- <script src="/frontend/js/map-init.js"></script> --}}

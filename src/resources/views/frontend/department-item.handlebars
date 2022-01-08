@@ -46,9 +46,13 @@
 											{{/if_eq}}
 											{{/each}}
 
-											<li>
-												<i class="ti-bell"></i>
+											{{!-- <li>
+												<i class="fas fa-bell"></i>
 												<a href="/member/departments/{{ department_item._id }}" title="">Notifications</a>
+											</li> --}}
+											<li>
+												<i class="fas fa-list-ul"></i>
+												<a href="/member/departments/list" title="">Department List</a>
 											</li>
 
 										</ul>
@@ -67,7 +71,7 @@
 											<p>
 												{{#if this.status}}
 												
-												<strong style="color: red;"><i class="fas fa-exclamation"></i> </strong> 
+												<strong style="color: rgb(255, 29, 29);">[IMPORTANT] </strong> 
 												{{/if}}
 												<span style="font-size: 18px; font-weight:bold">{{ this.title }}</span>
 											</p>

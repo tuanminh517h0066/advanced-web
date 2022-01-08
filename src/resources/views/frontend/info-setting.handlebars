@@ -30,7 +30,7 @@
 							<div class="col-lg-3">
 								<aside class="sidebar static">
 									<div class="widget">
-										<h4 class="widget-title">Your page</h4>	
+										<h4 class="widget-title">Profile</h4>	
 										
 										<div class="your-page">
 											{{#if member.avatar }}
@@ -39,26 +39,35 @@
 											<img src="/frontend/images/user-avatar.png" alt="" height="150px" width="150px">
 											{{/if}}
 											<br>
+											<div class="page-meta">
+												<a href="#" title="" class="underline">
+													{{#if member  }}
+														{{ member.username }}
+													{{/if}}
+												</a>
+											</div>
+											<input type="hidden" id="profile_member_id" value="{{ member._id }}">
 										</div>
 										<div class="widget"></div>
 										<ul class="naves">
-											
 											<li>
 												<i class="fa fa-home"></i>
-												<a href="/member/home" title="">Home</a>
+												<a href="/member/home" title="">home</a>
 											</li>
-											{{#if ../member.password}}
 											<li>
-												<i class="ti-lock"></i>
-												<a href="/member/change-password" title="">change password</a>
+												<i class="fas fa-clipboard"></i>
+												<a href="/member/profile/{{ member._id }}">My page</a>
+											</li>
+											{{#if member.password}}
+											<li>
+												<i class="fas fa-lock"></i>
+												<a href="/member/change-password" >Change password</a>
 											</li>
 											{{/if}}
 											
 										</ul>
 									</div>
 									<!-- Shortcuts -->
-									
-									
 								</aside>
 							</div><!-- sidebar -->
 							<div class="col-lg-9" style="padding-right: 60px;">
@@ -94,17 +103,6 @@
 												</div>
 												{{/if_eq }}
 
-												{{#if_eq member.role 1}}
-												<div class="form-group col-md-6">
-													<label for="phonenumber">Department</label>
-													
-													<select class="form-control js-example-basic-multiple" name="departments[]" multiple="multiple">
-														{{#each ../departments}}
-															<option value="{{ this._id }}" {{ checked_option ../../member.departments this._id}} >{{ this.name }}</option>
-														{{/each}}
-													</select>
-												</div>
-												{{/if_eq }}
 											</div>
 											
 											<div class="form-row">
@@ -126,7 +124,6 @@
 											</div>
 
 											<div class="submit-btns">
-												<button type="button" class="mtr-btn"><span>Cancel</span></button>
 												<button type="submit" class="mtr-btn"><span>Update</span></button>
 											</div>
 										</form>

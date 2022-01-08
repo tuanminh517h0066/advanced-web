@@ -8,11 +8,16 @@ const db    = require('./config/db');
 const passport = require('passport');
 const flash = require('connect-flash');
 
+const { disconnect } = require('process');
 //connect DB
 db.connect();
 
+// const cors = require('cors');
+const socket = require("socket.io");
+
 const app   = express();
 const port  = 3000;
+
 
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }))
@@ -156,8 +161,23 @@ route(app);
 
 
 
-app.listen(port, () => console.log(
+const server = app.listen(port, () => console.log(
     
     'Express started on http://localhost:${port}; ' +
     
-    'press Ctrl-C to terminate. ')) 
+    'press Ctrl-C to terminate. '))
+  
+// app.use(cors())
+const io = socket(server);
+io.on("connection", function (socket){
+    console.log("Made socket connection");
+    
+    socket.on("disconnect", function(){
+        console.log("Made socket disconnected");
+    })
+
+    socket.on("sendNotification", function(data){
+        io.emit("newNotification", data);
+        console.log("sent from server");
+    })
+});
