@@ -69,10 +69,10 @@ passport.use('local.login',new LocalStrategy({
 
 //google auth sign in
 passport.use(new GoogleStrategy({
-  clientID:     '1030080015854-snr9og0v8cpjvc25ab5ngtapm9p3jgag.apps.googleusercontent.com',
-  clientSecret: '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',
-  callbackURL: "http://localhost:3000/member/auth/google/callback",
-  passReqToCallback   : true
+    clientID:     '26655799551-09apjiro3k6iv40op1uefa3lv4abhshc.apps.googleusercontent.com',
+    clientSecret: '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',
+    callbackURL: "https://tdtu-socialnetworking.herokuapp.com/member/auth/google/callback",
+    passReqToCallback   : true
 },
 function(request, accessToken, refreshToken, profile, done) {
 
