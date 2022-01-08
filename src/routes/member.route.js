@@ -32,61 +32,64 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 
-router.get('/home',userMiddleware.isMember, HomeController.home );
+router.get('/member/home',userMiddleware.isMember, HomeController.home );
 
-router.get('/change-password',userMiddleware.isMember, PersonalController.Password);
-router.post('/change-password/post', 
+router.get('/member/change-password',userMiddleware.isMember, PersonalController.Password);
+router.post('/member/change-password/post', 
 userMiddleware.isMember, 
 body('currentpw').not().isEmpty().withMessage('must fill current password'),
 body('newpw').not().isEmpty().withMessage('must fill new password'), 
 body('confirmpw').not().isEmpty().withMessage('must fill confirm password'), 
 PersonalController.postPass);
 
-router.get('/info-setting', userMiddleware.isMember, PersonalController.infoSetting);
-router.post('/info-setting/post', userMiddleware.isMember, upload.single('image'), 
+router.get('/member/info-setting', userMiddleware.isMember, PersonalController.infoSetting);
+router.post('/member/info-setting/post', userMiddleware.isMember, upload.single('image'), 
 body('currentpw').not().isEmpty().withMessage('must fill current password'),
 body('newpw').not().isEmpty().withMessage('must fill new password'),
 PersonalController.postSetting);
 
-router.get('/profile/:member_id', userMiddleware.isMember,PersonalController.ProfileIndex);
+router.get('/member/profile/:member_id', userMiddleware.isMember,PersonalController.ProfileIndex);
 
-router.use('/departments', departmentRouter);
+router.use('/member/departments', departmentRouter);
 
 
 
 // local login
-router.get('/login',userMiddleware.checkAuthenticated, function(req, res, next) {
+router.get('/login',userMiddleware.checkNotAuthenticated, function(req, res, next) {
     // Hiển thị trang và truyển lại những tin nhắn từ phía server nếu có
     var messages = req.flash('error')
     // console.log(messages);
     res.render('auth/login',{ 
       messages: messages,
       hasErrors: messages.length > 0,
+      layout: 'login_layout'
      })
 });
 
-router.post('/login',userMiddleware.checkNotAuthenticated,
+router.post('/member/login',userMiddleware.checkNotAuthenticated,
   passport.authenticate('local.login', { successRedirect: '/member/home',
-                                  failureRedirect: '/member/login',
+                                  failureRedirect: '/login',
                                   failureFlash: true })
 );
 
 // google oauth login
-router.get('/auth/google', userMiddleware.checkNotAuthenticated ,
+router.get('/member/auth/google', userMiddleware.checkNotAuthenticated ,
   passport.authenticate('google', { scope:
       [ 'email', 'profile' ] }
 )); 
 
-router.get( '/auth/google/callback', userMiddleware.checkNotAuthenticated,
+router.get( '/member/auth/google/callback', userMiddleware.checkNotAuthenticated,
     passport.authenticate( 'google', {
         successRedirect: '/member/home',
-        failureRedirect: '/member/login',
+        failureRedirect: '/login',
         failureFlash: true
 }));
 
-router.get('/logout', function(req, res){
+router.get('/member/logout', function(req, res){
   req.logout();
-  res.redirect('/member/login');
+  res.redirect('/login');
 });
+
+router.get('/',userMiddleware.isMember, HomeController.home );
 
 module.exports = router;

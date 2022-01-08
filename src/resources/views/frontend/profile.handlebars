@@ -8,13 +8,13 @@
 		<div class="top-area">
 			<div class="user-img">
 				{{!-- <img class="dropdown-toggle" data-toggle="dropdown" src="/frontend/images/resources/admin.jpg" alt=""> --}}
-				{{#if member.avatar }}
-				<img src="/uploads/{{ member.avatar }}" class="dropdown-toggle" data-toggle="dropdown" alt="" height="60px" width="60px">
+				{{#if current_member.avatar }}
+				<img src="/uploads/{{ current_member.avatar }}" class="dropdown-toggle" data-toggle="dropdown" alt="" height="60px" width="60px">
 				{{else}}
 				<img src="/frontend/images/user-avatar.png" class="dropdown-toggle" data-toggle="dropdown" alt="" height="60px" width="60px">
 				{{/if}}
 				<div class="dropdown-menu">  
-					<a class="dropdown-item" href="/member/profile/{{ member._id }}"> <i class="fa fa-home"></i> My page</a>
+					<a class="dropdown-item" href="/member/profile/{{ current_member._id }}"> <i class="fa fa-home"></i> My page</a>
 					<a class="dropdown-item" href="/member/logout"> <i class="ti-power-off"></i> Logout</a>
 				</div>  
 			</div>
@@ -359,7 +359,7 @@
 										<h4 class="widget-title">Recent Notifications</h4>
 									</div>
 									<div class="col-sm-5" style="padding: 15px 30px 0px; color: #088dcd">
-										<a href="#" title="" class="underline">View all</a>
+										<a href="/member/departments/notifications/list/" title="" class="underline">View all</a>
 									</div>
 								</div>
 								<ul class="activitiez">
@@ -383,4 +383,4 @@
 </div>	
 	
 	<script src="/frontend/js/main.min.js"></script>
-	<script src="/frontend/js/main.js"></script> 
+	{{!-- <script src="/frontend/js/main.js"></script>  --}}

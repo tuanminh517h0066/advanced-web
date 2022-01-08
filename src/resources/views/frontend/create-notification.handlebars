@@ -74,7 +74,7 @@
 												<input type="hidden" name="notification_id" value="{{ noti_item._id }}">
 												<input type="hidden" name="department_id" value="{{ department_item._id }}">
 												<button type="button" class="mtr-btn"><span>Cancel</span></button>
-												<button type="button" class="mtr-btn" onclick="sendNotification()"><span>Save</span></button>
+												<button type="button" id="save_create_noti" class="mtr-btn"><span>Save</span></button>
 											</div>
 										</form>
 									</div>
@@ -88,6 +88,7 @@
 	</section>	
 	
 	{{!-- <script src="/frontend/js/main.min.js"></script> --}}
+	{{!-- <script src="/frontend/js/main.js"></script> --}}
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 	
@@ -125,22 +126,6 @@
 				}
 			});
 		}
-
-		const socket = io();
-
-		function sendNotification() {
-			var noti_title = $("#noti_title").val()
-			var widget_title = $(".widget-title").text()
-			var flexCheckDefault = $('#flexCheckDefault').is(":checked") ? 1: 0;
-			
-			socket.emit("sendNotification", {
-				"noti_title" : noti_title,
-				"widget_title" : widget_title,
-				"flexCheckDefault": flexCheckDefault
-			});
-			console.log("send from client")
-			$("#createNotification").submit()				
-		}
   	</script>
-	{{!-- <script src="/frontend/js/main.js"></scrip>  --}}
+	{{!-- <script src="/frontend/js/main.js"></script>  --}}
 	{{!-- <script src="/frontend/js/map-init.js"></script> --}}

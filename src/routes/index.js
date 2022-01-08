@@ -12,7 +12,7 @@ function route(app) {
 
     // app.use('/login', authRouter);
 
-    app.use('/member', memberRouter);
+    app.use('/', memberRouter);
 
 
     app.use('/post', postRouter);

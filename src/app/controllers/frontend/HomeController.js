@@ -20,7 +20,7 @@ class HomeController {
             populate: {path: "user"},
             options: { sort: { createdAt: -1 } },
         })
-        .sort('-updatedAt').limit(5);
+        .sort('-updatedAt').limit(10);
 
         const member = req.user;
 

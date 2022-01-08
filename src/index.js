@@ -159,7 +159,30 @@ route(app);
 // app.use('/', indexRouter);
 // app.use('/', )
 
+// custom 404 page
 
+app.use((req, res) => {
+
+    res.status(404)
+
+    res.render('error/404',{
+        layout: '404_layout'
+    });
+
+})
+
+// custom 500 page
+
+app.use((err, req, res, next) => {
+
+console.error(err.message)
+
+    res.status(500)
+
+    res.render('error/500',{
+        layout: '500_layout'
+    });
+})
 
 const server = app.listen(port, () => console.log(
     

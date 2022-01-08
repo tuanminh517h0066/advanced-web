@@ -9,7 +9,7 @@ class UserMiddleware {
         }
             
         
-        res.redirect('/admin/login');
+        res.redirect('/login');
     }
 
 
@@ -24,7 +24,7 @@ class UserMiddleware {
             // }
         }
 
-        res.redirect('/admin/login');
+        res.redirect('/login');
     }
 
     isMember (req, res, next) {
@@ -37,7 +37,7 @@ class UserMiddleware {
             //     // return next();
             // }
         }
-        res.redirect('/admin/login');
+        res.redirect('/login');
     }
 
     checkNotAuthenticated (req, res, next) {

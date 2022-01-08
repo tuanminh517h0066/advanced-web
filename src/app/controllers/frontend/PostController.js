@@ -136,7 +136,7 @@ class PostController {
                 options: { sort: { createdAt: -1 } },
             })
             .skip(startForm).sort('-updatedAt')
-            .limit(2)
+            .limit(10)
             .exec();
             res.json({current_account: current_account, posts});
         } else {
@@ -152,7 +152,7 @@ class PostController {
                 options: { sort: { createdAt: -1 } },
             })
             .skip(startForm).sort('-updatedAt')
-            .limit(2)
+            .limit(10)
             .exec();
             res.json({current_account: current_account, posts});
         }
