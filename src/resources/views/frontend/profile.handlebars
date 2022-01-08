@@ -48,11 +48,14 @@
 								</div>
 								<div class="widget"></div>
 								<ul class="naves">
-
+									<li>
+										<i class="fa fa-home"></i>
+										<a href="/member/home" title="">home</a>
+									</li>
                                     {{#if_eq current_member._id member._id }}
                                     {{#if ../member.password}}
 									<li>
-										<i class="ti-clipboard"></i>
+										<i class="fas fa-lock"></i>
 										<a href="/member/change-password" >Change password</a>
 									</li>
                                     {{/if}}
@@ -60,14 +63,11 @@
 
                                     {{#if_eq current_member._id member._id }}
                                     <li>
-										<i class="ti-clipboard"></i>
+										<i class="fas fa-cogs"></i>
 										<a href="/member/info-setting">Info setting</a>
 									</li>
                                     {{/if_eq }}
-                                    <li>
-										<i class="fa fa-home"></i>
-										<a href="/member/home" title="">home</a>
-									</li>
+                                    
 								</ul>
 							</div>
 							<!-- Shortcuts -->
@@ -104,14 +104,14 @@
 									<div class="col-lg-2 mx-0">
 										<figure style="text-align: center; margin-bottom: 5px">
 											{{#if ../member.avatar }}
-											<img src="/uploads/{{ ../member.avatar }}" alt="" class="rounded-circle" height="60px" width="60px">
+											<img src="/uploads/{{ ../member.avatar }}" alt="" class="rounded-circle" height="45px" width="45px">
 											{{else}}
-											<img src="/frontend/images/user-avatar.png" alt="" class="rounded-circle" height="60px" width="60px">
+											<img src="/frontend/images/user-avatar.png" alt="" class="rounded-circle" height="45px" width="45px">
 											{{/if}}
 										</figure>
 									</div>
 									<div class="col-lg-10 mx-0">
-										<div class="row mt-2" id="row-status" >
+										<div class="row" id="row-status" >
 											<button type="button" class="btn btn-secondary btn-block create_post" id="status-block">Hi, what are you thinking today?</button>
 										</div>
 										
@@ -151,9 +151,9 @@
 											<div class="friend-info">
 												<figure>
 													{{#if member.avatar }}
-													<img src="/uploads/{{ member.avatar }}" alt="" >
+													<img src="/uploads/{{ member.avatar }}" alt="" height="35px" width="35px">
 													{{else}}
-													<img src="/frontend/images/user-avatar.png" alt="">
+													<img src="/frontend/images/user-avatar.png" alt="" height="35px" width="35px">
 													{{/if}}
 												</figure>
 												<div class="friend-name">
@@ -252,9 +252,9 @@
 										
 										<figure>
 											{{#if this.user.avatar }}
-											<img src="/uploads/{{ this.user.avatar }}" alt="" height="50px" width="50px">
+											<img src="/uploads/{{ this.user.avatar }}" alt="" height="45px" width="45px">
 											{{else}}
-											<img src="/frontend/images/user-avatar.png" alt="" height="50px" width="50px">
+											<img src="/frontend/images/user-avatar.png" alt="" height="45px" width="45px">
 											{{/if}}
 										</figure>
 										<div class="friend-name">

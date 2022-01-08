@@ -51,19 +51,20 @@
 										<div class="widget"></div>
 										<ul class="naves">
 											<li>
-												<i class="ti-clipboard"></i>
+												<i class="fa fa-home"></i>
+												<a href="/member/home" title="">home</a>
+											</li>
+											<li>
+												<i class="fas fa-clipboard"></i>
 												<a href="/member/profile/{{ member._id }}">My page</a>
 											</li>
 											{{#if member.password}}
 											<li>
-												<i class="ti-clipboard"></i>
+												<i class="fas fa-lock"></i>
 												<a href="/member/change-password" >Change password</a>
 											</li>
 											{{/if}}
-											<li>
-												<i class="fa fa-home"></i>
-												<a href="/member/home" title="">home</a>
-											</li>
+											
 										</ul>
 									</div>
 									<!-- Shortcuts -->
@@ -98,7 +99,7 @@
 													<input type="text" class="form-control" name="class" value="{{ ../member.class }}">
 												</div>
 												<div class="form-group col-md-6">
-													<label for="department">Facility</label>
+													<label for="department">Faculty </label>
 													<select class="form-control" name="facility">
 														{{#each ../facilites}}
 															<option value="{{ this._id }}" {{#if_eq ../../member.facility this._id }} selected {{/if_eq}} >{{ this.name }}</option>
@@ -110,13 +111,7 @@
 											</div>
 											
 											<div class="form-row">
-												<div class="form-group col-md-6">
-													{{#if member.avatar }}
-													<img src="/uploads/{{ member.avatar }}" class="image-person" alt="" style="width: 50%; border-radius: 20px">
-													{{else}}
-													<img src="/frontend/images/user-avatar.png" class="image-person" alt="" style="width: 50%; border-radius: 20px">
-													{{/if}}
-												</div>
+												
 												<div class="form-group col-md-6">
 													<span>Avatar</span>
 													<div class="custom-file">
@@ -124,10 +119,16 @@
 														<label class="custom-file-label"  for="customFile">Choose file</label>
 													</div>
 												</div>
+												<div class="form-group col-md-6 d-flex justify-content-center">
+													{{#if member.avatar }}
+													<img src="/uploads/{{ member.avatar }}" class="image-person" alt="" style="width: 50%; border-radius: 20px">
+													{{else}}
+													<img src="/frontend/images/user-avatar.png" class="image-person" alt="" style="width: 50%; border-radius: 20px">
+													{{/if}}
+												</div>
 											</div>
 
 											<div class="submit-btns">
-												<button type="button" class="mtr-btn"><span>Cancel</span></button>
 												<button type="submit" class="mtr-btn"><span>Update</span></button>
 											</div>
 										</form>

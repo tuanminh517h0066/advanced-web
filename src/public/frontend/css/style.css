@@ -2564,6 +2564,10 @@ footer .logo {
   width: 40px;
 }
 
+ul li i {
+  width: 25px;
+}
+
 .cntct-adres .social-media > li {
   margin-right: 10px;
   padding-bottom: 0;
