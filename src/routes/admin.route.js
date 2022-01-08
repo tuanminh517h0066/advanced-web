@@ -59,25 +59,25 @@ memberController.postDepartmentMember);
 
 router.post('/member/delete',userMiddleware.isAdmin, memberController.deleteMember);
 
-router.get('/login',userMiddleware.checkNotAuthenticated, function(req, res, next) {
-    // Hiển thị trang và truyển lại những tin nhắn từ phía server nếu có
-    var messages = req.flash('error')
-    // console.log(messages);
-    res.render('auth/login',{ 
-      messages: messages,
-      hasErrors: messages.length > 0,
-     })
-});
+// router.get('/login',userMiddleware.checkNotAuthenticated, function(req, res, next) {
+//     // Hiển thị trang và truyển lại những tin nhắn từ phía server nếu có
+//     var messages = req.flash('error')
+//     // console.log(messages);
+//     res.render('auth/login',{ 
+//       messages: messages,
+//       hasErrors: messages.length > 0,
+//      })
+// });
 
-router.post('/login',userMiddleware.checkNotAuthenticated,
-  passport.authenticate('local.login', { successRedirect: '/admin/index',
-                                  failureRedirect: '/admin/login',
-                                  failureFlash: true })
-);
+// router.post('/login',userMiddleware.checkNotAuthenticated,
+//   passport.authenticate('local.login', { successRedirect: '/admin/index',
+//                                   failureRedirect: '/admin/login',
+//                                   failureFlash: true })
+// );
 
 router.get('/logout', function(req, res){
   req.logout();
-  res.redirect('/admin/login');
+  res.redirect('/login');
 });
 
 

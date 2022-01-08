@@ -1,0 +1,719 @@
+$(document).ready(function() {
+
+    //------------------ JS for Posts --------------------
+
+    $('#post_content').on('keyup input', function(){
+        var content = $(this).val();
+        
+        if( content.trim() == '') {
+            $('#bt-post').attr('disabled', 'disabled');     
+            return;
+        }
+        
+        $('#bt-post').removeAttr('disabled'); 
+        return; 
+    });
+
+    function readURL(input, element) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader()
+            reader.onload = function (e) {
+                $('#option').html('<img src="'+ e.target.result + '">');
+                $('#bt-post').removeAttr('disabled'); 
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function getYoutubeId(youtube)  {
+        var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+        return (youtube.match(p)) ? RegExp.$1 : false;
+    }
+
+    function formatDate(dates) {
+        var date = new Date(dates);
+        var dateStr =
+        ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
+        ("00" + date.getDate()).slice(-2) + "/" +
+        date.getFullYear() + " " +
+        ("00" + date.getHours()).slice(-2) + ":" +
+        ("00" + date.getMinutes()).slice(-2) + ":" +
+        ("00" + date.getSeconds()).slice(-2);
+        return dateStr
+    }
+
+    $("#upload-image").change(function() {
+        
+        readURL(this, $(this))
+
+        $('#upload-video').val('');
+    });
+
+    $(document).on('click', '.video-btn', function() {
+        $('#option').html('<input type="text" id="upload-video" name="video" placeholder=" please input link of youtube video" >');
+        $('#upload-image').val('');
+        var content = $('#post_content').val();
+
+        if( content.trim() == '') {
+            $('#bt-post').attr('disabled', 'disabled');     
+            return;
+        }
+    });
+
+    $('#upload-video').on('keyup input', function(){
+        
+        // console.log('1')
+        $('#bt-post').removeAttr('disabled');
+    });
+
+
+
+    $(document).on('click', '.create_post', function() {
+        // console.log(1)
+        $('#postModal').find('#title_content').val('');
+        $('#postModal').find('#post_content').val('');
+        $('#postModal').find('#post_id').val('');
+        $('#postModal').find('#upload-video').val('');
+        $('#postModal').find('#upload-image').val('');
+        $('#postModal').find('#video').val('');
+        $('#postModal').find('#option').html('');
+        $('#postModal').find('#title-post').text('Create post');
+        $('#postModal').modal('show');
+
+
+    });
+
+    $(document).on('click', '.edit_post', function() {  
+        var id = $(this).data('id');
+        $('#postModal').modal('show');
+        // console.log(id);
+        $.ajax({
+            url: '/post/edit',
+            data: {
+                id: id,
+            },
+            type: 'post',
+            success: function(data) {
+                // console.log(data);
+                if(data._id) {
+                    // console.log(data.content);
+                    $('#postModal').find('#title_content').val(data.title);
+                    $('#postModal').find('#post_content').val(data.content);
+                    
+                    $('#postModal').find('#post_id').val(data._id);
+                    $('#postModal').find('#title-post').text('Edit post');
+                    // $('#postModal').find('#department_id').val(data.department._id);
+                    if(data.image) {
+                        $('#option').html('<img src="/uploads/' + data.image + '">');
+                    }
+                    else if(data.video){
+                        
+                        $('#option').html('<input type="text" id="upload-video" name="video" value="'+ data.video +'" placeholder="please input link of youtube video" >');
+                    }
+                    
+                    $('#postModal').modal('show');
+                    
+                }
+            }
+        }); 
+    });
+
+    $("#postForm").submit(function (e) {
+        e.preventDefault();
+        // console.log(this);
+        var formData = new FormData(this);
+        
+
+        $.ajax({
+            type: "POST",
+            url: "/post/new",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(data){
+                if(data.success == true) {
+                    var status_edit_del = 1;
+                    if(data.type == 'update') {
+                        // console.log(data.post);
+                        var post = postForm(data.post,status_edit_del, data.current_account);
+
+                        $('#postModal').modal('hide');
+
+                        $( '#post-item' + data.post._id + '' ).html(post);
+
+                    } else {
+                        // console.log(data.post);
+
+                            var post = '<div class="central-meta item" id="post-item' + data.post._id + '">'
+                             post += postForm(data.post,status_edit_del);
+                            post += '</div>'
+                            $('#postModal').modal('hide');
+                            $( ".loadMore" ).prepend( post );
+                            var post_length = $(".loadMore > .central-meta").length
+                            // console.log(post_length);
+                            // {{!-- if(post_length > 5) {
+                            //     $('.loadMore').children().last().remove();
+                            // } --}}
+                        
+                    }
+                }
+            },
+        });
+    });
+
+
+    var startFrom = 10;
+
+    //  $(document).on('click', '#btn-loadMore', function() {
+    //     console.log(startFrom);
+        
+    //     $.ajax({
+    //         type: "post",
+    //         url: "/post/loadmore",
+    //         data: {
+    //             start: startFrom,
+    //         },
+            
+    //         success: function(data) {
+    //             console.log(data);
+                
+                
+    //             var post ='';
+    //             data.forEach(function(element) {  
+    //                 post += '<div class="central-meta item" id="post-item' + element._id + '">'
+    //                 post += postForm(element);
+    //                 post += '</div>'
+                    
+    //             }); 
+    //             $( ".loadMore" ).append( post );
+    //             startFrom = startFrom+2;
+    //         }
+    //     });
+    // });
+
+
+
+    $(window).scroll(function() {
+        if($(window).scrollTop() == $(document).height() - $(window).height()) {
+            // var load = loadForm();
+            // $('#load').removeAttr('hidden');
+            var profile_member_id = '';
+            
+            if ($("#profile_member_id")[0]){
+                profile_member_id = $('#profile_member_id').val();
+                // console.log(profile_member_id);
+            } else {
+                // console.log('doesnt')
+            }
+            
+            // console.log('member_id_loadmore'+profile_member_id);
+            $.ajax({
+                type: "post",
+                url: "/post/loadmore",
+                data: {
+                    start: startFrom,
+                    profile_member_id: profile_member_id,
+                },
+                
+                success: function(data) {
+                    console.log(data.posts);
+                    // console.log(data.current_account);
+                    var load = loadForm();
+                    if(data.posts.length > 0) {
+                        if ($("#load")[0]){
+                            // Do something if class exists
+                        } else {
+                            
+                            $('.loadMore').append(load);
+                        }
+                    }
+                    // $('.loadMore').append(load);
+                    
+                    setTimeout(function (){
+                        console.log("check time out")
+                        // $('.loadingPost').hide();
+                        $('.loadMore').find('#load').remove();
+                        var status_edit_del = 0;
+                        var post ='';
+                        data.posts.forEach(function(element) {  
+    
+                            if(String(data.current_account) === String(element.user._id)) {
+                                status_edit_del = 1
+                            }
+    
+                            post += '<div class="central-meta item" id="post-item' + element._id + '">'
+                            post += postForm(element, status_edit_del, data.current_account);
+                            post += '</div>'
+                            
+                        }); 
+                        $( ".loadMore" ).append( post );
+                        
+                    }, 1000);
+                    
+                    startFrom = startFrom+10;
+                    
+                },
+            });
+        }
+    });
+
+    function loadForm() {
+        load = '<div class="central-meta item" id="load">';
+        // load  = '<div id="checkLoad">'
+        load += '<div class="header-post">'
+		load += '<div class="space-img"></div>'						
+		load += '<div class="space-friend-name">'							
+		load += '<div class="space-name"></div>'							
+		load += '<div class="space-span"></div>'								
+		load += '</div>'									
+		load += '</div>'							
+		load += '<div class="body-post">'						
+		load += '<div class="space"></div>'						
+		load += '<div class="space"></div>'														
+		load += '</div>'							
+		load += '</div>'
+        
+        return load;					
+
+    }
+
+    function postForm(data, status_edit_del, current_account) {
+        
+        var post = '<div class="user-post">'
+        post += '<div class="friend-info" style=" display: inline-block;">'
+            
+        if(status_edit_del == 1) {
+        post += '<div class="edit-menu dropleft">'
+        post += '<button type="button" id="btn-edit-menu" class="btn btn-light dropdown-toggle-" data-toggle="dropdown" aria-expanded="false">'									
+        post += '<i class="fas fa-ellipsis-h"></i>'									
+        post += '</button>'									
+        post += '<div class="dropdown-menu" aria-labelledby="btn-edit-menu" >'
+        post += '<a class="dropdown-item edit_post" href="javascript:void(0);" data-id="' + data._id + '">Edit</a>'								
+        post += '<a class="dropdown-item delete_post" href="javascript:void(0);" data-id="' + data._id + '">Delete</a>'
+        post += '</div>'			
+        post += '</div>'	
+        }					
+
+        if (data.user.avatar) {
+            post += '<figure><img src="/uploads/'+ data.user.avatar +'" alt="" height="45px" width="45px"></figure>'
+        }
+        else {
+            post += '<figure><img src="/frontend/images/user-avatar.png" alt="" height="45px" width="45px"></figure>'
+        }
+        
+        post += '<div class="friend-name">'
+        post += '<ins><a href="/member/profile/'+ data.user._id +'" title="">' + data.user.username + '</a></ins>'
+        post += '<span>published: ' +  formatDate(data.createdAt) + '</span>'
+        post += '</div>'
+        post += '<div class="description">'
+        post += '<p>' + data.content + '</p>'
+        post += '</div>'
+        post += '<div class="post-meta">'
+        if(data.image) {
+        post += '<img src="/uploads/' + data.image + '" height="315" alt="">'
+        }
+        
+        if(data.video) {
+        post += '<iframe src="https://www.youtube.com/embed/' + getYoutubeId(data.video) + '" height="315" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+        }
+
+        post += '<div class="we-video-info">'
+
+        var liked = '';
+        var data_like = '';
+        var style_liked = '';
+
+        data.likes.forEach(function (element){
+            // console.log('member_like'+element.user._id);
+            
+            
+            if (String(element.user._id) === String(current_account)) {
+                
+                liked = 'liked';
+                style_liked = 'style="font-weight: 900;"';
+                data_like = element._id;
+                
+            }
+        })	
+
+
+        post += '<div class="row" >'
+		post += '<div class="col-md-6">'											
+		post += '<button type="button" class="btn btn-light " id="icon-block">'												
+		post += '<span class="like" data-toggle="tooltip" title="like">'													
+		post += '<a href="javascript:void(0)" class="total_like bt-like like-post' + data._id + '" data-post-id="' + data._id + '" data-like-id="'+ data_like +'"><i class="far fa-thumbs-up like-post-icon' + data._id + ' '+ liked +'" '+style_liked+'> Like</i></a>'														
+		post += '<ins class="count-like' + data._id + '" >'+ data.likes.length +' Likes</ins>'														
+		post += '</span>'													
+		post += '</button>'												
+		post += '</div>'											
+		post += '<div class="col-md-6">'											
+		post += '<button type="button" class="btn btn-light " id="icon-block">'												
+		post += '<span class="comment" data-toggle="tooltip" title="Comments">'													
+		post += '<i class="far fa-comment"> Comments</i>'														
+		post += '<ins class="count-comment' + data._id + '">'+ data.comments.length +' Comment</ins>'														
+		post += '</span>'													
+		post += '</button>'												
+		post += '</div>'										
+		post += '</div>'			
+        
+        
+        post += '</div>'
+        post += '</div>'
+        post += '</div>'
+
+        post += '<div class="coment-area">'
+        post +=	'<ul class="we-comet">'
+            
+        // console.log(data.comments);
+        data.comments.forEach(function (element){
+
+            var status_edit_del = 0;
+            // console.log(element.user._id);
+            // console.log(current_account);
+
+            if (String(element.user._id) === String(current_account)) {
+                
+                var status_edit_del = 1;
+                // console.log(status_edit_del);
+                
+            }
+
+            post +=	'<li id="comment'+ element._id +'">'
+            post +=  showComment(element, status_edit_del);					
+            post += '</li>'			
+        })
+        
+        //post += '<li>'			
+        //post += '<a href="#" title="" class="showmore underline">more comments</a>'				
+        //post += '</li>'
+
+        //post comment
+        post += '<li class="post-comment">'
+		post += '<div class="comet-avatar">'		
+        if (data.user.avatar) {
+            post += '<img src="/uploads/'+ data.user.avatar +'" alt="" height="40px" width="40px">'
+        }
+        else {
+            post += '<img src="/frontend/images/user-avatar.png" alt="" height="40px" width="40px">'
+        }																			
+		post += '</div>'												
+		post += '<div class="post-comt-box">'												
+		post += '<form name="frm-comment" action="" method="post" class="frm-post-comment" id="frm-post{{ this._id }}">'													
+		post += '<textarea placeholder="Post your comment" class="inputComment" name="comment"></textarea>'														
+		post += '<input type="hidden" name="post_id" value="'+ data._id + '" />'													
+		post += '</form>'														
+		post += '</div>'											
+		post += '</li>'														
+        post += '</ul>'		
+        post +=	'</div>'
+        post += '</div>'
+        
+        return post
+    }
+
+    $(document).on('click', '.delete_post', function() {
+        var id = $(this).data('id');
+        $('#confirmDeletePost').find('.btn_delete_post').attr('data-id', id);
+        $('#confirmDeletePost').modal('show');
+    });
+
+    $(document).on('click', '.btn_delete_post', function() {
+        var id = $(this).attr('data-id');
+        $.ajax({
+            url: '/post/delete',
+            data: {
+                id: id,
+            },
+            type: 'post',
+            success: function(data) {
+                if(data._id) {
+                    $('#post-item' + data._id).remove();
+                    $('#confirmDeletePost').modal('hide');
+                }
+                
+            }
+        });
+    });
+
+    //------------------JS for Like Button ------------------------------
+    $(document).on('click', '.bt-like', function(e) {  
+        $_this = $(this);
+        var post_id = $(this).data('post-id');
+        // console.log(post_id);
+        var count_like = parseInt($('.count-like' + post_id).text());
+        var like_id = $(this).attr('data-like-id');
+        // console.log(like_id);
+
+        if(like_id) { //remove a like
+            $.ajax({
+                url:'/post/ajaxRemoveLike',
+                type:'POST',
+                data:{id:like_id},
+                success:function(data){
+                    if(data.success == true){
+                        count_like = count_like - 1;
+
+                        $('.count-like' + post_id).text(count_like + " Like");
+                        $('.like-post' + post_id).attr('data-like-id', '');
+                        // $('.like-post-icon' + post_id).attr('class', 'far fa-thumbs-up like-post-icon'+post_id);
+                        $('.like-post-icon' + post_id).attr('style', 'font-weight: none;');
+                        
+                        $('.like-post-icon' + post_id).removeClass('liked');
+                        
+                    }
+                }
+            });
+        } else { //add a like
+            $.ajax({
+                url:'/post/ajaxLike',
+                type:'POST',
+                data:{post_id: post_id},
+                success:function(data){
+
+                    // console.log(data.id);
+                    count_like = count_like + 1;
+
+                    $('.count-like' + post_id).text(count_like + " Like");
+                    $('.like-post' + post_id).attr('data-like-id', data.id);
+                    // $('.like-post-icon' + post_id).attr('class', 'fas fa-thumbs-up like-post-icon'+post_id);
+                    $('.like-post-icon' + post_id).attr('style', 'font-weight: 900;');
+                    $('.like-post-icon' + post_id).addClass('liked');
+                    
+                }
+            }); 
+        }
+    });
+
+    //------------------JS for Comment area ------------------------------
+
+    $(document).on('keypress', '.frm-post-comment', function(e) {
+        if(e.shiftKey) return;
+
+        var _this = $(this);
+        var keyCode = e.keyCode || e.which;
+
+        if (keyCode === 13) { 
+            // console.log(1);
+            
+            var comment = _this.find('textarea[name=comment]').val() || '';
+            var post_id = _this.find('input[name=post_id]').val();
+            
+
+            
+            // var id      = _this.find('input[name=comment_id]').val();
+            var count_comment = parseInt($('.count-comment' + post_id).text());
+            
+            if(comment.trim() == '') {
+                e.preventDefault();          
+                return false;
+            }
+
+            $.ajax({
+            url:'/post/ajaxAddComment',
+            type:'POST',
+            data:{
+                comment:comment, 
+                post_id:post_id,
+            },
+            success:function(data) {
+                // console.log('check exist')
+                // console.log(data.comment);
+                count_comment = count_comment + 1;
+                
+                var status_edit_del = 1;
+
+                $('.count-comment' + post_id).text(count_comment + ' Comments');
+                _this.find('textarea[name=comment]').val('');
+
+                var comment = '';
+                comment += '<li id="comment'+ data.comment._id +'">'
+                comment += 	showComment(data.comment, status_edit_del);			
+                comment += '</li>'		
+
+                $('#post-item'+post_id).find( ".we-comet" ).prepend( comment );	
+
+            }
+            });
+
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    function showComment(data, status_edit_del) {
+        var comment = '<div class="comet-avatar">'	
+            if (data.user.avatar) {
+                comment += '<img src="/uploads/'+ data.user.avatar +'" alt="" height="40px" width="40px">'
+            }
+            else {
+                comment += '<img src="/frontend/images/user-avatar.png" alt="" height="40px" width="40px">'
+            }																
+            comment += '</div>'								
+            comment += '<div class="we-comment">'								
+            comment += '<div class="coment-head">'									
+            comment += '<h5><a href="/member/profile/'+ data.user._id +'" title="">'+ data.user.username +'</a></h5>'										
+            comment += '<span>'+ formatDate(data.user.createdAt) +'</span>'
+                if(status_edit_del == 1) {	
+
+                comment += '<div class="edit-menu dropleft">'
+                                                            
+                    comment += '<button type="button" id="btn-edit-menu" class="btn btn-light dropdown-toggle-" data-toggle="dropdown" aria-expanded="false">'											
+                    comment += '<i class="fas fa-ellipsis-h"></i>'													
+                    comment += '</button>'												
+
+                    comment += '<div class="dropdown-menu" aria-labelledby="btn-edit-menu" >'
+                    comment += '<a class="dropdown-item delete_comment" href="javascript:void(0);" data-id="'+ data._id +'">Delete</a>'												
+                    comment += '</div>'											
+                comment += '</div>'
+                }										
+            comment += '</div>'					
+
+            comment += '<p>'+ data.comment +'</p>'									
+            comment += '</div>'
+        
+        return comment;
+    }
+
+
+    $(document).on('click','.delete_comment', function(){
+        var id = $(this).attr('data-id');
+        
+
+        var post_id = $('.frm-post-comment').find('input[name=post_id]').val();
+        var count_comment = parseInt($('.count-comment' + post_id).text());
+        
+        
+        $.ajax({
+            url: '/post/ajaxDeleteComment',
+            data: {
+                comment_id: id,
+            },
+            type: 'post',
+            success: function(data) {
+                
+                if(data.success == true){
+                    count_comment = count_comment - 1;
+
+                    $('.count-comment' + post_id).text(count_comment + ' Comments');
+                    
+                    $('#comment' + id).remove();
+                }
+                
+            }
+        });
+    })
+
+    //------------------JS for notification area ------------------------------
+    
+    // $('#summernote').summernote({
+    //     placeholder: 'Fill your description',
+    //     tabsize: 2,
+    //     height: 200,
+    //     callbacks: {
+    //         onImageUpload: function(image, editor, welEditable) {
+    //             uploadImage(image[0], editor, welEditable);
+    //         },
+    //     }
+    // });
+
+   
+    // $(document).on('click','.delete-noti', function() {
+    //     var noti_id = $(this).data('id');
+
+    //     $('#confirmDeleteNotification').find('#notification-id').val(noti_id);
+    //     $('#confirmDeleteNotification').modal('show');
+    // })
+
+    
+
+    // function uploadImage(image, editor, welEditable) {
+    //     var data = new FormData();
+    //     data.append("image", image);
+    //     $.ajax({
+    //         url: '/member/departments/ajaxUploadImageContent',
+    //         data: data,
+    //         cache: false,
+    //         contentType: false,
+    //         processData: false,
+    //         type: "post",
+    //         success: function(data) {
+    //             var node = $('<img>').attr('src', data.url);
+    //             $('#summernote').summernote("insertNode", node[0]);
+    //             //$('#contentEditor').summernote("editor.insertImage", data.url);
+    //         },
+    //         error: function(data) {
+    //             console.log(data);
+    //         }
+    //     });
+    // }
+
+    //------------------JS for Personal area ------------------------------
+
+    $('.js-example-basic-multiple').select2();
+			
+    function readURLPerson(input, element) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader()
+            reader.onload = function (e) {
+                $('.image-person').attr('src',e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#image-personal").change(function() {
+        console.log(1);
+        readURLPerson(this, $(this))
+
+    });
+
+ 
+   //------------------JS for socket area ------------------------------
+    const socket = io();
+    $(document).on('click','#save_create_noti', function() {
+        
+        sendNotification();
+    })
+
+    function sendNotification() {
+        var noti_title = $("#noti_title").val()
+        var widget_title = $(".widget-title").text()
+        var flexCheckDefault = $('#flexCheckDefault').is(":checked") ? 1: 0;
+        var notification_id = $('#notification_id').val();
+        if(notification_id == '') {
+        
+            socket.emit("sendNotification", {
+                "noti_title" : noti_title,
+                "widget_title" : widget_title,
+                "flexCheckDefault": flexCheckDefault
+            });
+        }
+        console.log("send from client")
+        $("#createNotification").submit()				
+    }
+
+    toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    console.log("check check")
+    socket.on("newNotification", (data) =>{
+        (data.flexCheckDefault == 1) ? toastr.success(data.noti_title, "[IMPORTANT] " + data.widget_title) : toastr.success(data.noti_title, data.widget_title);
+        console.log("check toastr")
+    });
+
+
+})
