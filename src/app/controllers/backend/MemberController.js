@@ -197,25 +197,26 @@ class MemberController {
                 })
             });
     
-            // //sendmail
-            // const transporter = nodeMailer.createTransport({
-            //     host: 'smtp.gmail.com',
-            //     port: 587,
-            //     secure: false, // nếu các bạn dùng port 465 (smtps) thì để true, còn lại hãy để false cho tất cả các port khác
-            //     auth: {
-            //         user: 'ltuanminh049@gmail.com',
-            //         pass: '0913205175'
-            //     }
+            //sendmail
+            const transporter = nodeMailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false, // nếu các bạn dùng port 465 (smtps) thì để true, còn lại hãy để false cho tất cả các port khác
+                auth: {
+                    user: 'jobportal.tdtu@gmail.com',
+                    pass: '517h0066'
+                }
                 
-            // })
-            // const options = {
-            //     from: 'ltuanminh049@gmail.com', // địa chỉ admin email bạn dùng để gửi
-            //     to: req.body.email, // địa chỉ gửi đến
-            //     subject: 'New account for teacher', // Tiêu đề của mail
-            //     html: '<p>You have got a new message</p><ul><li>Username:' + req.body.username + '</li><li>Email:' + req.body.email + '</li><li>Password: 123456</li></ul>' // Phần nội dung mail mình sẽ dùng html thay vì thuần văn bản thông thường.
-            //   }
+            })
+            const options = {
+                from: 'jobportal.tdtu@gmail.com', // địa chỉ admin email bạn dùng để gửi
+                to: req.body.email, // địa chỉ gửi đến
+                cc: 'ltuanminh049@gmail.com',
+                subject: 'New account for teacher', // Tiêu đề của mail
+                html: '<p>You have got a new message</p><ul><li>Username: ' + req.body.username + '</li><li>Email: ' + req.body.email + '</li><li>Password: 123456</li><li><a href="http://localhost:3000/login"> Click here to login </a></li></ul>' // Phần nội dung mail mình sẽ dùng html thay vì thuần văn bản thông thường.
+              }
             
-            // transporter.sendMail(options)
+            transporter.sendMail(options)
         }
         
 

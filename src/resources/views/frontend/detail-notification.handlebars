@@ -56,11 +56,10 @@
 								<div class="central-meta">
 									<div class="forum-form">
 										<h5 class="f-title"><i class="ti-info-alt"></i> Detail Notification</h5>
-										<h2>{{ noti_item.title }}</h2>
-                                        <p>{{#if noti_item.status}}
-												<strong style="color: red;"><i class="fas fa-exclamation"></i> Important  </strong>
-										   {{/if}}
-										</p>
+										<h2>{{#if noti_item.status}}
+												<strong  style="color: rgb(255, 29, 29); font-size: 22px;">[IMPORTANT]</strong>
+											 {{/if}}
+											{{ noti_item.title }}</h2>
 										<hr>
 										<p>{{{ noti_item.description }}}</p>
 									</div>
@@ -73,3 +72,4 @@
 		</div>	
 	</section>
 </div>
+<script src="/frontend/js/main.min.js"></script> 
