@@ -6254,144 +6254,7 @@ a.reply {
   transition: all 0.3s;
 }
 
-/* .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 0%;
-  -webkit-opacity: 0;
-  -moz-opacity: 0;
-  -ms-opacity: 0;
-  -o-opacity: 0;
-  opacity: 0;
-  visibility: hidden;
-  overflow: hidden;
-}
 
-.overlay.open {
-  -webkit-opacity: 0.9;
-  -moz-opacity: 0.9;
-  -ms-opacity: 0.9;
-  -o-opacity: 0.9;
-  opacity: 0.9;
-  visibility: visible;
-  height: 100%;
-  top: 60px;
-}
-
-.overlay.open ul.offcanvas-menu > li {
-  -webkit-animation: fadeInRight 0.5s ease forwards;
-  -moz-animation: fadeInRight 0.5s ease forwards;
-  -ms-animation: fadeInRight 0.5s ease forwards;
-  -o-animation: fadeInRight 0.5s ease forwards;
-  animation: fadeInRight 0.5s ease forwards;
-  -webkit-animation-delay: 0.35s;
-  -moz-animation-delay: 0.35s;
-  -ms-animation-delay: 0.35s;
-  -o-animation-delay: 0.35s;
-  animation-delay: 0.35s;
-}
-
-.overlay.open ul.offcanvas-menu > li:nth-of-type(2) {
-  -webkit-animation-delay: 0.4s;
-  -moz-animation-delay: 0.4s;
-  -ms-animation-delay: 0.4s;
-  -o-animation-delay: 0.4s;
-  animation-delay: 0.4s;
-}
-
-.overlay.open ul.offcanvas-menu > li:nth-of-type(3) {
-  -webkit-animation-delay: 0.45s;
-  -moz-animation-delay: 0.45s;
-  -ms-animation-delay: 0.45s;
-  -o-animation-delay: 0.45s;
-  animation-delay: 0.45s;
-}
-
-.overlay.open ul.offcanvas-menu > li:nth-of-type(4) {
-  -webkit-animation-delay: 0.5s;
-  -moz-animation-delay: 0.5s;
-  -ms-animation-delay: 0.5s;
-  -o-animation-delay: 0.5s;
-  animation-delay: 0.5s;
-}
-
-.overlay ul.offcanvas-menu {
-  display: inline-block;
-  left: 50%;
-  list-style: outside none none;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  top: 40%;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  width: 100%;
-}
-
-.overlay ul.offcanvas-menu > li {
-  display: block;
-  min-height: 50px;
-  position: relative;
-  -webkit-opacity: 0;
-  -moz-opacity: 0;
-  -ms-opacity: 0;
-  -o-opacity: 0;
-  opacity: 0;
-}
-
-.overlay ul.offcanvas-menu > li > a {
-  display: block;
-  position: relative;
-  color: #fff;
-  -webkit-text-decoration: none;
-  -moz-text-decoration: none;
-  -ms-text-decoration: none;
-  -o-text-decoration: none;
-  text-decoration: none;
-  overflow: hidden;
-  -webkit-opacity: 0.7;
-  -moz-opacity: 0.7;
-  -ms-opacity: 0.7;
-  -o-opacity: 0.7;
-  opacity: 0.7;
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  -o-transform: scale(1);
-  transform: scale(1);
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  -ms-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  transition: all 0.3s;
-  font-size: 30px;
-  font-weight: 800;
-}
-
-.overlay ul.offcanvas-menu > li > a:hover,
-.overlay ul.offcanvas-menu > li > a:focus,
-.overlay ul.offcanvas-menu > li > a:active {
-  -webkit-opacity: 1;
-  -moz-opacity: 1;
-  -ms-opacity: 1;
-  -o-opacity: 1;
-  opacity: 1;
-  -webkit-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  -o-transform: scale(1.2);
-  transform: scale(1.2);
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  -ms-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  transition: all 0.3s;
-} */
 
 @keyframes fadeInRight {
   0% {
@@ -6510,19 +6373,6 @@ ul.offcanvas-menu ul {
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-/*--- offcanves menu end ----*/
-
-/*--- portfolio page ---*/
-
-/*--- featured top video post ---*/
-
-/*--- services box ---*/
-
-
-/*--- price table ---*/
-
-/*--- get a quote top baner ---*/
-
 /*--- login page ---*/
 
 #login-page {
@@ -6534,6 +6384,113 @@ ul.offcanvas-menu ul {
 
 #login-form {
   width: auto;
+}
+* {
+  box-sizing: border-box;
+}
+
+#login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
+  height: 100vh;
+}
+
+#login-page h1 {
+  font-weight: bold;
+  margin: 0;
+}
+
+#login-page h2 {
+  text-align: center;
+}
+
+.btn-text {
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  margin: 20px 0 30px;
+}
+
+#login-page span {
+  font-size: 12px;
+}
+
+#login-page a {
+  color: #333;
+  font-size: 16px;
+  text-decoration: none;
+  margin: 15px 0;
+  text-align: none;
+}
+
+#login-page button {
+  border-radius: 20px;
+  border: 1px solid #7579ff;
+  background-color: #7579ff;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+#login-page button:active {
+  transform: scale(0.95);
+}
+
+#login-page button:focus {
+  outline: none;
+}
+
+#login-page button.ghost {
+  background-color: transparent;
+  border-color: #ffffff;
+}
+
+#login-page form {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 50px;
+  height: 100%;
+  text-align: center;
+}
+
+#login-page input {
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
+  border-radius: 5px;
+  border: 3px solid #eee;
+}
+
+
+#login-page .btn-signIn {
+  margin-top: 20px;
+  padding: 12px 35px;
+}
+#login-page .Or {
+  margin: 20px 0;
+  color: rgb(161, 161, 161);
+}
+.container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  position: relative;
+  overflow: hidden;
+  width: 768px;
+  max-width: 100%;
+  min-height: 480px;
 }
 
 .google-btn {
@@ -6679,187 +6636,4 @@ aside.sidebar.full-style {
 
 .widget ul.feature-topics > li > span {
   padding-left: 25px;
-}
-
-/*=========================
-	FONT COLOR
-=========================*/
-.product-carousel .owl-nav .owl-prev::before, 
-.product-carousel .owl-nav .owl-next::before,
-.product-caro .owl-prev:hover:before, 
-.product-caro .owl-next:hover:before,
-.log-reg-area form .forgot-pwd,
-.log-reg-area form .already-have,
-.log-reg-area > p a,
-.top-area > ul > li > a > span,
-.timeline-info > ul li a.active,
-.timeline-info > ul li a:hover,
-.dropdowns > a.more-mesg,
-.activity-meta > h6 a,
-.activity-meta > span a:hover,
-.friend-name > ins,
-.description > p a,
-.we-reply,
-.sidebar .widget li:hover > a, .sidebar .widget li:hover > i,
-.friend-meta > a,
-.user-setting > a:hover,
-.we-comet li a.showmore,
-.twiter-feed > li p a,
-.tutor-links > li i,
-.tutor-links > li:hover,
-.pepl-info > span,
-.page-meta > a,
-.frnds .nav-tabs .nav-item a.active,
-.f-title i,
-#work > div a,
-.basics > li i,
-.education > li i,
-.groups > span i,
-a.forgot-pwd,
-.friend-meta > h4 a:hover,
-.x_title > h2,
-.post-meta .detail > span,
-.add-btn > a:hover,
-.top-area > ul.main-menu > li > ul li a:hover,
-.dropdowns.active > a i,
-.user-setting > a i,
-.form-group input.form-file ~ .control-label, 
-.form-group input.has-value ~ .control-label, 
-.form-group input:focus ~ .control-label, 
-.form-group input:valid ~ .control-label, 
-.form-group select ~ .control-label, 
-.form-group textarea.form-file ~ .control-label, 
-.form-group textarea.has-value ~ .control-label, 
-.form-group textarea:focus ~ .control-label, 
-.form-group textarea:valid ~ .control-label,
-.flaged > h3,
-.invition .friend-meta a.invite:hover,
-.more-optns > ul li:hover,
-.post-title > h4 a:hover,
-.post-title .p-date a:hover,
-.l-post .l-post-meta > h4 a:hover,
-.read:hover,
-blockquote,
-.tags > a:hover,
-.comment-titles > span,
-.help-list > ul li a:hover i,
-.carrer-title > h2 > span,
-.carrer-title > span a,
-.open-position > h4 a:hover,
-.option-set.icon-style > li > a.selected,
-.category-box > i,
-.getquot-baner > a,
-.branches-box > ul li i,
-.help-topic-result > h2 a:hover,
-.product-name > h5 a:hover,
-.full-postmeta .shopnow,
-.prices.style2 ins span,
-.single-btn > li > a.active,
-.total-box > ul > li.final-total,
-.logout-meta > p a,
-.forum-list table tbody tr td i,
-.forum-list table tbody tr td a,
-.widget ul.recent-topics > li > i,
-.date-n-reply > a,
-.topic-data > span,
-.help-list > ul li a:hover,
-.employer-info h2,
-.job-detail > ul li i,
-.company-intro > a
-{
-	color: #088dcd;	
-}
-svg{
-stroke: #fff;
-}
-path.icon{
-	fill: #fff;
-}
-
-
-/*=========================
-	BACKGROUND COLOR
-=========================*/
-#nprogress .bar,
-.timeline-info > ul li a::before,
-.add-btn > a,
-.activitiez > li::before,
-form button,
-.colla-apps > li a:hover,
-a.underline:before,
-.setting-row input:checked + label,
-.user-avatar:hover .edit-phto,
-.error-meta > a,
-.color-bg,
-.add-butn,
-.nav.nav-tabs.likes-btn > li a.active,
-a.dislike-btn,
-.drop > a:hover,
-.btn-view.btn-load-more:hover,
-.accordion .card h5 button[aria-expanded="true"],
-.chat-head,
-.f-page > figure em,
-.inbox-panel-head > ul > li > a,
-.nav-tabs--left .nav-link.active,
-.nav-tabs--left .nav-link.active:hover,
-footer .widget-title h4::before,
-#topcontrol,
-.sidebar .widget-title::before,
-.f-title::before,
-.g-post-classic > figure > i::after,
-.purify > a,
-.help-list > a:hover,
-.open-position::before,
-.info > a,
-.category-box:hover, .category-box.selected,
-a.main-btn,
-.section-heading::before,
-.getquot-baner,
-.more-branches > h4::before,
-.is-helpful > a,
-.cart-optionz > li > a:hover,
-.paginationz > li a:hover,
-.paginationz > li a.active,
-.shopping-cart,
-a.btn2:hover,
-.form-submit > input[type="submit"],
-button.submit-checkout,
-.delete-cart:hover,
-.proceed .button,
-.amount-area .update-cart,
-a.addnewforum,
-.apply-bttons > a
-{
-	background: #088dcd;
-}
-
-
-
-
-/*=========================
-	BORDER COLOR
-=========================*/
-.topbar .form-search input:focus,
-.add-btn > a:hover,
-.edit-phto:hover,
-.colla-apps > li a:hover,
-.user-avatar:hover .edit-phto,
-.top-area > ul.main-menu > li ul,
-.g-post-classic:hover > figure > i,
-.help-list > a:hover,
-a.btn2:hover,
-.single-btn > li > a.active
-{
-	border-color: #088dcd;	
-}
-
-#nprogress .spinner-icon{
-	border-left-color: #088dcd;
-}
-#nprogress .spinner-icon
-{
-	border-top-color: #088dcd;		
-}
-.timeline-info > ul li a:after{
-	border-bottom-color: #088dcd;
 }

@@ -16,7 +16,7 @@ db.connect();
 const socket = require("socket.io");
 
 const app   = express();
-const port  = 3000;
+const PORT = process.env.PORT || 3000;
 
 
 // parse application/x-www-form-urlencoded
@@ -184,7 +184,7 @@ console.error(err.message)
     });
 })
 
-const server = app.listen(port, () => console.log(
+const server = app.listen(PORT, () => console.log(
     
     'Express started on http://localhost:${port}; ' +
     
