@@ -18,9 +18,9 @@ class HomeController {
         .populate({
             path: 'comments',
             populate: {path: "user"},
-            options: { sort: { createdAt: -1 } },
+            options: { sort: { updatedAt: +1 } },
         })
-        .sort('-updatedAt').limit(10);
+        .sort('-createdAt').limit(10);
 
         const member = req.user;
 

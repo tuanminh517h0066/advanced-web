@@ -133,9 +133,9 @@ class PostController {
             .populate({
                 path: 'comments',
                 populate: {path: "user"},
-                options: { sort: { createdAt: -1 } },
+                options: { sort: { createdAt: +1 } },
             })
-            .skip(startForm).sort('-updatedAt')
+            .skip(startForm).sort('-createdAt')
             .limit(10)
             .exec();
             res.json({current_account: current_account, posts});
@@ -149,9 +149,9 @@ class PostController {
             .populate({
                 path: 'comments',
                 populate: {path: "user"},
-                options: { sort: { createdAt: -1 } },
+                options: { sort: { createdAt: +1 } },
             })
-            .skip(startForm).sort('-updatedAt')
+            .skip(startForm).sort('-createdAt')
             .limit(10)
             .exec();
             res.json({current_account: current_account, posts});

@@ -530,7 +530,8 @@ $(document).ready(function() {
                 comment += 	showComment(data.comment, status_edit_del);			
                 comment += '</li>'		
 
-                $('#post-item'+post_id).find( ".we-comet" ).prepend( comment );	
+                // $('#post-item'+post_id).find( ".we-comet" ).append( comment );	
+                $('#post-item'+post_id).find( ".post-comment" ).before( comment );
 
             }
             });
