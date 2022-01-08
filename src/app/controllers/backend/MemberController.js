@@ -213,7 +213,7 @@ class MemberController {
                 to: req.body.email, // địa chỉ gửi đến
                 cc: 'ltuanminh049@gmail.com',
                 subject: 'New account for teacher', // Tiêu đề của mail
-                html: '<p>You have got a new message</p><ul><li>Username:' + req.body.username + '</li><li>Email:' + req.body.email + '</li><li>Password: 123456</li></ul>' // Phần nội dung mail mình sẽ dùng html thay vì thuần văn bản thông thường.
+                html: '<p>You have got a new message</p><ul><li>Username: ' + req.body.username + '</li><li>Email: ' + req.body.email + '</li><li>Password: 123456</li><li><a href="http://localhost:3000/login"> Click here to login </a></li></ul>' // Phần nội dung mail mình sẽ dùng html thay vì thuần văn bản thông thường.
               }
             
             transporter.sendMail(options)
