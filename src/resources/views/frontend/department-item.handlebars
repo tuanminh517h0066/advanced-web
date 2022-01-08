@@ -66,6 +66,11 @@
 									</div>
 									
 									<ul class="nearby-contct">
+										{{#if success }}
+											{{#each success }}
+												<p class="alert alert-success">{{ this.msg }}</p>
+											{{/each}}
+										{{/if}}
 										{{#each notifications }}
 										<li>
 											<p>

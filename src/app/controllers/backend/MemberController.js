@@ -102,11 +102,15 @@ class MemberController {
         const departments = await Department.find({});
         const member_id = req.body.member_id;
 
+        console.log(member_id);
+        console.log(department_arr);
+
         const errors = validationResult(req).array();
 
         if (errors != '') {
             req.session.errors = errors;
             req.session.success = false;
+            console.log(1);
             
             res.redirect('back')
         // return res.status(400).json({ errors: errors.array() });
@@ -117,9 +121,10 @@ class MemberController {
                 current_user.departments = [];
                 current_user.save();
             }
+        
             departments.forEach( async (element, index) =>  { 
-                const department = await Department.findOne(element._id);
-
+                
+                const department = await Department.findById(element._id);
                 department.users.pull(member_id);
                 await department.save();
             })
@@ -134,19 +139,18 @@ class MemberController {
 
             update_current_user.save(async function(err,user) {
                 if (err) console.log(err);
-                if(user.role == 1) {
-                    department_arr.forEach( async (element, index) =>  { 
-                        const department = await Department.findById(element)
-                        department.users.push(user._id);
-                        await department.save();
-                        
-                    })
-                }
-                
+                department_arr.forEach( async (element, index) =>  { 
+                    const department = await Department.findById(element)
+                    department.users.push(user._id);
+                    await department.save();
+                    
+                })
             });
+
+            res.redirect('back');
         }
 
-        res.redirect('back');
+        
     }
 
     async post(req, res, next) {

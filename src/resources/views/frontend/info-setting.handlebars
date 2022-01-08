@@ -75,6 +75,11 @@
 								<div class="central-meta">
 									<div class="editing-info">
 										<h5 class="f-title"><i class="ti-info-alt"></i> Edit Basic Information</h5>
+										{{#if success }}
+											{{#each success }}
+												<p class="alert alert-success">{{ this.msg }}</p>
+											{{/each}}
+										{{/if}}
 
 										<form method="post" action="/member/info-setting/post" enctype="multipart/form-data">
 											<div class="form-row">

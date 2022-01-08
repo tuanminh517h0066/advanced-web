@@ -141,6 +141,7 @@ class DepartmentController {
             }
 
             res.render('frontend/department-item', {
+                success: req.session.success,
                 department_item: mongooseToObject(department_item),
                 member: mongooseToObject(current_account),
                 notifications: mutipleMongooseToObject(notifications),
@@ -149,6 +150,7 @@ class DepartmentController {
         }catch(error){
             console.log(error);
         }
+        req.session.success = null;
     }
 
     async createNoti(req, res, next) {
@@ -235,6 +237,7 @@ class DepartmentController {
         } 
         else {
             var deparment_id = req.body.department_id;
+            var text_success = '';
             console.log('enter else');  
             Notification.findOne({ '_id': req.body.notification_id }, async function(err, notification) {
                 if (err) {
@@ -249,7 +252,10 @@ class DepartmentController {
                     notification.status = req.body.important_status;
                     
                     notification.save();
+                    text_success = 'update notification successfully';
+                    req.session.success = [{ msg: 'update notification successfully' }]
                     // res.json({success: true, type: 'update', post});
+                    res.redirect(`/member/departments/${deparment_id}`);
                 }
                 if (!notification) {
                     console.log('new notification');
@@ -270,10 +276,15 @@ class DepartmentController {
                              
                         }
                     })
+                    text_success = 'create notification successfully';
+                    req.session.success = [{ msg: 'create notification successfully' }]
+
+                    res.redirect(`/member/departments/${deparment_id}`);
                 }
             })
-    
-            res.redirect(`/member/departments/${deparment_id}`);
+            // console.log(text_success)
+            // req.session.success = [{ msg: text_success }]
+            // res.redirect(`/member/departments/${deparment_id}`);
         }
 
     }
