@@ -1596,9 +1596,9 @@ for some reason nth-child(1) is always busy and elements starting from 2 */
 
 .comet-avatar {
   display: table-cell;
-  max-width: 7.6%;
+  /* max-width: 7.6%; */
   vertical-align: top;
-  width: 7.6%;
+  width: 65px;
 }
 
 .we-comment {
@@ -1608,7 +1608,7 @@ for some reason nth-child(1) is always busy and elements starting from 2 */
   padding: 10px;
   vertical-align: top;
   position: relative;
-  width: 65%;
+  /* width: 65%; */
   border-radius: 15px;
 }
 
