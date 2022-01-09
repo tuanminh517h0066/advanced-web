@@ -101,6 +101,7 @@
 												<div class="form-group col-md-6">
 													<label for="department">Faculty </label>
 													<select class="form-control" name="facility">
+														<option value="">Choose </option>
 														{{#each ../facilites}}
 															<option value="{{ this._id }}" {{#if_eq ../../member.facility this._id }} selected {{/if_eq}} >{{ this.name }}</option>
 														{{/each}}
