@@ -1610,7 +1610,6 @@ for some reason nth-child(1) is always busy and elements starting from 2 */
   position: relative;
   /* width: 65%; */
   border-radius: 15px;
-  background-color: rgb(207, 207, 207);
 }
 
 .we-comment::before,
@@ -1622,7 +1621,6 @@ for some reason nth-child(1) is always busy and elements starting from 2 */
   top: 10px;
   position: absolute;
   content: '';
-  background-color: rgb(207, 207, 207);
 }
 
 .we-comment::after,
@@ -1634,7 +1632,6 @@ for some reason nth-child(1) is always busy and elements starting from 2 */
   top: 12px;
   position: absolute;
   content: '';
-  background-color: rgb(207, 207, 207);
 }
 
 .we-comet > li ul {
