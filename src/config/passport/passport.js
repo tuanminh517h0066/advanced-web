@@ -71,7 +71,7 @@ passport.use('local.login',new LocalStrategy({
 passport.use(new GoogleStrategy({
     clientID:     '26655799551-09apjiro3k6iv40op1uefa3lv4abhshc.apps.googleusercontent.com',
     clientSecret: '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',
-    callbackURL: "https://localhost:3000/member/auth/google/callback",
+    callbackURL: "https://tdtu-socialnetworking.herokuapp.com/member/auth/google/callback",
     passReqToCallback   : true
 },
 function(request, accessToken, refreshToken, profile, done) {
